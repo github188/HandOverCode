@@ -63,16 +63,21 @@ private:
 	GNSSMSG m_GnssMsg;			//GNSS数据
 	int GetXMPi(int icode);
 	void DrawTime(Graphics *graphics,int x,int y);//考试时长
+	void DrawSignal(Graphics *graphics);//实时信号
 	//////////////////////////////////////////////////////////////////////////
 	Image *ImgMark;			//遮罩层
 	Image *ImgMap;			//地图文件
 	Image *ImgTime;			//时间
 	Image *ImgXmp;			//项目牌
 	Image *ImgCAR;			//考车
+	Image *ImgSignal;			//信号
 	//////////////////////////////////////////////////////////////////////////
 	DWORD m_SleepTime;		//线程运行间隔时间
 	HANDLE hThreadEvent;	//线程句柄
 	bool threadRun;			//线程是否运行
+
+	//huangqiwei
+	bool bDrawSignal;
 };
 
 #endif // !defined(AFX_FOURTHPICJMQ_H__7970E164_2015_4B34_9E91_763BC138A42E__INCLUDED_)

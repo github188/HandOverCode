@@ -32,6 +32,7 @@ public:
 	CCYuvToH264TApp();
 	CString exePath;//³ÌÐòÄ¿Â¼
 	CString NowDataPath;//
+
 // Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CCYuvToH264TApp)

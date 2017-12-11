@@ -91,6 +91,23 @@ typedef struct _gnssmsg
 	float	gnssR;//方向角
 	float	gnssSD;//速度
 	float	gnssLC;//里程
+
+	//huangqiwei temp
+	int aqd;   //安全带
+	int js;	//脚刹
+	int ss;	//手刹
+	int fs;	//副刹
+	int lh;	//离合
+	int lb;	//喇叭
+	int zzx;	//左转向
+	int yzx;	//右转向
+	int ygd;	//远光灯
+	int jgd;		//近光灯
+	int jsd;		//警示灯
+	int xh;		//熄火
+	int kgm;	//开关门
+	int dw;		//档位
+
 	_gnssmsg()
 	{
 		gnssX=0.0;
@@ -98,6 +115,21 @@ typedef struct _gnssmsg
 		gnssR=0.0f;
 		gnssSD=0.0f;
 		gnssLC=0.0f;
+
+		aqd = 0;
+		js = 0;
+		ss = 0;
+		fs = 0;
+		lh = 0;
+		lb = 0;
+		zzx = 0;
+		yzx = 0;
+		ygd = 0;
+		jgd = 0;
+		jsd = 0;
+		xh = 0;
+		kgm = 0;
+		dw = 0;
 	}
 }GNSSMSG;
 

@@ -32,6 +32,8 @@ CFourthPicJMQ::CFourthPicJMQ()
 	m_i55type=0;
 	iRunNum=5;
 	m_uKSKM=2;//默认科目二
+
+	bDrawSignal = false;
 }
 
 CFourthPicJMQ::~CFourthPicJMQ()
@@ -100,6 +102,149 @@ void CFourthPicJMQ::FourthPicInit(int ikch, CString path,int wMSG,HWND hwndz)
 	m_type =m_type | MTYPE1;
 	iRunNum=5;
 	//////////////////////////////////////////////////////////////////////////
+}
+
+void CFourthPicJMQ::DrawSignal(Graphics *graphics)
+{
+	int splitDest = 25;
+	int splitSource = 40;
+	int y = 72;
+	//安全带
+	if (1 == m_GnssMsg.aqd)
+	{
+		graphics->DrawImage(ImgSignal, Rect(0 * splitDest, y, splitDest, splitDest), 0, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(0 * splitDest, y, splitDest, splitDest), 0, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//脚刹
+	if (1 == m_GnssMsg.js)
+	{
+		graphics->DrawImage(ImgSignal, Rect(1 * splitDest, y, splitDest, splitDest), 12 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(1 * splitDest, y, splitDest, splitDest), 12 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//手刹
+	if (1 == m_GnssMsg.ss)
+	{
+		graphics->DrawImage(ImgSignal, Rect(2 * splitDest, y, splitDest, splitDest), 9 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(2 * splitDest, y, splitDest, splitDest), 9 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//副刹
+	if (1 == m_GnssMsg.fs)
+	{
+		graphics->DrawImage(ImgSignal, Rect(3 * splitDest, y, splitDest, splitDest), 13 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(3 * splitDest, y, splitDest, splitDest), 13 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//喇叭
+	if (1 == m_GnssMsg.lb)
+	{
+		graphics->DrawImage(ImgSignal, Rect(4 * splitDest, y, splitDest, splitDest), 7 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(4 * splitDest, y, splitDest, splitDest), 7 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//左转向
+	if (1 == m_GnssMsg.zzx)
+	{
+		graphics->DrawImage(ImgSignal, Rect(5 * splitDest, y, splitDest, splitDest), 1 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(5 * splitDest, y, splitDest, splitDest), 1 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//右转向
+	if (1 == m_GnssMsg.yzx)
+	{
+		graphics->DrawImage(ImgSignal, Rect(6 * splitDest, y, splitDest, splitDest), 2 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(6 * splitDest, y, splitDest, splitDest), 2 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//远光灯
+	if (1 == m_GnssMsg.ygd)
+	{
+		graphics->DrawImage(ImgSignal, Rect(7 * splitDest, y, splitDest, splitDest), 4 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(7 * splitDest, y, splitDest, splitDest), 4 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//近光灯
+	if (1 == m_GnssMsg.jgd)
+	{
+		graphics->DrawImage(ImgSignal, Rect(8 * splitDest, y, splitDest, splitDest), 3 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(8 * splitDest, y, splitDest, splitDest), 3 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+// 	//警示灯
+// 	if (1 == m_GnssMsg.jsd)
+// 	{
+// 		graphics->DrawImage(ImgSignal, Rect(9 * splitDest, y, splitDest, splitDest), 14 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+// 	}
+// 	else
+// 	{
+// 		graphics->DrawImage(ImgSignal, Rect(9 * splitDest, y, splitDest, splitDest), 14 * splitSource, 0, splitSource, splitSource, UnitPixel);
+// 	}
+
+	//熄火
+	if (1 == m_GnssMsg.xh)
+	{
+		graphics->DrawImage(ImgSignal, Rect(9 * splitDest, y, splitDest, splitDest), 10 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(9 * splitDest, y, splitDest, splitDest), 10 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//开关门
+	if (1 == m_GnssMsg.kgm)
+	{
+		graphics->DrawImage(ImgSignal, Rect(10 * splitDest, y, splitDest, splitDest), 6 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(10 * splitDest, y, splitDest, splitDest), 6 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//离合
+	if (1 == m_GnssMsg.lh)
+	{
+		graphics->DrawImage(ImgSignal, Rect(11 * splitDest, y, splitDest, splitDest), 17 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
+	else
+	{
+		graphics->DrawImage(ImgSignal, Rect(11 * splitDest, y, splitDest, splitDest), 17 * splitSource, 0, splitSource, splitSource, UnitPixel);
+	}
+
+	//档位
+	if (m_GnssMsg.dw >= 0 && m_GnssMsg.dw <= 5)
+	{
+		int nIndex = m_GnssMsg.dw + 18;
+		graphics->DrawImage(ImgSignal, Rect(12 * splitDest, y, splitDest, splitDest), nIndex * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+	}
 }
 
 void CFourthPicJMQ::DrawTime(Graphics *graphics,int x,int y)
@@ -249,6 +394,10 @@ void CFourthPicJMQ::OnGnssData(LPVOID msgz)
 	{
 		memcpy((char *)&m_GnssMsg,msgz,sizeof(GNSSMSG));
 		WriteStuData("%lf,%lf,%f,%f,%f",m_GnssMsg.gnssX,m_GnssMsg.gnssY,m_GnssMsg.gnssSD,m_GnssMsg.gnssLC,m_GnssMsg.gnssR);
+		WriteStuData(
+			"aqd=%d,js=%d,ss=%d,fs=%d,lh=%d,lb=%d,zzx=%d,yzx=%d,ygd=%d,jgd=%d,jsd=%d,xh=%d,kgm=%d,dw=%d",
+			m_GnssMsg.aqd, m_GnssMsg.js, m_GnssMsg.ss, m_GnssMsg.fs, m_GnssMsg.lh, m_GnssMsg.lb, m_GnssMsg.zzx,
+			m_GnssMsg.yzx, m_GnssMsg.ygd, m_GnssMsg.jgd, m_GnssMsg.jsd, m_GnssMsg.xh, m_GnssMsg.kgm, m_GnssMsg.dw);
 		if (m_DrawMap==true)
 		{		
 			//计算 X Y
@@ -457,6 +606,18 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 		m_DrawCar=true;//画车模型
 	}
 	uDituPy=GetPrivateProfileInt("CONFIG","DITUPY",1,configfile);//地图偏移
+
+	UINT uDrawSignal;
+	uDrawSignal = GetPrivateProfileInt("CONFIG","DrawSignal",0,configfile); 
+	if (1 == uDrawSignal)
+	{
+		memset(StcharArr, 0x0, sizeof(StcharArr));
+		temp.Format("%s\\signal.png", path);
+		swprintf((wchar_t *)StcharArr, L"%s", temp.AllocSysString());
+		ImgSignal = Image::FromFile(StcharArr);
+		bDrawSignal = true;
+	}
+
 	WriteLog("20171030 1042 LoadMapCfg OK!uDituPy=%d",uDituPy);
 }
 
@@ -538,6 +699,14 @@ void CFourthPicJMQ::DrawMapTM()
 	 		}
 		}
 		DrawTime(&grdc,266,268);//考试时长
+
+		//huangqiwei temp
+		if (bDrawSignal)
+		{
+			DrawSignal(&grdc);
+		}
+
+
 #ifdef SAVE_PNGFILE
 		SavePngFile();
 		runerror=true;	
