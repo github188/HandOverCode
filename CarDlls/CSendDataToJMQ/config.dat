@@ -1,0 +1,40 @@
+[UID]
+UserID=Admin
+
+[PWD]
+Password=1
+
+[ICODE]
+Icode = 0
+
+[AVERAGE]
+average=3355
+
+[DOSET]
+J1 =1
+J2 =2
+J3=4
+J4=8
+J5=16
+JG=64
+
+[COMSET]
+IO = 3
+XM=4
+
+[FingerHW]
+Value= 0
+
+[IDCard]
+Value=0
+
+[VIDEO]
+IP=192.168.0.192
+USER=admin
+PWD=12345
+
+[CONFIG]
+Xmip=192.168.0.62
+
+[XMState]
+Value=0
