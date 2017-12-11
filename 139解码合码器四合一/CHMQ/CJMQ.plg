@@ -1,0 +1,357 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: CJMQ - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Debug/CJMQ.res" /d "_DEBUG" /d "_AFXDLL" "D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CHMQ\CJMQ.rc"" 
+Creating temporary file "C:\Users\Hqw\AppData\Local\Temp\RSPABE7.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/CJMQ.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CHMQ\CJMQ.cpp"
+"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CHMQ\CJMQDlg.cpp"
+"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CHMQ\JMQCarz.cpp"
+"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CHMQ\JMQManager.cpp"
+"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CHMQ\TCPSockz.cpp"
+]
+Creating command line "cl.exe @C:\Users\Hqw\AppData\Local\Temp\RSPABE7.tmp" 
+Creating temporary file "C:\Users\Hqw\AppData\Local\Temp\RSPABE8.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/CJMQ.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CHMQ\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\Hqw\AppData\Local\Temp\RSPABE8.tmp" 
+Creating temporary file "C:\Users\Hqw\AppData\Local\Temp\RSPABE9.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/CHMQ.pdb" /debug /machine:I386 /out:"../DEXE/CHMQ.exe" /pdbtype:sept 
+".\Debug\CJMQ.obj"
+".\Debug\CJMQDlg.obj"
+".\Debug\JMQCarz.obj"
+".\Debug\JMQManager.obj"
+".\Debug\StdAfx.obj"
+".\Debug\TCPSockz.obj"
+".\Debug\CJMQ.res"
+]
+Creating command line "link.exe @C:\Users\Hqw\AppData\Local\Temp\RSPABE9.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+CJMQ.cpp
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2059: syntax error : '?'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2065: '_Y' : undeclared identifier
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2275: '_A' : illegal use of this type as an expression
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2143: syntax error : missing ',' before ')'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(631) : error C2951: template declarations are only permitted at global or namespace scope
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : error C2976: '_Tree' : too few template arguments
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(602) : see declaration of '_Tree'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2143: syntax error : missing ',' before '<='
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2433: 'bool' : 'inline' not permitted on data declarations
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2059: syntax error : 'operator <op>'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2143: syntax error : missing ')' before '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2059: syntax error : '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2143: syntax error : missing ';' before '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2447: missing function header (old-style formal list?)
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(636) : error C2954: template definitions cannot nest
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2039: 'reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2146: syntax error : missing ';' before identifier '_Tref'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2501: '_Tref' : missing storage-class or type specifiers
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(48) : error C2040: 'reference' : ' &' differs in levels of indirection from 'int'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(92) : error C2143: syntax error : missing ';' before '['
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(92) : error C2501: '_Tref' : missing storage-class or type specifiers
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2039: 'size_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2146: syntax error : missing ';' before identifier 'size_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2868: 'size_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2039: 'difference_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2146: syntax error : missing ';' before identifier 'difference_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2868: 'difference_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2039: 'pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2146: syntax error : missing ';' before identifier 'pointer'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2868: 'pointer' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2039: 'const_pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2146: syntax error : missing ';' before identifier 'const_pointer'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2868: 'const_pointer' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2039: 'reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2146: syntax error : missing ';' before identifier 'reference'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2868: 'reference' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2039: 'const_reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2146: syntax error : missing ';' before identifier 'const_reference'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2868: 'const_reference' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2039: 'value_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2146: syntax error : missing ';' before identifier 'value_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2868: 'value_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(32) : error C2039: 'pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(33) : error C2039: 'const_pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(283) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const class std::basic_string<_E,_Tr,_A> &)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(218) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(287) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const _E *,int)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(241) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(290) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const _E *)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(260) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(293) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,int,_E)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(262) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(579) : error C2535: 'int __cdecl std::basic_string<_E,_Tr,_A>::_Psum(int,int)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(576) : see declaration of '_Psum'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : fatal error C1004: unexpected end of file found
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(605) : see reference to class template instantiation 'std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >' being compiled
+CJMQDlg.cpp
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2059: syntax error : '?'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2065: '_Y' : undeclared identifier
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2275: '_A' : illegal use of this type as an expression
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2143: syntax error : missing ',' before ')'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(631) : error C2951: template declarations are only permitted at global or namespace scope
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : error C2976: '_Tree' : too few template arguments
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(602) : see declaration of '_Tree'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2143: syntax error : missing ',' before '<='
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2433: 'bool' : 'inline' not permitted on data declarations
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2059: syntax error : 'operator <op>'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2143: syntax error : missing ')' before '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2059: syntax error : '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2143: syntax error : missing ';' before '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2447: missing function header (old-style formal list?)
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(636) : error C2954: template definitions cannot nest
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2039: 'reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2146: syntax error : missing ';' before identifier '_Tref'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2501: '_Tref' : missing storage-class or type specifiers
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(48) : error C2040: 'reference' : ' &' differs in levels of indirection from 'int'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(92) : error C2143: syntax error : missing ';' before '['
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(92) : error C2501: '_Tref' : missing storage-class or type specifiers
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2039: 'size_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2146: syntax error : missing ';' before identifier 'size_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2868: 'size_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2039: 'difference_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2146: syntax error : missing ';' before identifier 'difference_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2868: 'difference_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2039: 'pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2146: syntax error : missing ';' before identifier 'pointer'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2868: 'pointer' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2039: 'const_pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2146: syntax error : missing ';' before identifier 'const_pointer'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2868: 'const_pointer' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2039: 'reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2146: syntax error : missing ';' before identifier 'reference'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2868: 'reference' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2039: 'const_reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2146: syntax error : missing ';' before identifier 'const_reference'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2868: 'const_reference' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2039: 'value_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2146: syntax error : missing ';' before identifier 'value_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2868: 'value_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(32) : error C2039: 'pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(33) : error C2039: 'const_pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(283) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const class std::basic_string<_E,_Tr,_A> &)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(218) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(287) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const _E *,int)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(241) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(290) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const _E *)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(260) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(293) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,int,_E)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(262) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(579) : error C2535: 'int __cdecl std::basic_string<_E,_Tr,_A>::_Psum(int,int)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(576) : see declaration of '_Psum'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : fatal error C1004: unexpected end of file found
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(605) : see reference to class template instantiation 'std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >' being compiled
+JMQCarz.cpp
+JMQManager.cpp
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2059: syntax error : '?'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2065: '_Y' : undeclared identifier
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2275: '_A' : illegal use of this type as an expression
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(629) : error C2143: syntax error : missing ',' before ')'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(631) : error C2951: template declarations are only permitted at global or namespace scope
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : error C2976: '_Tree' : too few template arguments
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(602) : see declaration of '_Tree'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2143: syntax error : missing ',' before '<='
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2433: 'bool' : 'inline' not permitted on data declarations
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(633) : error C2059: syntax error : 'operator <op>'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2143: syntax error : missing ')' before '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2059: syntax error : '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2143: syntax error : missing ';' before '{'
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(635) : error C2447: missing function header (old-style formal list?)
+d:\program files (x86)\microsoft visual studio\vc98\include\xtree(636) : error C2954: template definitions cannot nest
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2039: 'reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2146: syntax error : missing ';' before identifier '_Tref'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(44) : error C2501: '_Tref' : missing storage-class or type specifiers
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(48) : error C2040: 'reference' : ' &' differs in levels of indirection from 'int'
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(92) : error C2143: syntax error : missing ';' before '['
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\map(92) : error C2501: '_Tref' : missing storage-class or type specifiers
+        d:\program files (x86)\microsoft visual studio\vc98\include\map(140) : see reference to class template instantiation 'std::map<_K,_Ty,_Pr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2039: 'size_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2146: syntax error : missing ';' before identifier 'size_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : error C2868: 'size_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2039: 'difference_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2146: syntax error : missing ';' before identifier 'difference_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(26) : error C2868: 'difference_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2039: 'pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2146: syntax error : missing ';' before identifier 'pointer'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(27) : error C2868: 'pointer' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2039: 'const_pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2146: syntax error : missing ';' before identifier 'const_pointer'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(28) : error C2868: 'const_pointer' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2039: 'reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2146: syntax error : missing ';' before identifier 'reference'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(29) : error C2868: 'reference' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2039: 'const_reference' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2146: syntax error : missing ';' before identifier 'const_reference'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(30) : error C2868: 'const_reference' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2039: 'value_type' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2146: syntax error : missing ';' before identifier 'value_type'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(31) : error C2868: 'value_type' : illegal syntax for using-declaration; expected qualified-name
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(32) : error C2039: 'pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(33) : error C2039: 'const_pointer' : is not a member of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xtree(632) : see declaration of '_A'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(283) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const class std::basic_string<_E,_Tr,_A> &)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(218) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(287) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const _E *,int)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(241) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(290) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,const _E *)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(260) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(293) : error C2535: 'class std::basic_string<_E,_Tr,_A> &__thiscall std::basic_string<_E,_Tr,_A>::replace(int,int,int,_E)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(262) : see declaration of 'replace'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(579) : error C2535: 'int __cdecl std::basic_string<_E,_Tr,_A>::_Psum(int,int)' : member function already defined or declared
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(576) : see declaration of '_Psum'
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(597) : see reference to class template instantiation 'std::basic_string<_E,_Tr,_A>' being compiled
+d:\program files (x86)\microsoft visual studio\vc98\include\xstring(25) : fatal error C1004: unexpected end of file found
+        d:\program files (x86)\microsoft visual studio\vc98\include\xstring(605) : see reference to class template instantiation 'std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >' being compiled
+TCPSockz.cpp
+Generating Code...
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+CHMQ.exe - 147 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
