@@ -2,8 +2,8 @@
 //
 // msado15.tlh
 //
-// C++ source equivalent of type library C:\Program Files\Common Files\System\ADO\msado15.dll
-// compiler-generated file created 12/11/17 at 09:40:25 - DO NOT EDIT!
+// C++ source equivalent of Win32 type library C:\Program Files\Common Files\System\ADO\msado15.dll
+// compiler-generated file created 12/11/17 at 11:31:55 - DO NOT EDIT!
 
 #pragma once
 #pragma pack(push, 8)
@@ -14,7 +14,7 @@
 // Forward references and typedefs
 //
 
-typedef __int64 PositionEnum_Param;
+typedef enum PositionEnum PositionEnum_Param;
 typedef enum SearchDirectionEnum SearchDirection;
 struct __declspec(uuid("00000512-0000-0010-8000-00aa006d2ea4"))
 /* dual interface */ _Collection;
@@ -89,9 +89,8 @@ struct __declspec(uuid("00000517-0000-0010-8000-00aa006d2ea4"))
 /* interface */ ADOCommandConstruction;
 struct /* coclass */ Command;
 struct /* coclass */ Recordset;
-struct __declspec(uuid("00000283-0000-0010-8000-00aa006d2ea4"))
+struct __declspec(uuid("00001283-0000-0010-8000-00aa006d2ea4"))
 /* interface */ ADORecordsetConstruction;
-typedef __int64 ADO_LONGPTR;
 struct __declspec(uuid("00001505-0000-0010-8000-00aa006d2ea4"))
 /* dual interface */ Field15;
 struct /* coclass */ Parameter;
@@ -119,6 +118,7 @@ struct __declspec(uuid("00000569-0000-0010-8000-00aa006d2ea4"))
 /* dual interface */ Field_Deprecated;
 struct __declspec(uuid("0000054c-0000-0010-8000-00aa006d2ea4"))
 /* dual interface */ Field20_Deprecated;
+typedef long ADO_LONGPTR;
 struct __declspec(uuid("b08400bd-f9d1-4d02-b856-71d5dba123e9"))
 /* dual interface */ _Command_Deprecated;
 struct __declspec(uuid("0000054e-0000-0010-8000-00aa006d2ea4"))
@@ -139,6 +139,8 @@ struct __declspec(uuid("00000562-0000-0010-8000-00aa006d2ea4"))
 /* dual interface */ _Record_Deprecated;
 struct __declspec(uuid("00000565-0000-0010-8000-00aa006d2ea4"))
 /* dual interface */ _Stream_Deprecated;
+struct __declspec(uuid("00000283-0000-0010-8000-00aa006d2ea4"))
+/* interface */ ADORecordsetConstruction_Deprecated;
 struct __declspec(uuid("00000505-0000-0010-8000-00aa006d2ea4"))
 /* dual interface */ Field15_Deprecated;
 
@@ -204,6 +206,7 @@ _COM_SMARTPTR_TYPEDEF(ConnectionEvents_Deprecated, __uuidof(IDispatch));
 _COM_SMARTPTR_TYPEDEF(RecordsetEvents_Deprecated, __uuidof(IDispatch));
 _COM_SMARTPTR_TYPEDEF(_Record_Deprecated, __uuidof(_Record_Deprecated));
 _COM_SMARTPTR_TYPEDEF(_Stream_Deprecated, __uuidof(_Stream_Deprecated));
+_COM_SMARTPTR_TYPEDEF(ADORecordsetConstruction_Deprecated, __uuidof(ADORecordsetConstruction_Deprecated));
 _COM_SMARTPTR_TYPEDEF(Field15_Deprecated, __uuidof(Field15_Deprecated));
 
 //
@@ -2961,7 +2964,7 @@ Recordset;
     // [ default ] interface _Recordset
     // [ default, source ] dispinterface RecordsetEvents
 
-struct __declspec(uuid("00000283-0000-0010-8000-00aa006d2ea4"))
+struct __declspec(uuid("00001283-0000-0010-8000-00aa006d2ea4"))
 ADORecordsetConstruction : IDispatch
 {
     //
@@ -2971,7 +2974,7 @@ ADORecordsetConstruction : IDispatch
     __declspec(property(get=GetRowset,put=PutRowset))
     IUnknownPtr Rowset;
     __declspec(property(get=GetChapter,put=PutChapter))
-    ADO_LONGPTR Chapter;
+    long Chapter;
     __declspec(property(get=GetRowPosition,put=PutRowPosition))
     IUnknownPtr RowPosition;
 
@@ -2982,9 +2985,9 @@ ADORecordsetConstruction : IDispatch
     IUnknownPtr GetRowset ( );
     void PutRowset (
         IUnknown * ppRowset );
-    ADO_LONGPTR GetChapter ( );
+    long GetChapter ( );
     void PutChapter (
-        ADO_LONGPTR plChapter );
+        long plChapter );
     IUnknownPtr GetRowPosition ( );
     void PutRowPosition (
         IUnknown * ppRowPos );
@@ -2998,9 +3001,9 @@ ADORecordsetConstruction : IDispatch
     virtual HRESULT __stdcall put_Rowset (
         IUnknown * ppRowset ) = 0;
     virtual HRESULT __stdcall get_Chapter (
-        ADO_LONGPTR * plChapter ) = 0;
+        long * plChapter ) = 0;
     virtual HRESULT __stdcall put_Chapter (
-        ADO_LONGPTR plChapter ) = 0;
+        long plChapter ) = 0;
     virtual HRESULT __stdcall get_RowPosition (
         IUnknown * * ppRowPos ) = 0;
     virtual HRESULT __stdcall put_RowPosition (
@@ -4833,6 +4836,52 @@ _Stream_Deprecated : IDispatch
     virtual HRESULT __stdcall raw_Cancel ( ) = 0;
 };
 
+struct __declspec(uuid("00000283-0000-0010-8000-00aa006d2ea4"))
+ADORecordsetConstruction_Deprecated : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetRowset,put=PutRowset))
+    IUnknownPtr Rowset;
+    __declspec(property(get=GetChapter,put=PutChapter))
+    ADO_LONGPTR Chapter;
+    __declspec(property(get=GetRowPosition,put=PutRowPosition))
+    IUnknownPtr RowPosition;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    IUnknownPtr GetRowset ( );
+    void PutRowset (
+        IUnknown * ppRowset );
+    ADO_LONGPTR GetChapter ( );
+    void PutChapter (
+        ADO_LONGPTR plChapter );
+    IUnknownPtr GetRowPosition ( );
+    void PutRowPosition (
+        IUnknown * ppRowPos );
+
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_Rowset (
+        IUnknown * * ppRowset ) = 0;
+    virtual HRESULT __stdcall put_Rowset (
+        IUnknown * ppRowset ) = 0;
+    virtual HRESULT __stdcall get_Chapter (
+        ADO_LONGPTR * plChapter ) = 0;
+    virtual HRESULT __stdcall put_Chapter (
+        ADO_LONGPTR plChapter ) = 0;
+    virtual HRESULT __stdcall get_RowPosition (
+        IUnknown * * ppRowPos ) = 0;
+    virtual HRESULT __stdcall put_RowPosition (
+        IUnknown * ppRowPos ) = 0;
+};
+
 struct __declspec(uuid("00000505-0000-0010-8000-00aa006d2ea4"))
 Field15_Deprecated : _ADO
 {
@@ -5215,8 +5264,8 @@ __declspec(implementation_key(292)) IUnknownPtr ADOCommandConstruction::GetOLEDB
 __declspec(implementation_key(293)) void ADOCommandConstruction::PutOLEDBCommand ( IUnknown * ppOLEDBCommand );
 __declspec(implementation_key(294)) IUnknownPtr ADORecordsetConstruction::GetRowset ( );
 __declspec(implementation_key(295)) void ADORecordsetConstruction::PutRowset ( IUnknown * ppRowset );
-__declspec(implementation_key(296)) ADO_LONGPTR ADORecordsetConstruction::GetChapter ( );
-__declspec(implementation_key(297)) void ADORecordsetConstruction::PutChapter ( ADO_LONGPTR plChapter );
+__declspec(implementation_key(296)) long ADORecordsetConstruction::GetChapter ( );
+__declspec(implementation_key(297)) void ADORecordsetConstruction::PutChapter ( long plChapter );
 __declspec(implementation_key(298)) IUnknownPtr ADORecordsetConstruction::GetRowPosition ( );
 __declspec(implementation_key(299)) void ADORecordsetConstruction::PutRowPosition ( IUnknown * ppRowPos );
 __declspec(implementation_key(300)) long Field15::GetActualSize ( );
@@ -5493,19 +5542,25 @@ __declspec(implementation_key(570)) HRESULT _Stream_Deprecated::LoadFromFile ( _
 __declspec(implementation_key(571)) _bstr_t _Stream_Deprecated::ReadText ( long NumChars );
 __declspec(implementation_key(572)) HRESULT _Stream_Deprecated::WriteText ( _bstr_t Data, enum StreamWriteEnum Options );
 __declspec(implementation_key(573)) HRESULT _Stream_Deprecated::Cancel ( );
-__declspec(implementation_key(574)) ADO_LONGPTR Field15_Deprecated::GetActualSize ( );
-__declspec(implementation_key(575)) long Field15_Deprecated::GetAttributes ( );
-__declspec(implementation_key(576)) ADO_LONGPTR Field15_Deprecated::GetDefinedSize ( );
-__declspec(implementation_key(577)) _bstr_t Field15_Deprecated::GetName ( );
-__declspec(implementation_key(578)) enum DataTypeEnum Field15_Deprecated::GetType ( );
-__declspec(implementation_key(579)) _variant_t Field15_Deprecated::GetValue ( );
-__declspec(implementation_key(580)) void Field15_Deprecated::PutValue ( const _variant_t & pvar );
-__declspec(implementation_key(581)) unsigned char Field15_Deprecated::GetPrecision ( );
-__declspec(implementation_key(582)) unsigned char Field15_Deprecated::GetNumericScale ( );
-__declspec(implementation_key(583)) HRESULT Field15_Deprecated::AppendChunk ( const _variant_t & Data );
-__declspec(implementation_key(584)) _variant_t Field15_Deprecated::GetChunk ( long Length );
-__declspec(implementation_key(585)) _variant_t Field15_Deprecated::GetOriginalValue ( );
-__declspec(implementation_key(586)) _variant_t Field15_Deprecated::GetUnderlyingValue ( );
+__declspec(implementation_key(574)) IUnknownPtr ADORecordsetConstruction_Deprecated::GetRowset ( );
+__declspec(implementation_key(575)) void ADORecordsetConstruction_Deprecated::PutRowset ( IUnknown * ppRowset );
+__declspec(implementation_key(576)) ADO_LONGPTR ADORecordsetConstruction_Deprecated::GetChapter ( );
+__declspec(implementation_key(577)) void ADORecordsetConstruction_Deprecated::PutChapter ( ADO_LONGPTR plChapter );
+__declspec(implementation_key(578)) IUnknownPtr ADORecordsetConstruction_Deprecated::GetRowPosition ( );
+__declspec(implementation_key(579)) void ADORecordsetConstruction_Deprecated::PutRowPosition ( IUnknown * ppRowPos );
+__declspec(implementation_key(580)) ADO_LONGPTR Field15_Deprecated::GetActualSize ( );
+__declspec(implementation_key(581)) long Field15_Deprecated::GetAttributes ( );
+__declspec(implementation_key(582)) ADO_LONGPTR Field15_Deprecated::GetDefinedSize ( );
+__declspec(implementation_key(583)) _bstr_t Field15_Deprecated::GetName ( );
+__declspec(implementation_key(584)) enum DataTypeEnum Field15_Deprecated::GetType ( );
+__declspec(implementation_key(585)) _variant_t Field15_Deprecated::GetValue ( );
+__declspec(implementation_key(586)) void Field15_Deprecated::PutValue ( const _variant_t & pvar );
+__declspec(implementation_key(587)) unsigned char Field15_Deprecated::GetPrecision ( );
+__declspec(implementation_key(588)) unsigned char Field15_Deprecated::GetNumericScale ( );
+__declspec(implementation_key(589)) HRESULT Field15_Deprecated::AppendChunk ( const _variant_t & Data );
+__declspec(implementation_key(590)) _variant_t Field15_Deprecated::GetChunk ( long Length );
+__declspec(implementation_key(591)) _variant_t Field15_Deprecated::GetOriginalValue ( );
+__declspec(implementation_key(592)) _variant_t Field15_Deprecated::GetUnderlyingValue ( );
 #pragma stop_map_region
 
 #pragma pack(pop)

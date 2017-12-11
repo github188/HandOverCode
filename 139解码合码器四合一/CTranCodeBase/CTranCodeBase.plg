@@ -6,39 +6,6 @@
 --------------------Configuration: CTranCodeBase - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x804 /fo"Release/CTranCodeBase.res" /d "NDEBUG" /d "_AFXDLL" "D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CTranCodeBase\CTranCodeBase.rc"" 
-Creating temporary file "C:\Users\Hqw\AppData\Local\Temp\RSPBC4D.tmp" with contents
-[
-/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_AFXEXT" /Fp"Release/CTranCodeBase.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CTranCodeBase\AVIThreadz.cpp"
-"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CTranCodeBase\CTranCodeBase.cpp"
-]
-Creating command line "cl.exe @C:\Users\Hqw\AppData\Local\Temp\RSPBC4D.tmp" 
-Creating temporary file "C:\Users\Hqw\AppData\Local\Temp\RSPBC5D.tmp" with contents
-[
-/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_AFXEXT" /Fp"Release/CTranCodeBase.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\Users\Hqw\Documents\Work\北科舟宇\project\code\HandOverCode\139解码合码器四合一\CTranCodeBase\StdAfx.cpp"
-]
-Creating command line "cl.exe @C:\Users\Hqw\AppData\Local\Temp\RSPBC5D.tmp" 
-Creating temporary file "C:\Users\Hqw\AppData\Local\Temp\RSPBC5E.tmp" with contents
-[
-/nologo /subsystem:windows /dll /incremental:no /pdb:"Release/CTranCodeBase.pdb" /machine:I386 /def:".\CTranCodeBase.def" /out:"Release/CTranCodeBase.dll" /implib:"Release/CTranCodeBase.lib" 
-".\Release\AVIThreadz.obj"
-".\Release\CTranCodeBase.obj"
-".\Release\StdAfx.obj"
-".\Release\CTranCodeBase.res"
-]
-Creating command line "link.exe @C:\Users\Hqw\AppData\Local\Temp\RSPBC5E.tmp"
-<h3>Output Window</h3>
-Compiling resources...
-Compiling...
-StdAfx.cpp
-Compiling...
-AVIThreadz.cpp
-CTranCodeBase.cpp
-Generating Code...
-Linking...
-   Creating library Release/CTranCodeBase.lib and object Release/CTranCodeBase.exp
 
 
 

@@ -2,8 +2,8 @@
 //
 // msado15.tli
 //
-// Wrapper implementations for type library C:\Program Files\Common Files\System\ADO\msado15.dll
-// compiler-generated file created 12/11/17 at 09:40:25 - DO NOT EDIT!
+// Wrapper implementations for Win32 type library C:\Program Files\Common Files\System\ADO\msado15.dll
+// compiler-generated file created 12/11/17 at 11:31:55 - DO NOT EDIT!
 
 
 //
@@ -2300,15 +2300,15 @@ inline void ADORecordsetConstruction::PutRowset ( IUnknown * ppRowset ) {
 }
 
 #pragma implementation_key(296)
-inline ADO_LONGPTR ADORecordsetConstruction::GetChapter ( ) {
-    ADO_LONGPTR _result;
+inline long ADORecordsetConstruction::GetChapter ( ) {
+    long _result;
     HRESULT _hr = get_Chapter(&_result);
     if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
     return _result;
 }
 
 #pragma implementation_key(297)
-inline void ADORecordsetConstruction::PutChapter ( ADO_LONGPTR plChapter ) {
+inline void ADORecordsetConstruction::PutChapter ( long plChapter ) {
     HRESULT _hr = put_Chapter(plChapter);
     if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
 }
@@ -4428,10 +4428,56 @@ inline HRESULT _Stream_Deprecated::Cancel ( ) {
 }
 
 //
-// interface Field15_Deprecated wrapper method implementations
+// interface ADORecordsetConstruction_Deprecated wrapper method implementations
 //
 
 #pragma implementation_key(574)
+inline IUnknownPtr ADORecordsetConstruction_Deprecated::GetRowset ( ) {
+    IUnknown * _result;
+    HRESULT _hr = get_Rowset(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IUnknownPtr(_result, false);
+}
+
+#pragma implementation_key(575)
+inline void ADORecordsetConstruction_Deprecated::PutRowset ( IUnknown * ppRowset ) {
+    HRESULT _hr = put_Rowset(ppRowset);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+#pragma implementation_key(576)
+inline ADO_LONGPTR ADORecordsetConstruction_Deprecated::GetChapter ( ) {
+    ADO_LONGPTR _result;
+    HRESULT _hr = get_Chapter(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+#pragma implementation_key(577)
+inline void ADORecordsetConstruction_Deprecated::PutChapter ( ADO_LONGPTR plChapter ) {
+    HRESULT _hr = put_Chapter(plChapter);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+#pragma implementation_key(578)
+inline IUnknownPtr ADORecordsetConstruction_Deprecated::GetRowPosition ( ) {
+    IUnknown * _result;
+    HRESULT _hr = get_RowPosition(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IUnknownPtr(_result, false);
+}
+
+#pragma implementation_key(579)
+inline void ADORecordsetConstruction_Deprecated::PutRowPosition ( IUnknown * ppRowPos ) {
+    HRESULT _hr = put_RowPosition(ppRowPos);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+//
+// interface Field15_Deprecated wrapper method implementations
+//
+
+#pragma implementation_key(580)
 inline ADO_LONGPTR Field15_Deprecated::GetActualSize ( ) {
     ADO_LONGPTR _result;
     HRESULT _hr = get_ActualSize(&_result);
@@ -4439,7 +4485,7 @@ inline ADO_LONGPTR Field15_Deprecated::GetActualSize ( ) {
     return _result;
 }
 
-#pragma implementation_key(575)
+#pragma implementation_key(581)
 inline long Field15_Deprecated::GetAttributes ( ) {
     long _result;
     HRESULT _hr = get_Attributes(&_result);
@@ -4447,7 +4493,7 @@ inline long Field15_Deprecated::GetAttributes ( ) {
     return _result;
 }
 
-#pragma implementation_key(576)
+#pragma implementation_key(582)
 inline ADO_LONGPTR Field15_Deprecated::GetDefinedSize ( ) {
     ADO_LONGPTR _result;
     HRESULT _hr = get_DefinedSize(&_result);
@@ -4455,7 +4501,7 @@ inline ADO_LONGPTR Field15_Deprecated::GetDefinedSize ( ) {
     return _result;
 }
 
-#pragma implementation_key(577)
+#pragma implementation_key(583)
 inline _bstr_t Field15_Deprecated::GetName ( ) {
     BSTR _result;
     HRESULT _hr = get_Name(&_result);
@@ -4463,7 +4509,7 @@ inline _bstr_t Field15_Deprecated::GetName ( ) {
     return _bstr_t(_result, false);
 }
 
-#pragma implementation_key(578)
+#pragma implementation_key(584)
 inline enum DataTypeEnum Field15_Deprecated::GetType ( ) {
     enum DataTypeEnum _result;
     HRESULT _hr = get_Type(&_result);
@@ -4471,7 +4517,7 @@ inline enum DataTypeEnum Field15_Deprecated::GetType ( ) {
     return _result;
 }
 
-#pragma implementation_key(579)
+#pragma implementation_key(585)
 inline _variant_t Field15_Deprecated::GetValue ( ) {
     VARIANT _result;
     VariantInit(&_result);
@@ -4480,13 +4526,13 @@ inline _variant_t Field15_Deprecated::GetValue ( ) {
     return _variant_t(_result, false);
 }
 
-#pragma implementation_key(580)
+#pragma implementation_key(586)
 inline void Field15_Deprecated::PutValue ( const _variant_t & pvar ) {
     HRESULT _hr = put_Value(pvar);
     if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
 }
 
-#pragma implementation_key(581)
+#pragma implementation_key(587)
 inline unsigned char Field15_Deprecated::GetPrecision ( ) {
     unsigned char _result;
     HRESULT _hr = get_Precision(&_result);
@@ -4494,7 +4540,7 @@ inline unsigned char Field15_Deprecated::GetPrecision ( ) {
     return _result;
 }
 
-#pragma implementation_key(582)
+#pragma implementation_key(588)
 inline unsigned char Field15_Deprecated::GetNumericScale ( ) {
     unsigned char _result;
     HRESULT _hr = get_NumericScale(&_result);
@@ -4502,14 +4548,14 @@ inline unsigned char Field15_Deprecated::GetNumericScale ( ) {
     return _result;
 }
 
-#pragma implementation_key(583)
+#pragma implementation_key(589)
 inline HRESULT Field15_Deprecated::AppendChunk ( const _variant_t & Data ) {
     HRESULT _hr = raw_AppendChunk(Data);
     if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
     return _hr;
 }
 
-#pragma implementation_key(584)
+#pragma implementation_key(590)
 inline _variant_t Field15_Deprecated::GetChunk ( long Length ) {
     VARIANT _result;
     VariantInit(&_result);
@@ -4518,7 +4564,7 @@ inline _variant_t Field15_Deprecated::GetChunk ( long Length ) {
     return _variant_t(_result, false);
 }
 
-#pragma implementation_key(585)
+#pragma implementation_key(591)
 inline _variant_t Field15_Deprecated::GetOriginalValue ( ) {
     VARIANT _result;
     VariantInit(&_result);
@@ -4527,7 +4573,7 @@ inline _variant_t Field15_Deprecated::GetOriginalValue ( ) {
     return _variant_t(_result, false);
 }
 
-#pragma implementation_key(586)
+#pragma implementation_key(592)
 inline _variant_t Field15_Deprecated::GetUnderlyingValue ( ) {
     VARIANT _result;
     VariantInit(&_result);
