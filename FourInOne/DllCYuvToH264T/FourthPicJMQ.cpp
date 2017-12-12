@@ -33,7 +33,8 @@ CFourthPicJMQ::CFourthPicJMQ()
 	iRunNum=5;
 	m_uKSKM=2;//默认科目二
 
-	bDrawSignal = false;
+	m_bDrawSignal = false;
+	m_bNineMaps = false;
 }
 
 CFourthPicJMQ::~CFourthPicJMQ()
@@ -102,6 +103,131 @@ void CFourthPicJMQ::FourthPicInit(int ikch, CString path,int wMSG,HWND hwndz)
 	m_type =m_type | MTYPE1;
 	iRunNum=5;
 	//////////////////////////////////////////////////////////////////////////
+}
+
+void CFourthPicJMQ::DrawNineMaps(Graphics *graphics, int carX, int carY)
+{
+	try
+	{
+	CString configfile;
+	UINT uMaxX = 0;
+	UINT uMinX = 0;
+	UINT uMaxY = 0;
+	UINT uMinY = 0;
+	UINT uZoomIn = 0;
+	UINT uSplitWidth = 0;
+	configfile.Format("%s\\HS_CONF_MAP.ini",m_sExePath);	
+	uMaxX=GetPrivateProfileInt("CONFIG","MAXX",0,configfile);
+	uMinX=GetPrivateProfileInt("CONFIG","MINX",0,configfile);
+	uMaxY=GetPrivateProfileInt("CONFIG","MAXY",0,configfile);
+	uMinY=GetPrivateProfileInt("CONFIG","MINY",0,configfile);
+	uZoomIn=GetPrivateProfileInt("CONFIG","ZOOMIN",0,configfile);
+	uSplitWidth=GetPrivateProfileInt("CONFIG","SPLITWIDTH",0,configfile);
+	WriteLog("carX=%d,carY=%d,splitWidth=%d,maxx=%d",carX,carY,uSplitWidth,uMaxX);
+	if (0==uMaxX || 0 == uMinX || 0 == uMaxY || 0 == uMinY || 0 ==uZoomIn || 0 == uSplitWidth)
+	{
+		WriteLog("错误：从HS_CONF_MAP.ini配置文件中得到的坐标范围存在异常，请检查配置文件");
+		return;
+	}
+
+	int rowNum = carY/ uSplitWidth;
+	int columnNum = carX/ uSplitWidth;
+	//WriteLog("rowNum=%d,columnNum=%d",rowNum,columnNum);
+	if (0 == rowNum && 0 == columnNum)
+	{
+		//WriteLog("错误：从HS_CONF_MAP.ini配置文件中得到的坐标范围存在异常，请检查配置文件.carX=%d, carY=%d",carX, carY);
+		//return;
+		rowNum = 1;
+		columnNum = 1;
+		carX += uSplitWidth;
+		carY += uSplitWidth;
+	}
+
+	//加载考车坐标周围的9张图片
+	CString temp;
+	unsigned short StcharArr[256];
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum-1, columnNum-1);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgLeftTop = Image::FromFile(StcharArr);
+
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum-1, columnNum);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgTop = Image::FromFile(StcharArr);
+
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum-1, columnNum+1);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgRightTop = Image::FromFile(StcharArr);
+
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum, columnNum-1);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgLeftMiddle = Image::FromFile(StcharArr);
+	
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum, columnNum);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgMiddle = Image::FromFile(StcharArr);
+	
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum, columnNum+1);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgRightMiddle = Image::FromFile(StcharArr);
+
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum+1, columnNum-1);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgLeftBottom = Image::FromFile(StcharArr);
+	
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum+1, columnNum);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgBottom = Image::FromFile(StcharArr);
+	
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\%d_%d.png",m_sMapPath, rowNum+1, columnNum+1);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	Image *imgRightBottom = Image::FromFile(StcharArr);
+
+	//生成一张临时的大图
+	Bitmap bm(3*uSplitWidth, 3*uSplitWidth);
+	Graphics *gNineMaps;
+	gNineMaps = Graphics::FromImage(&bm);
+	gNineMaps->DrawImage(imgLeftTop, Rect(0, 0, uSplitWidth, uSplitWidth));
+	gNineMaps->DrawImage(imgTop, Rect(uSplitWidth, 0, uSplitWidth, uSplitWidth));
+	gNineMaps->DrawImage(imgRightTop, Rect(2 * uSplitWidth, 0, uSplitWidth, uSplitWidth));
+	gNineMaps->DrawImage(imgLeftMiddle, Rect(0, uSplitWidth, uSplitWidth, uSplitWidth));
+	gNineMaps->DrawImage(imgMiddle, Rect(uSplitWidth, uSplitWidth, uSplitWidth, uSplitWidth));
+	gNineMaps->DrawImage(imgRightMiddle, Rect(2 * uSplitWidth, uSplitWidth, uSplitWidth, uSplitWidth));
+	gNineMaps->DrawImage(imgLeftBottom, Rect(0, 2 * uSplitWidth, uSplitWidth, uSplitWidth));
+	gNineMaps->DrawImage(imgBottom, Rect(uSplitWidth, 2 * uSplitWidth, uSplitWidth, uSplitWidth));
+	gNineMaps->DrawImage(imgRightBottom, Rect(2 * uSplitWidth, 2 * uSplitWidth, uSplitWidth, uSplitWidth));
+
+	//绘制实时地图
+	int relativeX = carX % uSplitWidth + uSplitWidth;
+	int relativeY = carY % uSplitWidth + uSplitWidth;
+	//WriteLog("relativex=%d,relativey=%d",relativeX,relativeY);
+	graphics->DrawImage(&bm, Rect(0,0,352,288), (relativeX-176), (relativeY-144), 352, 288, UnitPixel);
+	
+	delete imgLeftTop;
+	delete imgTop;
+	delete imgRightTop;
+	delete imgLeftMiddle;
+	delete imgMiddle;
+	delete imgRightMiddle;
+	delete imgLeftBottom;
+	delete imgBottom;
+	delete imgRightBottom;
+	delete gNineMaps;
+	}
+	catch (...)
+	{
+		WriteLog("错误：DrawNineMaps 捕获取异常");
+		return;
+	}
+	
 }
 
 void CFourthPicJMQ::DrawSignal(Graphics *graphics)
@@ -529,6 +655,9 @@ void CFourthPicJMQ::SetSleepTime(DWORD dwTime)
 
 void CFourthPicJMQ::LoadMapCfg(CString path)
 {
+	m_sExePath = path;
+	m_sMapPath = path + "\\map";
+	
 	CString temp;
 	unsigned short StcharArr[256];
 	memset(StcharArr,0x0,sizeof(StcharArr));
@@ -539,56 +668,11 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 	m_mayWH.x=ImgMap->GetWidth();
 	m_mayWH.y=ImgMap->GetHeight();
 	//////////////////////////////////////////////////////////////////////////
-	CString MapCfg,keyXname,keyYname;
-	MapCfg.Format("%s\\MAP.cfg",path);
-	int ixc,iyc;
-	ixc=GetPrivateProfileInt("MAPCONFIG","XC",0,MapCfg);
-	iyc=GetPrivateProfileInt("MAPCONFIG","YC",0,MapCfg);
-	if (ixc==1)
-	{
-		keyXname.Format("MINX");
-	}
-	else
-	{
-		keyXname.Format("MAXX");
-	}
-	if (iyc==1)
-	{
-		keyYname.Format("MINY");
-	}
-	else
-	{
-		keyYname.Format("MAXY");
-	}
-	if(GetPrivateProfileString("MAPCONFIG",keyXname,"",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
-	{
-		temp.ReleaseBuffer();
-		m_Mapx=atof(temp);
-	}
-	else
-	{
-		WriteLog("MAP.cfg Get %s failed! %d",keyXname,m_iCarNum);
-	}
-	if(GetPrivateProfileString("MAPCONFIG",keyYname,"",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
-	{
-		temp.ReleaseBuffer();
-		m_Mapy=atof(temp);
-	}
-	else
-	{
-		WriteLog("MAP.cfg Get MINY failed! %d",m_iCarNum);
-	}
 
-	if(GetPrivateProfileString("MAPCONFIG","ZoomIn","",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
-	{
-		temp.ReleaseBuffer();
-		m_bs=atof(temp);
-	}
-	else
-	{
-		WriteLog("MAP.cfg Get ZoomIn failed! %d",m_iCarNum);
-	}
-	m_DrawMap=true;
+	
+
+	
+	
 	//////////////////////////////////////////////////////////////////////////
 	CString strCarN,configfile;
 	configfile.Format("%s\\config.ini",path);	
@@ -597,9 +681,9 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 	if (uDrawCar==1)
 	{
 		strCarN.Format("%d",m_iCarNum);
-		ixc=GetPrivateProfileInt("CARSKIN",strCarN,0,configfile);
+		int carNo=GetPrivateProfileInt("CARSKIN",strCarN,0,configfile);
 		memset(StcharArr,0x0,sizeof(StcharArr));
-		temp.Format("%s\\Car%d.skin",path,ixc);
+		temp.Format("%s\\Car%d.skin",path,carNo);
 		WriteLog("加载config.ini CARSKIN[%s]",temp);
 		swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
 		ImgCAR=Image::FromFile(StcharArr);
@@ -607,6 +691,7 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 	}
 	uDituPy=GetPrivateProfileInt("CONFIG","DITUPY",1,configfile);//地图偏移
 
+	//huangqiwei
 	UINT uDrawSignal;
 	uDrawSignal = GetPrivateProfileInt("CONFIG","DrawSignal",0,configfile); 
 	if (1 == uDrawSignal)
@@ -615,7 +700,120 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 		temp.Format("%s\\signal.png", path);
 		swprintf((wchar_t *)StcharArr, L"%s", temp.AllocSysString());
 		ImgSignal = Image::FromFile(StcharArr);
-		bDrawSignal = true;
+		m_bDrawSignal = true;
+	}
+	
+	UINT uNineMaps;
+	uNineMaps = GetPrivateProfileInt("CONFIG","NineMaps",0,configfile); 
+	if (1 == uNineMaps)
+	{
+		m_bNineMaps = true;
+	}
+
+	m_DrawMap=true;
+	if (m_bNineMaps)
+	{
+		CString MapCfg,keyXname,keyYname;
+		MapCfg.Format("%s\\HS_CONF_MAP.ini",path);
+		int ixc,iyc;
+		ixc=GetPrivateProfileInt("CONFIG","XC",0,MapCfg);
+		iyc=GetPrivateProfileInt("CONFIG","YC",0,MapCfg);
+		if (ixc==1)
+		{
+			keyXname.Format("MINX");
+		}
+		else
+		{
+			keyXname.Format("MAXX");
+		}
+		if (iyc==1)
+		{
+			keyYname.Format("MINY");
+		}
+		else
+		{
+			keyYname.Format("MAXY");
+		}
+		if(GetPrivateProfileString("CONFIG",keyXname,"",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		{
+			temp.ReleaseBuffer();
+			m_Mapx=atof(temp);
+		}
+		else
+		{
+			WriteLog("HS_CONF_MAP.ini Get %s failed! %d",keyXname,m_iCarNum);
+		}
+		if(GetPrivateProfileString("CONFIG",keyYname,"",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		{
+			temp.ReleaseBuffer();
+			m_Mapy=atof(temp);
+		}
+		else
+		{
+			WriteLog("HS_CONF_MAP.ini Get MINY failed! %d",m_iCarNum);
+		}
+		
+		if(GetPrivateProfileString("CONFIG","ZoomIn","",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		{
+			temp.ReleaseBuffer();
+			m_bs=atof(temp);
+		}
+		else
+		{
+			WriteLog("HS_CONF_MAP.ini Get ZoomIn failed! %d",m_iCarNum);
+		}
+	}
+	else
+	{
+		CString MapCfg,keyXname,keyYname;
+		MapCfg.Format("%s\\MAP.cfg",path);
+		int ixc,iyc;
+		ixc=GetPrivateProfileInt("MAPCONFIG","XC",0,MapCfg);
+		iyc=GetPrivateProfileInt("MAPCONFIG","YC",0,MapCfg);
+		if (ixc==1)
+		{
+			keyXname.Format("MINX");
+		}
+		else
+		{
+			keyXname.Format("MAXX");
+		}
+		if (iyc==1)
+		{
+			keyYname.Format("MINY");
+		}
+		else
+		{
+			keyYname.Format("MAXY");
+		}
+		if(GetPrivateProfileString("MAPCONFIG",keyXname,"",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		{
+			temp.ReleaseBuffer();
+			m_Mapx=atof(temp);
+		}
+		else
+		{
+			WriteLog("MAP.cfg Get %s failed! %d",keyXname,m_iCarNum);
+		}
+		if(GetPrivateProfileString("MAPCONFIG",keyYname,"",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		{
+			temp.ReleaseBuffer();
+			m_Mapy=atof(temp);
+		}
+		else
+		{
+			WriteLog("MAP.cfg Get MINY failed! %d",m_iCarNum);
+		}
+		
+		if(GetPrivateProfileString("MAPCONFIG","ZoomIn","",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		{
+			temp.ReleaseBuffer();
+			m_bs=atof(temp);
+		}
+		else
+		{
+			WriteLog("MAP.cfg Get ZoomIn failed! %d",m_iCarNum);
+		}
 	}
 
 	WriteLog("20171030 1042 LoadMapCfg OK!uDituPy=%d",uDituPy);
@@ -659,7 +857,17 @@ void CFourthPicJMQ::DrawMapTM()
 		WaitForSingleObject(hThreadEvent,INFINITE);
 		Rtime=timeGetTime();
 		//////////////////////////////////////////////////////////////////////////
-		grdc.DrawImage(ImgMap,Rect(0,0,352,288),m_imapx,m_imapy,352,288,UnitPixel);//地图
+
+		//绘制地图
+		if (m_bNineMaps)
+		{
+			DrawNineMaps(&grdc, m_imapx + 176, m_imapy + 144);
+		}
+		else
+		{
+			grdc.DrawImage(ImgMap,Rect(0,0,352,288),m_imapx,m_imapy,352,288,UnitPixel);//地图
+		}
+		
 		if (m_DrawCar==true)//是否绘制考车
 		{
 			grdc.TranslateTransform(176,144);
@@ -701,7 +909,7 @@ void CFourthPicJMQ::DrawMapTM()
 		DrawTime(&grdc,266,268);//考试时长
 
 		//huangqiwei temp
-		if (bDrawSignal)
+		if (m_bDrawSignal)
 		{
 			DrawSignal(&grdc);
 		}
