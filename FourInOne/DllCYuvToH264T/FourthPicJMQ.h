@@ -79,6 +79,7 @@ private:
 	CString m_sMapPath;	//底图路径
 	bool m_bDrawSignal;	//是否绘制信号
 	bool m_bNineMaps;		//是否采用九宫格模式
+	bool m_bBigCar;	//大车
 	Image *ImgSignal;			//信号
 	void DrawSignal(Graphics *graphics);//实时信号
 	void DrawNineMaps(Graphics *graphics, int carX, int carY);//画九宫格地图

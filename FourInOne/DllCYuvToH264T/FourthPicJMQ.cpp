@@ -35,6 +35,7 @@ CFourthPicJMQ::CFourthPicJMQ()
 
 	m_bDrawSignal = false;
 	m_bNineMaps = false;
+	m_bBigCar = false;
 }
 
 CFourthPicJMQ::~CFourthPicJMQ()
@@ -99,6 +100,16 @@ void CFourthPicJMQ::FourthPicInit(int ikch, CString path,int wMSG,HWND hwndz)
 	temp.Format("%s\\xmp.skin",path);
 	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
 	ImgXmp=Image::FromFile(StcharArr);
+
+	//huangqiwei
+	CString configfile;
+	configfile.Format("%s\\config.ini",path);	
+	UINT uBigCar;
+	uBigCar=GetPrivateProfileInt("CONFIG","BigCar",0,configfile);
+	if (1 == uBigCar)
+	{
+		m_bBigCar = true;
+	}
 
 	m_type =m_type | MTYPE1;
 	iRunNum=5;
@@ -399,42 +410,118 @@ int CFourthPicJMQ::GetXMPi(int icode)
 	if (m_uKSKM==2)//科目二
 	{   //201510
 		icode=icode/1000;
-		if (201==icode)
+		
+		if (!m_bBigCar)
 		{
-			itype=1;
-		}
-		else if (204==icode)
-		{
-			itype=2;
-		}
-		else if (203==icode)
-		{
-			itype=3;
-		}
-		else if (206==icode)
-		{
-			itype=4;
-		}
-		else if (207==icode)
-		{
-			itype=5;
-		}
-		else if (214==icode)
-		{
-			itype=7;
-		}
-		else if (215==icode)
-		{
-			itype=6;
-		}
-		else if (216==icode)
-		{
-			itype=6;
+			if (201==icode)
+			{
+				itype=1;
+			}
+			else if (204==icode)
+			{
+				itype=2;
+			}
+			else if (203==icode)
+			{
+				itype=3;
+			}
+			else if (206==icode)
+			{
+				itype=4;
+			}
+			else if (207==icode)
+			{
+				itype=5;
+			}
+			else if (214==icode)
+			{
+				itype=7;
+			}
+			else if (215==icode)
+			{
+				itype=6;
+			}
+			else if (216==icode)
+			{
+				itype=6;
+			}
+			else
+			{
+				itype=0;
+			}
 		}
 		else
 		{
-			itype=0;
+			if (202 == icode)	//桩考
+			{
+				itype = 1;
+			}
+			else if (204 == icode)	//侧方
+			{
+				itype = 2;
+			}
+			else if (203 == icode)	//定点
+			{
+				itype = 3;
+			}
+			else if (205 == icode)	//单边桥
+			{
+				itype = 4;
+			}
+			else if (209 == icode)	//连续障碍
+			{
+				itype = 5;
+			}
+			else if (208 == icode)	//限宽门
+			{
+				itype = 6;
+			}
+			else if (207 == icode)	//直角
+			{
+				itype = 7;
+			}
+			else if (206 == icode)	//曲线
+			{
+				itype = 8;
+			}
+			else if (210 == icode)	//起伏
+			{
+				itype = 9;
+			}
+			else if (211 == icode)	//掉头
+			{
+				itype = 10;
+			}
+			else if (213 == icode)	//急弯
+			{
+				itype = 11;
+			}
+			else if (216 == icode)	//湿滑
+			{
+				itype = 12;
+			}
+			else if (215 == icode)	//雨雾
+			{
+				itype = 13;
+			}
+			else if (214 == icode)	//隧道
+			{
+				itype = 14;
+			}
+			else if (212 == icode)	//高速
+			{
+				itype = 15;
+			}
+			else if (217 == icode || 218 == icode)	//紧急情况
+			{
+				itype = 16;
+			}
+			else
+			{
+				itype = 0;
+			}
 		}
+		
 	}
 	else
 	{
@@ -995,17 +1082,17 @@ void CFourthPicJMQ::DrawXMListTM()
 		{
 			m_type=m_type & (~ MTYPE1);
 			grdc.DrawImage(ImgMark,Rect(0,0,352,288));//遮罩
-			if (m_uKSKM==2)
+			if (m_uKSKM==3 || m_bBigCar)	//大车的项目牌与科目三类似 
 			{
-				grdc.DrawImage(ImgXmp,Rect(264,36,88,252),0,0,88,252,UnitPixel);//项目牌
+				grdc.DrawImage(ImgXmp,Rect(264,0,88,288),0,0,88,288,UnitPixel);//项目牌
 			}
 			else
 			{
-				grdc.DrawImage(ImgXmp,Rect(264,0,88,288),0,0,88,288,UnitPixel);//项目牌
+				grdc.DrawImage(ImgXmp,Rect(264,36,88,252),0,0,88,252,UnitPixel);//项目牌
 			}			
 		}
 		grdc.DrawImage(ImgMark,Rect(0,0,263,288),0,0,263,288,UnitPixel);
-		grdc.DrawImage(ImgMark,Rect(0,0,352,30),0,0,352,30,UnitPixel);
+		//grdc.DrawImage(ImgMark,Rect(0,0,352,30),0,0,352,30,UnitPixel);
 		strtext.Format("%s(%d)",nowztstr,m_iCarNum);
 		m_ImageDC.DrawText(strtext,&textrc[0],DT_LEFT | DT_SINGLELINE | DT_VCENTER );
 		strtext.Format("速度:%4.1fkm/h",m_GnssMsg.gnssSD);
@@ -1072,13 +1159,10 @@ void CFourthPicJMQ::DrawXMList(Graphics *graphics)
 	tempi=GetMType(m_i52type);
 	while (tempi!=0)
 	{
-//		tempi-=1;
-		if (m_uKSKM==2)
+		if (m_uKSKM==3 || m_bBigCar)
 		{
-			graphics->DrawImage(ImgXmp,Rect(264,tempi*36,88,36),88,(tempi-1)*36,88,36,UnitPixel);
-		}
-		else
-		{
+			tempi-=1;
+			
 			if (tempi%2==0)
 			{
 				graphics->DrawImage(ImgXmp,Rect(264,(tempi/2)*36,44,36),88,(tempi/2)*36,44,36,UnitPixel);
@@ -1087,20 +1171,21 @@ void CFourthPicJMQ::DrawXMList(Graphics *graphics)
 			{
 				graphics->DrawImage(ImgXmp,Rect(308,(tempi/2)*36,44,36),132,(tempi/2)*36,44,36,UnitPixel);
 			}
-
+			
+		}
+		else
+		{
+			graphics->DrawImage(ImgXmp,Rect(264,tempi*36,88,36),88,(tempi-1)*36,88,36,UnitPixel);
 		}
 		tempi=GetMType(m_i52type);
 	}
 	tempi=GetMType(m_i55type);
 	while (tempi!=0)
 	{
-//		tempi-=1;
-		if (m_uKSKM==2)
+		if (m_uKSKM==3 || m_bBigCar)
 		{
-			graphics->DrawImage(ImgXmp,Rect(264,tempi*36,88,36),176,(tempi-1)*36,88,36,UnitPixel);
-		}
-		else
-		{
+			tempi-=1;
+			
 			if (tempi%2==0)
 			{
 				graphics->DrawImage(ImgXmp,Rect(264,(tempi/2)*36,44,36),176,(tempi/2)*36,44,36,UnitPixel);
@@ -1109,6 +1194,10 @@ void CFourthPicJMQ::DrawXMList(Graphics *graphics)
 			{
 				graphics->DrawImage(ImgXmp,Rect(308,(tempi/2)*36,44,36),220,(tempi/2)*36,44,36,UnitPixel);
 			}
+		}
+		else
+		{
+			graphics->DrawImage(ImgXmp,Rect(264,tempi*36,88,36),176,(tempi-1)*36,88,36,UnitPixel);
 		}
 		tempi=GetMType(m_i55type);
 	}
