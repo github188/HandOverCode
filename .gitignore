@@ -4,6 +4,9 @@
 *.opensdf
 *.VC.db
 *.VC.opendb
+*.ncb
+*.opt
+*.plg
 ipch
 Debug
 Release
@@ -11,3 +14,5 @@ x64
 bin
 Output
 temp
+DEXE
+REXE
