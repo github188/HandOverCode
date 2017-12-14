@@ -134,7 +134,7 @@ void CFourthPicJMQ::DrawNineMaps(Graphics *graphics, int carX, int carY)
 	uMinY=GetPrivateProfileInt("CONFIG","MINY",0,configfile);
 	uZoomIn=GetPrivateProfileInt("CONFIG","ZOOMIN",0,configfile);
 	uSplitWidth=GetPrivateProfileInt("CONFIG","SPLITWIDTH",0,configfile);
-	WriteLog("carX=%d,carY=%d,splitWidth=%d,maxx=%d",carX,carY,uSplitWidth,uMaxX);
+	//WriteLog("carX=%d,carY=%d,splitWidth=%d,maxx=%d",carX,carY,uSplitWidth,uMaxX);
 	if (0==uMaxX || 0 == uMinX || 0 == uMaxY || 0 == uMinY || 0 ==uZoomIn || 0 == uSplitWidth)
 	{
 		WriteLog("错误：从HS_CONF_MAP.ini配置文件中得到的坐标范围存在异常，请检查配置文件");
@@ -619,6 +619,7 @@ void CFourthPicJMQ::OnGnssData(LPVOID msgz)
 			{
 				tempx=abs((int)((m_GnssMsg.gnssX-m_Mapx)*m_bs))-176;
 				tempy=abs((int)((m_GnssMsg.gnssY-m_Mapy)*m_bs))-144;
+				WriteLog("qw2 gnssy=%f,tempy=%d,maxy=%lf", m_GnssMsg.gnssY, tempy,m_Mapy);
 			}
 			else
 			{
@@ -752,8 +753,7 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
 	ImgMap=Image::FromFile(StcharArr);
 
-	m_mayWH.x=ImgMap->GetWidth();
-	m_mayWH.y=ImgMap->GetHeight();
+
 	//////////////////////////////////////////////////////////////////////////
 
 	
@@ -805,39 +805,63 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 		int ixc,iyc;
 		ixc=GetPrivateProfileInt("CONFIG","XC",0,MapCfg);
 		iyc=GetPrivateProfileInt("CONFIG","YC",0,MapCfg);
-		if (ixc==1)
-		{
-			keyXname.Format("MINX");
-		}
-		else
-		{
-			keyXname.Format("MAXX");
-		}
-		if (iyc==1)
-		{
-			keyYname.Format("MINY");
-		}
-		else
-		{
-			keyYname.Format("MAXY");
-		}
-		if(GetPrivateProfileString("CONFIG",keyXname,"",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		
+		float maxX = 0.0;
+		float minX = 0.0;
+		float maxY = 0.0;
+		float minY = 0.0;
+		if(GetPrivateProfileString("CONFIG","MAXX","",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
 		{
 			temp.ReleaseBuffer();
-			m_Mapx=atof(temp);
+			maxX=atof(temp);
 		}
 		else
 		{
-			WriteLog("HS_CONF_MAP.ini Get %s failed! %d",keyXname,m_iCarNum);
+			WriteLog("HS_CONF_MAP.ini Get MAXX failed! %d",m_iCarNum);
 		}
-		if(GetPrivateProfileString("CONFIG",keyYname,"",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		if(GetPrivateProfileString("CONFIG","MINX","",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
 		{
 			temp.ReleaseBuffer();
-			m_Mapy=atof(temp);
+			minX=atof(temp);
+		}
+		else
+		{
+			WriteLog("HS_CONF_MAP.ini Get MINX failed! %d",m_iCarNum);
+		}
+		if(GetPrivateProfileString("CONFIG","MAXY","",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		{
+			temp.ReleaseBuffer();
+			maxY=atof(temp);
+		}
+		else
+		{
+			WriteLog("HS_CONF_MAP.ini Get MAXY failed! %d",m_iCarNum);
+		}
+		if(GetPrivateProfileString("CONFIG","MINY","",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
+		{
+			temp.ReleaseBuffer();
+			minY=atof(temp);
 		}
 		else
 		{
 			WriteLog("HS_CONF_MAP.ini Get MINY failed! %d",m_iCarNum);
+		}
+
+		if (ixc==1)
+		{
+			m_Mapx = minX;
+		}
+		else
+		{
+			m_Mapx = maxX;
+		}
+		if (iyc==1)
+		{
+			m_Mapy = minY;
+		}
+		else
+		{
+			m_Mapy = maxY;
 		}
 		
 		if(GetPrivateProfileString("CONFIG","ZoomIn","",temp.GetBuffer(MAX_PATH),MAX_PATH,MapCfg))
@@ -849,9 +873,15 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 		{
 			WriteLog("HS_CONF_MAP.ini Get ZoomIn failed! %d",m_iCarNum);
 		}
+
+		m_mayWH.x = (maxX - minX) * m_bs;
+		m_mayWH.y = (maxY - minY) * m_bs;
 	}
 	else
 	{
+		m_mayWH.x=ImgMap->GetWidth();
+		m_mayWH.y=ImgMap->GetHeight();
+		
 		CString MapCfg,keyXname,keyYname;
 		MapCfg.Format("%s\\MAP.cfg",path);
 		int ixc,iyc;
@@ -944,6 +974,8 @@ void CFourthPicJMQ::DrawMapTM()
 		WaitForSingleObject(hThreadEvent,INFINITE);
 		Rtime=timeGetTime();
 		//////////////////////////////////////////////////////////////////////////
+
+		//WriteLog("qw m_imapx=%d,m_imapy=%d", m_imapx,m_imapy);
 
 		//绘制地图
 		if (m_bNineMaps)
