@@ -27,7 +27,9 @@ CJMQManager::CJMQManager()
 	tempPath=exeFullPath;
 	ModulePath.Format("%s",tempPath.Left(tempPath.ReverseFind('\\')));
 	configfile.Format("%s\\config.ini",ModulePath);//当前目录下
-	NET_DVR_Init();//海康SDK初始化	
+	NET_DVR_Init();//海康SDK初始化
+	
+	uMergeVideo = 0;
 }
 
 CJMQManager::~CJMQManager()
@@ -448,6 +450,8 @@ void CJMQManager::RunMap()
 	CString temp;
 	STerminalPZ temppz;
 	LONG lph;
+	uMergeVideo=GetPrivateProfileInt("CONFIG","MergeVideo",0,configfile);//是否合成视频
+	
 	for (iter=m_JMQCar.begin();iter!=m_JMQCar.end();iter++)
 	{
 		Sleep(10);
@@ -455,12 +459,26 @@ void CJMQManager::RunMap()
 		if(GetTerminalPZ(temppz,temp)==TRUE)
 		{
 			iter->second.StartDynamic(temppz,0);//车载视频动态
-		}		
-		temp.Format("考车%d_2",iter->first);	
-		if(GetTerminalPZ(temppz,temp)==TRUE)
-		{
-			iter->second.StartDynamic(temppz,1);//车载视频动态
 		}	
+		
+		if (0 == uMergeVideo)
+		{
+			temp.Format("考车%d_2",iter->first);	//副驾视频	
+			if(GetTerminalPZ(temppz,temp)==TRUE)
+			{
+				iter->second.StartDynamic(temppz,1);
+			}
+		}
+		else
+		{
+			temp.Format("考车%d_10",iter->first);		//叠加后的视频
+			if(GetTerminalPZ(temppz,temp)==TRUE)
+			{
+				iter->second.StartDynamic(temppz,1);
+			}	
+		}
+
+
 // 		temp.Format("考车%d_3",iter->first);	
 // 		if(GetTerminalPZ(temppz,temp)==TRUE)
 // 		{
@@ -501,11 +519,15 @@ void CJMQManager::OnJ17C51(int ikch, CString str)
 	{		
 		CString temp;
 		STerminalPZ temppz;
-		temp.Format("10001_1");//201	
-		if(GetTerminalPZ(temppz,temp)==TRUE)
+		temp.Format("10001_1");//201
+		if (0 == uMergeVideo)	//不是采用合成视频的模式, 视频合成场景下，四合一不进行切换
 		{
-			m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			if(GetTerminalPZ(temppz,temp)==TRUE)
+			{
+				m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			}
 		}
+
 	}
 }
 
@@ -582,9 +604,13 @@ void CJMQManager::OnJ17C56(int ikch,CString zkzmbh,CString smsg)
 		CString temp;
 		STerminalPZ temppz;
 		temp.Format("10086_1");//201	
-		if(GetTerminalPZ(temppz,temp)==TRUE)
+		if (0 == uMergeVideo)	//不是采用合成视频的模式, 视频合成场景下，四合一不进行切换
 		{
-			m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			if (GetTerminalPZ(temppz,temp)==TRUE)	
+			{
+				m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			}
+
 		}
 	}
 }
@@ -628,9 +654,13 @@ void CJMQManager::OnQH17C52(int ikch,int ibh)
 	CString temp;
 	STerminalPZ temppz;
 	temp.Format("%d_%d",iQhKCH[ikch],ibh);	
-	if(GetTerminalPZ(temppz,temp)==TRUE)
+	if (0 == uMergeVideo)	//不是采用合成视频的模式, 视频合成场景下，四合一不进行切换
 	{
-		m_JMQCar[ikch].StartDynamic(temppz,1);//
+		if(GetTerminalPZ(temppz,temp)==TRUE)
+		{
+			m_JMQCar[ikch].StartDynamic(temppz,1);//
+		}
+		
 	}
 	logz.WriteLog(AppLogID,"画面切换 OnQH17C52 考车%d,%s",ikch,temp);
 }
@@ -642,9 +672,13 @@ void CJMQManager::OnJ17C52(int ikch, CString zkzmbh,CString smsg)
 		CString temp;
 		STerminalPZ temppz;
 		temp.Format("%s_1",smsg);//201	
-		if(GetTerminalPZ(temppz,temp)==TRUE)
+		if (0 == uMergeVideo)	//不是采用合成视频的模式, 视频合成场景下，四合一不进行切换
 		{
-			m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			if(GetTerminalPZ(temppz,temp)==TRUE)
+			{
+				m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			}
+			
 		}
 		//////////////////////////////////////////////////////////////////////////
 
@@ -723,9 +757,13 @@ void CJMQManager::OnJ17C55(int ikch, CString zkzmbh,CString smsg)
 	{		
 		STerminalPZ temppz;
 		temp.Format("考车%d_2",ikch);	
-		if(GetTerminalPZ(temppz,temp)==TRUE)
+		if (0 == uMergeVideo)	//不是采用合成视频的模式, 视频合成场景下，四合一不进行切换
 		{
-			m_JMQCar[ikch].StartDynamic(temppz,1);//车载视频动态第二画面车外
+			if(GetTerminalPZ(temppz,temp)==TRUE)
+			{
+				m_JMQCar[ikch].StartDynamic(temppz,1);//车载视频动态第二画面车外
+			}
+			
 		}		
 		if (atoi(smsg)<700)
 		{
@@ -779,9 +817,13 @@ void CJMQManager::OnJ17C55(int ikch, CString zkzmbh,CString smsg)
 	{		
 		STerminalPZ temppz;
 		temp.Format("10086_1");//201	
-		if(GetTerminalPZ(temppz,temp)==TRUE)
+		if (0 == uMergeVideo)	//不是采用合成视频的模式, 视频合成场景下，四合一不进行切换
 		{
-			m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			if(GetTerminalPZ(temppz,temp)==TRUE)
+			{
+				m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			}
+			
 		}
 	}
 }
