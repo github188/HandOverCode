@@ -85,6 +85,8 @@ private:
 	CWriteLog logz;//日志类
 	UINT uKSKM;//考试科目三
 	UINT uWNDTWO;//画面二
+	
+	UINT uMergeVideo;
 private:
 	//////////////////////////////////////////////////////////////////////////
 	typedef void (* TFInit)(int /*ikch*/,int /*wMSG*/,HWND /*hwndz*/);
