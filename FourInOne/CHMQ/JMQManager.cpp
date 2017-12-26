@@ -30,6 +30,13 @@ CJMQManager::CJMQManager()
 	NET_DVR_Init();//海康SDK初始化
 	
 	uMergeVideo = 0;
+	m_bBigCar = false;
+
+	UINT uBigCar = GetPrivateProfileInt("CONFIG","BigCar",0,configfile);	//大车科目二合格分数为90
+	if (1 == uBigCar)
+	{
+		m_bBigCar = true;
+	}
 }
 
 CJMQManager::~CJMQManager()
@@ -587,6 +594,13 @@ void CJMQManager::OnJ17C56(int ikch,CString zkzmbh,CString smsg)
 	if(uKSKM==3)//科目三
 	{
 		kshgcj=90;
+	}
+	else
+	{
+		if (m_bBigCar)
+		{
+			kshgcj = 90;
+		}
 	}
 	if(ikscj>=kshgcj)//考试合格
 	{

@@ -250,6 +250,7 @@ BOOL CCJMQDlg::OnInitDialog()
 		CDialog::OnCancel();
 		return FALSE;
 	}
+	
 	if (!jmqudp.InitSockU(m_hWnd,6709,UM_SOCKUDPZ))
 	{
 		CDialog::OnCancel();

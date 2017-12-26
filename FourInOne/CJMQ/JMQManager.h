@@ -87,6 +87,7 @@ private:
 	UINT uWNDTWO;//画面二
 
 	UINT uMergeVideo;	//是否展示合成视频
+	bool m_bBigCar;		//大车科目二合格分数为90
 private:
 	//////////////////////////////////////////////////////////////////////////
 	typedef void (* TFInit)(int /*ikch*/,int /*wMSG*/,HWND /*hwndz*/);
