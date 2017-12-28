@@ -46,7 +46,7 @@ private:
 	int m_i52type,m_i55type;
 	int GetMType(int &type);
 	void SetMtype(int &type,int idrxmp);
-	void DrawXMList(Graphics *graphics);
+	void DrawXMList(Graphics *graphics, Image *img);
 	//////////////////////////////////////////////////////////////////////////
 	bool m_DrawCar;				//是否显示考车
 	POINT m_mayWH;				//地图长宽
@@ -81,6 +81,8 @@ private:
 	bool m_bNineMaps;		//是否采用九宫格模式
 	bool m_bBigCar;	//大车
 	Image *ImgSignal;			//信号
+	Image *ImgXMList;		//地图模式下也要展示项目牌
+	Image *ImgXMListMark;		//地图模式下也要展示项目牌,这张图是项目背景
 	void DrawSignal(Graphics *graphics);//实时信号
 	void DrawNineMaps(Graphics *graphics, int carX, int carY);//画九宫格地图
 };
