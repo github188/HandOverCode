@@ -113,6 +113,16 @@ void CFourthPicJMQ::FourthPicInit(int ikch, CString path,int wMSG,HWND hwndz)
 
 	m_type =m_type | MTYPE1;
 	iRunNum=5;
+
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\XMList.skin",path);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	ImgXMList=Image::FromFile(StcharArr);
+
+	memset(StcharArr,0x0,sizeof(StcharArr));
+	temp.Format("%s\\XMListMark.skin",path);
+	swprintf((wchar_t *)StcharArr,L"%s",temp.AllocSysString());
+	ImgXMListMark=Image::FromFile(StcharArr);
 	//////////////////////////////////////////////////////////////////////////
 }
 
@@ -220,7 +230,7 @@ void CFourthPicJMQ::DrawNineMaps(Graphics *graphics, int carX, int carY)
 	int relativeX = carX % uSplitWidth + uSplitWidth;
 	int relativeY = carY % uSplitWidth + uSplitWidth;
 	//WriteLog("relativex=%d,relativey=%d",relativeX,relativeY);
-	graphics->DrawImage(&bm, Rect(0,0,352,288), (relativeX-176), (relativeY-144), 352, 288, UnitPixel);
+	graphics->DrawImage(&bm, Rect(0,0,264,288), (relativeX-132), (relativeY-144), 264, 288, UnitPixel);
 	
 	delete imgLeftTop;
 	delete imgTop;
@@ -243,9 +253,9 @@ void CFourthPicJMQ::DrawNineMaps(Graphics *graphics, int carX, int carY)
 
 void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 {
-	int splitDest = 25;
+	int splitDest = 20;
 	int splitSource = 40;
-	int y = 72;
+	int y = 30;
 	//安全带
 	if (1 == m_GnssMsg.aqd)
 	{
@@ -388,19 +398,22 @@ void CFourthPicJMQ::DrawTime(Graphics *graphics,int x,int y)
 {
 	CTimeSpan ctempSpan;
 	ctempSpan = CTime::GetCurrentTime() - m_StartTime;
+
+	int splitWidth = (264 * 10) / 352;
+
 	//H 考试时长
-	graphics->DrawImage(ImgTime,Rect(x+10*0,y,10,16), 10*(ctempSpan.GetHours()/10), 0,10,16,UnitPixel); 
-	graphics->DrawImage(ImgTime,Rect(x+10*1,y,10,16), 10*(ctempSpan.GetHours()%10), 0,10,16,UnitPixel); 
+	graphics->DrawImage(ImgTime,Rect(x+splitWidth*0,y,splitWidth,16), 10*(ctempSpan.GetHours()/10), 0,10,16,UnitPixel); 
+	graphics->DrawImage(ImgTime,Rect(x+splitWidth*1,y,splitWidth,16), 10*(ctempSpan.GetHours()%10), 0,10,16,UnitPixel); 
 	//:
-	graphics->DrawImage(ImgTime,Rect(x+10*2,y,10,16), 100, 0,10,16,UnitPixel); 
+	graphics->DrawImage(ImgTime,Rect(x+splitWidth*2,y,splitWidth,16), 100, 0,10,16,UnitPixel); 
 	//M
-	graphics->DrawImage(ImgTime,Rect(x+10*3,y,10,16), 10*(ctempSpan.GetMinutes()/10), 0,10,16,UnitPixel);
-	graphics->DrawImage(ImgTime,Rect(x+10*4,y,10,16), 10*(ctempSpan.GetMinutes()%10), 0,10,16,UnitPixel); 
+	graphics->DrawImage(ImgTime,Rect(x+splitWidth*3,y,splitWidth,16), 10*(ctempSpan.GetMinutes()/10), 0,10,16,UnitPixel);
+	graphics->DrawImage(ImgTime,Rect(x+splitWidth*4,y,splitWidth,16), 10*(ctempSpan.GetMinutes()%10), 0,10,16,UnitPixel); 
 	//:
-	graphics->DrawImage(ImgTime,Rect(x+10*5,y,10,16), 100, 0,10,16,UnitPixel); 
+	graphics->DrawImage(ImgTime,Rect(x+splitWidth*5,y,splitWidth,16), 100, 0,10,16,UnitPixel); 
 	//S
-	graphics->DrawImage(ImgTime,Rect(x+10*6,y,10,16), 10*(ctempSpan.GetSeconds()/10), 0,10,16,UnitPixel); 
-	graphics->DrawImage(ImgTime,Rect(x+10*7,y,10,16), 10*(ctempSpan.GetSeconds()%10), 0,10,16,UnitPixel); 
+	graphics->DrawImage(ImgTime,Rect(x+splitWidth*6,y,splitWidth,16), 10*(ctempSpan.GetSeconds()/10), 0,10,16,UnitPixel); 
+	graphics->DrawImage(ImgTime,Rect(x+splitWidth*7,y,splitWidth,16), 10*(ctempSpan.GetSeconds()%10), 0,10,16,UnitPixel); 
 }
 
 int CFourthPicJMQ::GetXMPi(int icode)
@@ -947,21 +960,21 @@ void CFourthPicJMQ::DrawMapTM()
 	
 	m_StartTime=CTime::GetCurrentTime();
 	CRect textrc[4];
-	textrc[0].SetRect(0,0,348,30);
-	textrc[1].SetRect(0,236,98,262);//速度
-	textrc[2].SetRect(0,262,98,288);//里程
-	textrc[3].SetRect(264,236,350,262);//成绩
+	textrc[0].SetRect(0,0,264,30);
+	textrc[1].SetRect(0,236,73,262);//速度
+	textrc[2].SetRect(0,262,73,288);//里程
+	textrc[3].SetRect(198,236,264,262);//成绩
 	CRect errorRect[3];
-	errorRect[0].SetRect(6,216,346,236);
-	errorRect[1].SetRect(6,196,346,216);
-	errorRect[2].SetRect(6,176,346,196);
+	errorRect[0].SetRect(6,216,260,236);
+	errorRect[1].SetRect(6,196,260,216);
+	errorRect[2].SetRect(6,176,260,196);
 	CString strtext;
 	CFont fontz;//
-	fontz.CreateFont(20, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, ANSI_CHARSET,
+	fontz.CreateFont(13, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, ANSI_CHARSET,
 		OUT_STROKE_PRECIS, CLIP_STROKE_PRECIS,
 		DRAFT_QUALITY, DEFAULT_PITCH | FF_SWISS, "宋体");
 	CFont fontzerror;//
-	fontzerror.CreateFont(16, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, ANSI_CHARSET,
+	fontzerror.CreateFont(13, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, ANSI_CHARSET,
 		OUT_STROKE_PRECIS, CLIP_STROKE_PRECIS,
 		DRAFT_QUALITY, VARIABLE_PITCH | FF_SWISS, "宋体");
 	
@@ -975,6 +988,20 @@ void CFourthPicJMQ::DrawMapTM()
 		Rtime=timeGetTime();
 		//////////////////////////////////////////////////////////////////////////
 
+		if (m_type & MTYPE1)
+		{
+			m_type=m_type & (~ MTYPE1);
+			grdc.DrawImage(ImgXMListMark,Rect(0,0,352,288));//遮罩
+			if (m_uKSKM==3 || m_bBigCar)	//大车的项目牌与科目三类似 
+			{
+				grdc.DrawImage(ImgXMList,Rect(264,0,88,288),0,0,88,288,UnitPixel);//项目牌
+			}
+			else
+			{
+				grdc.DrawImage(ImgXMList,Rect(264,36,88,252),0,0,88,252,UnitPixel);//项目牌
+			}			
+		}
+
 		//WriteLog("qw m_imapx=%d,m_imapy=%d", m_imapx,m_imapy);
 
 		//绘制地图
@@ -984,22 +1011,22 @@ void CFourthPicJMQ::DrawMapTM()
 		}
 		else
 		{
-			grdc.DrawImage(ImgMap,Rect(0,0,352,288),m_imapx,m_imapy,352,288,UnitPixel);//地图
+			grdc.DrawImage(ImgMap,Rect(0,0,352-88,288),m_imapx + 176 - 132,m_imapy,352-88,288,UnitPixel);//地图
 		}
 		
 		if (m_DrawCar==true)//是否绘制考车
 		{
-			grdc.TranslateTransform(176,144);
+			grdc.TranslateTransform(132,144);
 			grdc.RotateTransform(m_GnssMsg.gnssR);//角度
-			grdc.TranslateTransform(-176,-144);
+			grdc.TranslateTransform(-132,-144);
 			//绘制图片
-			grdc.DrawImage(ImgCAR,Rect(0,0,352,288));//画车模型
+			grdc.DrawImage(ImgCAR,Rect(0,0,264,288));//画车模型
 			grdc.ResetTransform();
 		}
-		grdc.DrawImage(ImgMark,Rect(0,0,352,288));//遮罩
+		grdc.DrawImage(ImgMark,Rect(0,0,264,288));//遮罩
 		
-		strtext.Format("%s[%d]",nowztstr,m_iCarNum);
-		m_ImageDC.DrawText(strtext,&textrc[0],DT_RIGHT | DT_SINGLELINE | DT_VCENTER );
+		strtext.Format("%s",nowztstr);
+		m_ImageDC.DrawText(strtext,&textrc[0],DT_LEFT | DT_SINGLELINE | DT_VCENTER );
 		strtext.Format("%4.1fkm/h",m_GnssMsg.gnssSD);//117.92);//
 		m_ImageDC.DrawText(strtext,&textrc[1],DT_RIGHT | DT_SINGLELINE | DT_VCENTER );
 		strtext.Format("%6.1fm",m_GnssMsg.gnssLC);//5000.26);//
@@ -1018,14 +1045,19 @@ void CFourthPicJMQ::DrawMapTM()
 			m_ImageDC.SetTextColor(RGB(255,255,255));
 			m_ImageDC.SelectObject(&fontz);
 		}
-		if (m_uKSKM==3)
+
+		//地图左上角，现在不展示项目图片
+		/*if (m_uKSKM==3)
 		{
 			if (iDrXMP>0 && iDrXMP<17)
 			{	
 				grdc.DrawImage(ImgXmp,Rect(0,0,72,72),0,iDrXMP*72,72,72,UnitPixel); 	
 	 		}
-		}
-		DrawTime(&grdc,266,268);//考试时长
+		}*/
+
+		DrawXMList(&grdc, ImgXMList);
+		
+		DrawTime(&grdc,198,268);//考试时长
 
 		//huangqiwei temp
 		if (m_bDrawSignal)
@@ -1079,7 +1111,7 @@ void CFourthPicJMQ::DrawXMListTM()
 
 	m_StartTime=CTime::GetCurrentTime();
 	CRect textrc[4];
-	textrc[0].SetRect(4,0,348,36);//状态
+	textrc[0].SetRect(4,0,264,36);//状态
 	textrc[3].SetRect(4,36,263,66);//成绩
 	textrc[1].SetRect(4,66,263,88);//速度
 	textrc[2].SetRect(4,88,263,114);//里程	
@@ -1125,7 +1157,7 @@ void CFourthPicJMQ::DrawXMListTM()
 		}
 		grdc.DrawImage(ImgMark,Rect(0,0,263,288),0,0,263,288,UnitPixel);
 		//grdc.DrawImage(ImgMark,Rect(0,0,352,30),0,0,352,30,UnitPixel);
-		strtext.Format("%s(%d)",nowztstr,m_iCarNum);
+		strtext.Format("%s",nowztstr);
 		m_ImageDC.DrawText(strtext,&textrc[0],DT_LEFT | DT_SINGLELINE | DT_VCENTER );
 		strtext.Format("速度:%4.1fkm/h",m_GnssMsg.gnssSD);
 		m_ImageDC.DrawText(strtext,&textrc[1],DT_LEFT | DT_SINGLELINE | DT_VCENTER );		
@@ -1149,7 +1181,7 @@ void CFourthPicJMQ::DrawXMListTM()
 			m_ImageDC.SetTextColor(RGB(255,255,255));
 		}
 		
-		DrawXMList(&grdc);
+		DrawXMList(&grdc, ImgXmp);
 		DrawTime(&grdc,56,44);//考试时长
 		//////////////////////////////////////////////////////////////////////////
 #ifdef SAVE_PNGFILE
@@ -1185,7 +1217,7 @@ void CFourthPicJMQ::DrawXMListTM()
 	WriteLog("线程退出!项目列表版本,ThreadRun %d",m_iCarNum);
 }
 
-void CFourthPicJMQ::DrawXMList(Graphics *graphics)
+void CFourthPicJMQ::DrawXMList(Graphics *graphics, Image* img)
 {
 	int tempi=-1;
 	tempi=GetMType(m_i52type);
@@ -1197,17 +1229,17 @@ void CFourthPicJMQ::DrawXMList(Graphics *graphics)
 			
 			if (tempi%2==0)
 			{
-				graphics->DrawImage(ImgXmp,Rect(264,(tempi/2)*36,44,36),88,(tempi/2)*36,44,36,UnitPixel);
+				graphics->DrawImage(img,Rect(264,(tempi/2)*36,44,36),88,(tempi/2)*36,44,36,UnitPixel);
 			}
 			else
 			{
-				graphics->DrawImage(ImgXmp,Rect(308,(tempi/2)*36,44,36),132,(tempi/2)*36,44,36,UnitPixel);
+				graphics->DrawImage(img,Rect(308,(tempi/2)*36,44,36),132,(tempi/2)*36,44,36,UnitPixel);
 			}
 			
 		}
 		else
 		{
-			graphics->DrawImage(ImgXmp,Rect(264,tempi*36,88,36),88,(tempi-1)*36,88,36,UnitPixel);
+			graphics->DrawImage(img,Rect(264,tempi*36,88,36),88,(tempi-1)*36,88,36,UnitPixel);
 		}
 		tempi=GetMType(m_i52type);
 	}
@@ -1220,16 +1252,16 @@ void CFourthPicJMQ::DrawXMList(Graphics *graphics)
 			
 			if (tempi%2==0)
 			{
-				graphics->DrawImage(ImgXmp,Rect(264,(tempi/2)*36,44,36),176,(tempi/2)*36,44,36,UnitPixel);
+				graphics->DrawImage(img,Rect(264,(tempi/2)*36,44,36),176,(tempi/2)*36,44,36,UnitPixel);
 			}
 			else
 			{
-				graphics->DrawImage(ImgXmp,Rect(308,(tempi/2)*36,44,36),220,(tempi/2)*36,44,36,UnitPixel);
+				graphics->DrawImage(img,Rect(308,(tempi/2)*36,44,36),220,(tempi/2)*36,44,36,UnitPixel);
 			}
 		}
 		else
 		{
-			graphics->DrawImage(ImgXmp,Rect(264,tempi*36,88,36),176,(tempi-1)*36,88,36,UnitPixel);
+			graphics->DrawImage(img,Rect(264,tempi*36,88,36),176,(tempi-1)*36,88,36,UnitPixel);
 		}
 		tempi=GetMType(m_i55type);
 	}
