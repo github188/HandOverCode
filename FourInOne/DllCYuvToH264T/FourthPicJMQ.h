@@ -77,12 +77,25 @@ private:
 	//huangqiwei
 	CString m_sExePath;	//程序路径
 	CString m_sMapPath;	//底图路径
-	bool m_bDrawSignal;	//是否绘制信号
 	bool m_bNineMaps;		//是否采用九宫格模式
 	bool m_bBigCar;	//大车
 	Image *ImgSignal;			//信号
 	Image *ImgXMList;		//地图模式下也要展示项目牌
 	Image *ImgXMListMark;		//地图模式下也要展示项目牌,这张图是项目背景
+	bool m_bDrawSignal;	//是否绘制信号
+	bool m_bSignalAqd;	//安全带信号
+	bool m_bSignalJs;	//脚刹信号
+	bool m_bSignalSs;	//手刹信号
+	bool m_bSignalFs;	//副刹信号
+	bool m_bSignalLb;	//喇叭信号
+	bool m_bSignalZzx;	//左转向信号
+	bool m_bSignalYzx;	//右转向信号
+	bool m_bSignalYgd;	//远光灯信号
+	bool m_bSignalJgd;	//近光灯信号
+	bool m_bSignalXh;	//熄火信号
+	bool m_bSignalKgm;	//开关门信号
+	bool m_bSignalLh;	//离合信号
+	bool m_bSignalDw;	//档位信号
 	void DrawSignal(Graphics *graphics);//实时信号
 	void DrawNineMaps(Graphics *graphics, int carX, int carY);//画九宫格地图
 };
