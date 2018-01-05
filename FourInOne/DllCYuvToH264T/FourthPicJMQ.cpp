@@ -1146,7 +1146,7 @@ void CFourthPicJMQ::DrawMapTM()
 			grdc.RotateTransform(m_GnssMsg.gnssR);//角度
 			grdc.TranslateTransform(-132,-144);
 			//绘制图片
-			grdc.DrawImage(ImgCAR,Rect(0,0,264,288));//画车模型
+			grdc.DrawImage(ImgCAR,Rect(0,0,264,288), 44, 0, 264, 288, UnitPixel);//画车模型
 			grdc.ResetTransform();
 		}
 		grdc.DrawImage(ImgMark,Rect(0,0,264,288));//遮罩
