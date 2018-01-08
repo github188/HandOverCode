@@ -50,6 +50,30 @@ typedef struct _gnssmsg
 	int xh;		//熄火
 	int kgm;	//开关门
 	int dw;		//档位
+	int yg;		//雨刮
+	int wd;		//雾灯
+	int skd;	//示廓灯
+
+	_gnssmsg()
+	{
+		aqd = 0;
+		js = 0;
+		ss = 0;
+		fs = 0;
+		lh = 0;
+		lb = 0;
+		zzx = 0;
+		yzx = 0;
+		ygd = 0;
+		jgd = 0;
+		jsd = 0;
+		xh = 0;
+		kgm = 0;
+		dw = 0;
+		yg = 0;
+		wd = 0;
+		skd = 0;
+	}
 	
 }GNSSMSG;
 /////////////////////////////////////////////////////////////////////////////
