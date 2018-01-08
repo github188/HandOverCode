@@ -539,26 +539,6 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 		}
 		nIndexDest += 1;
 	}
-	//ÎíµÆ
-	x = nIndexDest * splitDest;
-	if (x > nRightCoordinate)
-	{
-		x = 0;
-		y += splitDest;
-		nIndexDest = 0;
-	}
-	if(m_bSignalWd)
-	{
-		if (1 == m_GnssMsg.wd)
-		{
-			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 25 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
-		}
-		else
-		{
-			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 25 * splitSource, 0, splitSource, splitSource, UnitPixel);
-		}
-		nIndexDest += 1;
-	}
 	//Óê¹Î
 	x = nIndexDest * splitDest;
 	if (x > nRightCoordinate)
@@ -570,6 +550,26 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	if(m_bSignalYg)
 	{
 		if (1 == m_GnssMsg.yg)
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 25 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+		}
+		else
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 25 * splitSource, 0, splitSource, splitSource, UnitPixel);
+		}
+		nIndexDest += 1;
+	}
+	//ÎíµÆ
+	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
+	if(m_bSignalWd)
+	{
+		if (1 == m_GnssMsg.wd)
 		{
 			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 26 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
 		}
