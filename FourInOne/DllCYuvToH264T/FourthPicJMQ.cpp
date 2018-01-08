@@ -50,6 +50,10 @@ CFourthPicJMQ::CFourthPicJMQ()
 	m_bSignalKgm = false;
 	m_bSignalLh = false;
 	m_bSignalDw = false;
+	m_bSignalJsd = false;
+	m_bSignalYg = false;
+	m_bSignalSkd = false;
+	m_bSignalWd = false;
 }
 
 CFourthPicJMQ::~CFourthPicJMQ()
@@ -267,14 +271,22 @@ void CFourthPicJMQ::DrawNineMaps(Graphics *graphics, int carX, int carY)
 
 void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 {
-	int splitDest = 20;
+	int splitDest = 25;
 	int splitSource = 40;
 	int x = 0;
 	int y = 30;
 	int nIndexDest = 0;
 
+	int nRightCoordinate = 352 - 88 - splitDest;	//信号图标不能超出这个右边界
+
 	//安全带
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if(m_bSignalAqd)
 	{
 		if (1 == m_GnssMsg.aqd)
@@ -289,6 +301,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//脚刹
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if(m_bSignalJs)
 	{
 		if (1 == m_GnssMsg.js)
@@ -303,6 +321,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//手刹
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if(m_bSignalSs)
 	{
 		if (1 == m_GnssMsg.ss)
@@ -317,6 +341,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//副刹
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if(m_bSignalFs)
 	{
 		if (1 == m_GnssMsg.fs)
@@ -331,6 +361,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//喇叭
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if (m_bSignalLb)
 	{
 		if (1 == m_GnssMsg.lb)
@@ -345,6 +381,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//左转向
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if (m_bSignalZzx)
 	{
 		if (1 == m_GnssMsg.zzx)
@@ -359,6 +401,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//右转向
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if(m_bSignalYzx)
 	{
 		if (1 == m_GnssMsg.yzx)
@@ -373,6 +421,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//远光灯
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if(m_bSignalYgd)
 	{
 		if (1 == m_GnssMsg.ygd)
@@ -387,6 +441,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//近光灯
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if (m_bSignalJgd)
 	{
 		if (1 == m_GnssMsg.jgd)
@@ -401,6 +461,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//熄火
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if (m_bSignalXh)
 	{
 		if (1 == m_GnssMsg.xh)
@@ -415,6 +481,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//开关门
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if (m_bSignalKgm)
 	{
 		if (1 == m_GnssMsg.kgm)
@@ -429,6 +501,12 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 	}
 	//离合
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if(m_bSignalLh)
 	{
 		if (1 == m_GnssMsg.lh)
@@ -441,8 +519,94 @@ void CFourthPicJMQ::DrawSignal(Graphics *graphics)
 		}
 		nIndexDest += 1;
 	}
+	//警示灯
+	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
+	if(m_bSignalJsd)
+	{
+		if (1 == m_GnssMsg.jsd)
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 24 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+		}
+		else
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 24 * splitSource, 0, splitSource, splitSource, UnitPixel);
+		}
+		nIndexDest += 1;
+	}
+	//雾灯
+	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
+	if(m_bSignalWd)
+	{
+		if (1 == m_GnssMsg.wd)
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 25 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+		}
+		else
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 25 * splitSource, 0, splitSource, splitSource, UnitPixel);
+		}
+		nIndexDest += 1;
+	}
+	//雨刮
+	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
+	if(m_bSignalYg)
+	{
+		if (1 == m_GnssMsg.yg)
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 26 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+		}
+		else
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 26 * splitSource, 0, splitSource, splitSource, UnitPixel);
+		}
+		nIndexDest += 1;
+	}
+	//示廓灯
+	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
+	if(m_bSignalSkd)
+	{
+		if (1 == m_GnssMsg.skd)
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 14 * splitSource, splitSource, splitSource, splitSource, UnitPixel);
+		}
+		else
+		{
+			graphics->DrawImage(ImgSignal, Rect(x, y, splitDest, splitDest), 14 * splitSource, 0, splitSource, splitSource, UnitPixel);
+		}
+		nIndexDest += 1;
+	}
 	//档位
 	x = nIndexDest * splitDest;
+	if (x > nRightCoordinate)
+	{
+		x = 0;
+		y += splitDest;
+		nIndexDest = 0;
+	}
 	if(m_bSignalDw)
 	{
 		if (m_GnssMsg.dw >= 0 && m_GnssMsg.dw <= 5)
@@ -680,9 +844,10 @@ void CFourthPicJMQ::OnGnssData(LPVOID msgz)
 		memcpy((char *)&m_GnssMsg,msgz,sizeof(GNSSMSG));
 		WriteStuData("%lf,%lf,%f,%f,%f",m_GnssMsg.gnssX,m_GnssMsg.gnssY,m_GnssMsg.gnssSD,m_GnssMsg.gnssLC,m_GnssMsg.gnssR);
 		WriteStuData(
-			"aqd=%d,js=%d,ss=%d,fs=%d,lh=%d,lb=%d,zzx=%d,yzx=%d,ygd=%d,jgd=%d,jsd=%d,xh=%d,kgm=%d,dw=%d",
+			"aqd=%d,js=%d,ss=%d,fs=%d,lh=%d,lb=%d,zzx=%d,yzx=%d,ygd=%d,jgd=%d,jsd=%d,xh=%d,kgm=%d,dw=%d,yg=%d,wd=%d,skd=%d",
 			m_GnssMsg.aqd, m_GnssMsg.js, m_GnssMsg.ss, m_GnssMsg.fs, m_GnssMsg.lh, m_GnssMsg.lb, m_GnssMsg.zzx,
-			m_GnssMsg.yzx, m_GnssMsg.ygd, m_GnssMsg.jgd, m_GnssMsg.jsd, m_GnssMsg.xh, m_GnssMsg.kgm, m_GnssMsg.dw);
+			m_GnssMsg.yzx, m_GnssMsg.ygd, m_GnssMsg.jgd, m_GnssMsg.jsd, m_GnssMsg.xh, m_GnssMsg.kgm, m_GnssMsg.dw,
+			m_GnssMsg.yg, m_GnssMsg.wd, m_GnssMsg.skd);
 		if (m_DrawMap==true)
 		{		
 			//计算 X Y
@@ -691,7 +856,7 @@ void CFourthPicJMQ::OnGnssData(LPVOID msgz)
 			{
 				tempx=abs((int)((m_GnssMsg.gnssX-m_Mapx)*m_bs))-176;
 				tempy=abs((int)((m_GnssMsg.gnssY-m_Mapy)*m_bs))-144;
-				WriteLog("qw2 gnssy=%f,tempy=%d,maxy=%lf", m_GnssMsg.gnssY, tempy,m_Mapy);
+				//WriteLog("qw2 gnssy=%f,tempy=%d,maxy=%lf", m_GnssMsg.gnssY, tempy,m_Mapy);
 			}
 			else
 			{
@@ -927,6 +1092,26 @@ void CFourthPicJMQ::LoadMapCfg(CString path)
 		{
 			m_bSignalDw = true;
 		}
+		UINT uJsd = GetPrivateProfileInt("SIGNAL","JSD",0,configfile); 
+		if (1 == uJsd)
+		{
+			m_bSignalJsd = true;
+		}
+		UINT uSkd = GetPrivateProfileInt("SIGNAL","SKD",0,configfile); 
+		if (1 == uSkd)
+		{
+			m_bSignalSkd = true;
+		}
+		UINT uWd = GetPrivateProfileInt("SIGNAL","WD",0,configfile); 
+		if (1 == uWd)
+		{
+			m_bSignalWd = true;
+		}
+		UINT uYg = GetPrivateProfileInt("SIGNAL","YG",0,configfile); 
+		if (1 == uYg)
+		{
+			m_bSignalYg = true;
+		}
 	}
 	
 	UINT uNineMaps;
@@ -1146,7 +1331,7 @@ void CFourthPicJMQ::DrawMapTM()
 			grdc.RotateTransform(m_GnssMsg.gnssR);//角度
 			grdc.TranslateTransform(-132,-144);
 			//绘制图片
-			grdc.DrawImage(ImgCAR,Rect(0,0,264,288));//画车模型
+			grdc.DrawImage(ImgCAR,Rect(0,0,264,288), 44, 0, 264, 288, UnitPixel);//画车模型
 			grdc.ResetTransform();
 		}
 		grdc.DrawImage(ImgMark,Rect(0,0,264,288));//遮罩

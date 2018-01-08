@@ -324,31 +324,35 @@ extern "C" EXPORTAPI void SendJGPTData(UINT type,LPCTSTR msgz)
 
 
 /**
-* @brief 车载向四合一发送GPS、信号数据
+* @brief 车载向四合一发送GPS、车载信号
 *
-* @param[in]  x         经度
-* @param[in]  y   纬度
-* @param[in]  sd    速度
-* @param[in] fx          方向
+* @param[in]  x    经度
+* @param[in]  y    纬度
+* @param[in]  sd   速度
+* @param[in]  fx   方向
 * @param[in]  lc   里程
-* @param[in]  aqd   安全带（0：没插；1：插上）	
+* @param[in]  aqd  安全带（0：没插；1：插上）	
 * @param[in]  js   脚刹（0：无信号；1：有信号）
 * @param[in]  ss   手刹（0：无信号；1：有信号）
 * @param[in]  fs   副刹（0：无信号；1：有信号）
 * @param[in]  lh   离合（0：无信号；1：有信号）
 * @param[in]  lb   喇叭（0：无信号；1：有信号）
-* @param[in]  zzx   左转向（0：无信号；1：有信号）
-* @param[in]  yzx   右转向（0：无信号；1：有信号）
-* @param[in]  ygd   远光灯（0：无信号；1：有信号）
-* @param[in]  jgd   近光灯（0：无信号；1：有信号）
-* @param[in]  jsd   警示灯（0：无信号；1：有信号）
+* @param[in]  zzx  左转向（0：无信号；1：有信号）
+* @param[in]  yzx  右转向（0：无信号；1：有信号）
+* @param[in]  ygd  远光灯（0：无信号；1：有信号）
+* @param[in]  jgd  近光灯（0：无信号；1：有信号）
+* @param[in]  jsd  警示灯（0：无信号；1：有信号）
 * @param[in]  xh   熄火（0：无信号；1：有信号）
-* @param[in]  kgm   开关门（0：关门；1：开门）
+* @param[in]  kgm  开关门（0：关门；1：开门）
 * @param[in]  dw   档位
+* @param[in]  yg   雨刮（0：无信号；1：有信号）
+* @param[in]  wd   雾灯（0：无信号；1：有信号）
+* @param[in]  skd  示廓灯（0：无信号；1：有信号）
 * @return 是否成功
 */
-extern "C" EXPORTAPI void SendGnssData(double x, double y, float sd, float fx, float lc, int aqd=0, 
-		int js=0, int ss=0, int fs=0, int lh=0, int lb=0, int zzx=0, int yzx=0, int ygd=0, int jgd=0, int jsd=0, int xh=0, int kgm=0, int dw=0)
+extern "C" EXPORTAPI void SendGnssData(double x, double y, float sd, float fx, float lc, int aqd=0, int js=0, int ss=0, int fs=0, 
+									   int lh=0, int lb=0, int zzx=0, int yzx=0, int ygd=0, int jgd=0, int jsd=0, int xh=0, int kgm=0, 
+									   int dw=0, int yg = 0, int wd = 0, int skd = 0)
 {
 	if (timeGetTime()-theApp.lSendTime<500)
 	{
@@ -400,14 +404,17 @@ extern "C" EXPORTAPI void SendGnssData(double x, double y, float sd, float fx, f
 	myGnss.xh = xh;
 	myGnss.kgm = kgm;
 	myGnss.dw = dw;
+	myGnss.yg = yg;
+	myGnss.wd = wd;
+	myGnss.skd = skd;
 	
 	myGnss.gnssLC=lc;
 	theApp.SGnssData(GNSSDATA,(char *)&myGnss,sizeof(GNSSMSG));
 	if (theApp.ignsssend<1000)
 	{
 		theApp.WriteLog("x=%lf,y=%lf,sd=%f,fx=%f,lc=%f",x,y,sd,fx,lc);
-		theApp.WriteLog("aqd=%d,js=%d,ss=%d,fs=%d,lh=%d,lb=%d,zzx=%d,yzx=%d,ygd=%d,jgd=%d,jsd=%d,xh=%d,kgm=%d,dw=%d",
-			aqd,js,ss,fs,lh,lb,zzx,yzx,ygd,jgd,jsd,xh,kgm,dw);
+		theApp.WriteLog("aqd=%d,js=%d,ss=%d,fs=%d,lh=%d,lb=%d,zzx=%d,yzx=%d,ygd=%d,jgd=%d,jsd=%d,xh=%d,kgm=%d,dw=%d,yg=%d,wd=%d,skd=%d",
+			aqd,js,ss,fs,lh,lb,zzx,yzx,ygd,jgd,jsd,xh,kgm,dw,yg,wd,skd);
 		theApp.ignsssend++;
 	}
 	if (theApp.iGNssMap==0)
