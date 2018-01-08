@@ -95,6 +95,10 @@ private:
 	bool m_bSignalXh;	//熄火信号
 	bool m_bSignalKgm;	//开关门信号
 	bool m_bSignalLh;	//离合信号
+	bool m_bSignalYg;	//雨刮信号
+	bool m_bSignalWd;	//雾灯信号
+	bool m_bSignalSkd;	//示廓灯信号
+	bool m_bSignalJsd;	//警示灯信号
 	bool m_bSignalDw;	//档位信号
 	void DrawSignal(Graphics *graphics);//实时信号
 	void DrawNineMaps(Graphics *graphics, int carX, int carY);//画九宫格地图
