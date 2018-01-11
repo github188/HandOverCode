@@ -7,6 +7,8 @@
 *.ncb
 *.opt
 *.plg
+*.tlh
+*.tli
 ipch
 Debug
 Release
@@ -15,4 +17,3 @@ bin
 Output
 temp
 DEXE
-REXE
