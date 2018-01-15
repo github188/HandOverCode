@@ -156,6 +156,8 @@ void CThirdPicJMQ::ThirdPicInit(int ikch, CString path,int wMSG,HWND hwndz)
 	InitDC(ikch,3,path,wMSG,hwndz);
 	CString temp;
 	unsigned short StcharArr[256];
+
+	m_iCarNum = ikch;
 	
 	memset(StcharArr,0x0,sizeof(StcharArr));
 	temp.Format("%s\\tbk.skin",path);

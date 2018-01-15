@@ -99,6 +99,8 @@ void CFourthPicJMQ::FourthPicInit(int ikch, CString path,int wMSG,HWND hwndz)
 {
 	InitDC(ikch,4,path,wMSG,hwndz);
 
+	m_iCarNum = ikch;
+
 	CString temp;
 	unsigned short StcharArr[256];
 
