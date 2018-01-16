@@ -152,8 +152,7 @@ bool CAVIThreadz::InitDC(int iCarNum,int itf,CString ePath,int wMSG,HWND hwndz)
 	opts[0]->cbFormat = 0;
 	opts[0]->dwInterleaveEvery = 0;
 	//////////////////////////////////////////////////////////////////////////
-
-	
+	m_iCarNum=iCarNum;
 	exePath.Format("%s",ePath);
 	m_avifnpath.Format("%s\\log\\z%d_%d",ePath,m_iCarNum,itf);
 	
@@ -171,6 +170,9 @@ void CAVIThreadz::WriteLog(LPCTSTR pstrFormat, ...)
 	logstr.FormatV(pstrFormat, avlist);
 	va_end(avlist);
 	::PostMessage(m_hwndz,m_wMSG,WPARAM(m_itf),LPARAM(new CString(logstr)));
+	// 	FILE *fp=fopen(logfilename,"a+");
+	// 	fprintf(fp,"[%s]:%s#\n",curTime.Format(_T("%d %H:%M:%S")),logstr);
+	// 	fclose(fp);
 }
 
 bool CAVIThreadz::IsMSendDataT()
