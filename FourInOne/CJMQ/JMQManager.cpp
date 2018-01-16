@@ -529,7 +529,7 @@ void CJMQManager::OnJ17C51(int ikch, CString str)
 // 	{
 // 		m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
 // 	}
-	if (uWNDTWO==3)
+	if (uWNDTWO > 1)
 	{		
 		CString temp;
 		STerminalPZ temppz;
@@ -620,6 +620,21 @@ void CJMQManager::OnJ17C56(int ikch,CString zkzmbh,CString smsg)
 	{
 		//m_JMQCar[ikch].On17C56(2,ikscj);
 		dTF17C56(ikch,2,ikscj);
+	}
+
+	if (uWNDTWO > 1)
+	{		
+		STerminalPZ temppz;
+		CString temp;
+		temp.Format("10086_1");//201
+		if (0 == uMergeVideo)	//不是采用合成视频的模式, 视频合成场景下，四合一不进行切换
+		{
+			if(GetTerminalPZ(temppz,temp)==TRUE)
+			{
+				m_JMQCar[ikch].StartDynamic(temppz,1);//第二画面进项目
+			}
+		}
+		
 	}
 }
 
@@ -748,7 +763,7 @@ void CJMQManager::OnJ17C55(int ikch, CString zkzmbh,CString smsg)
 	}
 	dTF17C55(ikch,atoi(smsg),GetErrorKFLX(temp));
 
-	if (uWNDTWO>=2 )
+	if (uWNDTWO > 1)
 	{		
 		STerminalPZ temppz;
 		temp.Format("10086_1");//201

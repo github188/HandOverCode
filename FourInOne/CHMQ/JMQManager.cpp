@@ -522,7 +522,7 @@ void CJMQManager::OnJ17C51(int ikch, CString str)
 //	m_JMQCar[ikch].On17C51(str,ikscs,idrcs);
 	dTF17C51(ikch,str,ikscs,idrcs);
 	//////////////////////////////////////////////////////////////////////////
-	if (uWNDTWO==2)
+	if (uWNDTWO > 1)
 	{		
 		CString temp;
 		STerminalPZ temppz;
@@ -613,7 +613,7 @@ void CJMQManager::OnJ17C56(int ikch,CString zkzmbh,CString smsg)
 		dTF17C56(ikch,2,ikscj);
 	}
 
-	if (uWNDTWO==3)
+	if (uWNDTWO > 1)
 	{		
 		CString temp;
 		STerminalPZ temppz;
@@ -827,7 +827,7 @@ void CJMQManager::OnJ17C55(int ikch, CString zkzmbh,CString smsg)
 
 //	dTF17C55(ikch,atoi(smsg),GetErrorKFLX(temp));
 	dTF17C55(ikch,ite,GetErrorKFLX(temp));
-	if (uWNDTWO==2)
+	if (uWNDTWO > 1)
 	{		
 		STerminalPZ temppz;
 		temp.Format("10086_1");//201	
