@@ -110,6 +110,9 @@ typedef struct _gnssmsg
 	int yg;		//雨刮
 	int wd;		//雾灯
 	int skd;	//示廓灯
+	int dh;		//点火
+	float   fSpeedCar;	//原车速度
+	float   fSpeedEngine;	//转速
 
 	_gnssmsg()
 	{
@@ -136,6 +139,10 @@ typedef struct _gnssmsg
 		yg = 0;
 		wd = 0;
 		skd = 0;
+
+		dh = 0;
+		fSpeedCar = 0;
+		fSpeedEngine = 0;
 	}
 }GNSSMSG;
 
