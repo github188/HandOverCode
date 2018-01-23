@@ -1,0 +1,353 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\CBKDigitalMap.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\CBKDigitalMap.ico"
+IDI_ICON1               ICON    DISCARDABLE     "res\\icon1.ico"
+IDI_ICON2               ICON    DISCARDABLE     "res\\icon2.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAPSUB           BITMAP  DISCARDABLE     "res\\boxtip2.bmp"
+IDB_BMP_BTNBK           BITMAP  DISCARDABLE     "res\\CardBTN.bmp"
+IDB_BMPPHOBK            BITMAP  DISCARDABLE     "res\\phobk.bmp"
+IDB_BITMAP_ONLINECAR    BITMAP  DISCARDABLE     "res\\OnlineCar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 CBKDigitalMap"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "CBKDigitalMap 1.0 版",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2014",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_CBKDIGITALMAP_DIALOG DIALOGEX 0, 0, 488, 310
+STYLE WS_POPUP | WS_VISIBLE
+EXSTYLE WS_EX_APPWINDOW
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Button1",IDC_BUTTON1,11,271,33,16
+    LTEXT           "",IDC_STATIC_TOTALCAR,32,47,257,38,0,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Button0",IDC_BUTTON0,6,287,39,18
+    PUSHBUTTON      "Button3",IDC_BUTTON3,11,233,30,18
+    PUSHBUTTON      "Button2",IDC_BUTTON2,10,252,35,16
+    PUSHBUTTON      "Button5",IDC_BUTTON5,11,200,30,18
+    PUSHBUTTON      "Button4",IDC_BUTTON4,9,217,37,16
+    PUSHBUTTON      "Button7",IDC_BUTTON7,12,164,30,18
+    PUSHBUTTON      "Button8",IDC_BUTTON8,9,149,36,16
+    PUSHBUTTON      "Button9",IDC_BUTTON9,5,129,39,18
+    PUSHBUTTON      "Button10",IDC_BUTTON10,7,110,37,16
+    PUSHBUTTON      "Button11",IDC_BUTTON11,50,286,41,18
+    PUSHBUTTON      "Button12",IDC_BUTTON12,52,270,35,16
+    PUSHBUTTON      "Button13",IDC_BUTTON13,51,252,34,18
+    PUSHBUTTON      "Button14",IDC_BUTTON14,51,233,40,16
+    PUSHBUTTON      "Button15",IDC_BUTTON15,48,214,40,18
+    PUSHBUTTON      "Button16",IDC_BUTTON16,48,197,37,16
+    PUSHBUTTON      "Button17",IDC_BUTTON17,47,180,43,18
+    PUSHBUTTON      "Button18",IDC_BUTTON18,51,162,44,16
+    PUSHBUTTON      "Button19",IDC_BUTTON19,52,143,45,18
+    PUSHBUTTON      "Button6",IDC_BUTTON6,11,180,32,20
+    PUSHBUTTON      "Button20",IDC_BUTTON20,55,126,35,16
+    PUSHBUTTON      "Button21",IDC_BUTTON21,106,289,35,18
+    PUSHBUTTON      "Button22",IDC_BUTTON22,107,273,31,13
+    PUSHBUTTON      "Button23",IDC_BUTTON23,104,255,36,16
+    PUSHBUTTON      "Button24",IDC_BUTTON24,105,242,36,13
+    PUSHBUTTON      "Button25",IDC_BUTTON25,105,227,35,13
+    PUSHBUTTON      "Button26",IDC_BUTTON26,105,210,38,15
+    PUSHBUTTON      "Button27",IDC_BUTTON27,103,198,39,12
+    PUSHBUTTON      "Button28",IDC_BUTTON28,106,181,35,11
+    PUSHBUTTON      "Button29",IDC_BUTTON29,105,165,34,14
+    PUSHBUTTON      "Button30",IDC_BUTTON30,105,152,35,10
+    PUSHBUTTON      "Button31",IDC_BUTTON31,157,299,35,10
+    PUSHBUTTON      "Button32",IDC_BUTTON32,157,284,38,10
+    PUSHBUTTON      "Button33",IDC_BUTTON33,155,271,37,10
+    PUSHBUTTON      "Button34",IDC_BUTTON34,159,255,36,12
+    PUSHBUTTON      "Button35",IDC_BUTTON35,159,239,37,14
+    PUSHBUTTON      "Button36",IDC_BUTTON36,159,223,36,12
+    PUSHBUTTON      "Button37",IDC_BUTTON37,157,207,40,12
+    PUSHBUTTON      "Button38",IDC_BUTTON38,157,187,36,13
+    PUSHBUTTON      "Button39",IDC_BUTTON39,157,171,33,13
+    LTEXT           "",IDC_STATIC_BOOT,193,5,40,24
+    PUSHBUTTON      "Button40",IDC_BUTTON40,155,151,41,18
+    PUSHBUTTON      "Button41",IDC_BUTTON41,216,300,35,10
+    PUSHBUTTON      "Button42",IDC_BUTTON42,216,285,38,10
+    PUSHBUTTON      "Button43",IDC_BUTTON43,214,272,37,10
+    PUSHBUTTON      "Button44",IDC_BUTTON44,218,256,36,12
+    PUSHBUTTON      "Button45",IDC_BUTTON45,218,240,37,14
+    PUSHBUTTON      "Button46",IDC_BUTTON46,218,224,36,12
+    PUSHBUTTON      "Button47",IDC_BUTTON47,216,208,40,12
+    PUSHBUTTON      "Button48",IDC_BUTTON48,216,188,36,13
+    PUSHBUTTON      "Button49",IDC_BUTTON49,216,172,33,13
+    PUSHBUTTON      "Button50",IDC_BUTTON50,214,152,41,18
+    PUSHBUTTON      "Button51",IDC_BUTTON51,268,300,35,10
+    PUSHBUTTON      "Button52",IDC_BUTTON52,268,285,38,10
+    PUSHBUTTON      "Button53",IDC_BUTTON53,266,272,37,10
+    PUSHBUTTON      "Button54",IDC_BUTTON54,270,256,36,12
+    PUSHBUTTON      "Button55",IDC_BUTTON55,270,240,37,14
+    PUSHBUTTON      "Button56",IDC_BUTTON56,270,224,36,12
+    PUSHBUTTON      "Button57",IDC_BUTTON57,268,208,40,12
+    PUSHBUTTON      "Button58",IDC_BUTTON58,268,188,36,13
+    PUSHBUTTON      "Button59",IDC_BUTTON59,268,172,33,13
+    PUSHBUTTON      "展开",IDC_BUTTON_SHOWPLAY,318,243,35,17,NOT WS_VISIBLE
+END
+
+IDD_DIALOG1 DIALOG DISCARDABLE  0, 0, 257, 153
+STYLE DS_MODALFRAME | WS_POPUP
+FONT 10, "System"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,200,7,50,14
+    PUSHBUTTON      "取消",IDCANCEL,200,24,50,14
+    PUSHBUTTON      "Button1",IDC_BUTTON1,211,123,25,15
+    LTEXT           "",IDC_STATIC_CARNUMBER,7,7,56,12
+    LTEXT           "",IDC_STATIC_PHO,87,14,57,48
+    LTEXT           "",IDC_STATIC_CARNUMBER1,7,27,57,21
+    LTEXT           "",IDC_STATIC_NAME1,13,52,64,16
+    LTEXT           "",IDC_STATIC_NAME,7,75,69,20
+    LTEXT           "",IDC_STATIC_ZKZH1,7,104,72,18
+    LTEXT           "",IDC_STATIC_ZKZH,7,132,75,14
+    LTEXT           "",IDC_STATIC_EXAMMODEL,120,92,33,13
+    LTEXT           "",IDC_STATIC_EXAMMODEL1,119,113,35,11
+END
+
+IDD_DIALOG_ONLINECARINFO DIALOG DISCARDABLE  0, 0, 187, 175
+STYLE WS_POPUP
+FONT 10, "System"
+BEGIN
+    LTEXT           "",IDC_STATIC_DATE,7,8,34,10
+    LTEXT           "",IDC_STATIC_TIME,7,19,34,10
+    CONTROL         "Tab1",IDC_TAB_OPTION,"SysTabControl32",TCS_FIXEDWIDTH,7,
+                    36,99,35
+    PUSHBUTTON      "开全部",IDC_BUTTONALL,17,145,35,13
+    PUSHBUTTON      "开主驾",IDC_BUTTONMAIN,56,145,35,13
+    PUSHBUTTON      "开副驾",IDC_BUTTONCOPILOT,94,144,35,13
+    PUSHBUTTON      "开车外",IDC_BUTTONOUTSIDE,134,145,35,13
+END
+
+IDD_DIALOG_EXAM DIALOG DISCARDABLE  0, 0, 187, 94
+STYLE DS_MODALFRAME | WS_CHILD
+FONT 10, "System"
+BEGIN
+    CONTROL         "Tree1",IDC_TREE_EXAM,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,24,23,29,57
+END
+
+IDD_DIALOG_DETAILS DIALOG DISCARDABLE  0, 0, 187, 94
+STYLE DS_MODALFRAME | WS_CHILD
+FONT 10, "System"
+BEGIN
+    CONTROL         "Tree1",IDC_TREE_DETAILS,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,27,15,45,64
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "福州北科大舟宇电子有限公司\0"
+            VALUE "FileDescription", "数字地图-考试实时定位系统 V1.0\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "CBKDigitalMap\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2014 ZSZ\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "CBKDigitalMap.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "CBKDigitalMap 应用程序\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 250
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 146
+    END
+
+    IDD_DIALOG_ONLINECARINFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+    END
+
+    IDD_DIALOG_EXAM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+
+    IDD_DIALOG_DETAILS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 CBKDigitalMap(&A)..."
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\CBKDigitalMap.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

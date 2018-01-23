@@ -1,0 +1,15 @@
+[2016-05-06 15:01:08]考车 TrackExamCar_thd.
+[2016-05-06 15:01:08]主 WakeUpExamCar_thd.
+[2016-05-06 15:01:08]考车 SerachOnLineExamCar_thd.
+[2016-05-06 15:01:08]对话框 StretchDlg_thd.
+[2016-05-06 15:01:09]考车 RefreshCDDDlg_thd.
+[2016-05-06 15:01:11]主 HideOtherCar_thd.
+[2016-05-06 15:01:11]主 UpdateMap_thd.
+[2016-05-06 15:01:11]主 ListenExamCarOnline_thd.
+[2016-05-06 15:01:11]主 ListenExamCar_thd.
+[2016-05-06 15:01:12]继续监听.
+[2016-05-06 15:01:12]收包数：0.
+[2016-05-06 15:01:12]Socket StretchDlg_thd.
+[2016-05-06 15:01:13]解包数：0  0  0  0   包数为：0   0.
+[2016-05-06 15:01:13]主 ParsePackage_thd.
+[2016-05-06 15:01:14]详 UpdateExamCarInfo_thd.
