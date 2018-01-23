@@ -174,7 +174,13 @@ DWORD WINAPI SendThreadProc(LPVOID param)
 			bconn=false;
 			Sleep(1000);
 			continue;
-		}		
+		}
+		else
+		{
+			CString log;
+			log.Format("发送成功，tempSend=%s", tempSend.GetBuffer(0));
+			theApp.WriteLog(log);
+		}
 	}
 	closesocket(sockClient);
 	theApp.WriteLog("退出数字地图发送线程! 20160519 1334");
@@ -282,8 +288,8 @@ extern "C" __declspec( dllexport ) BOOL MAPTCPSENG(double dLongitude,double dLat
 }
 extern "C" __declspec( dllexport ) void MATSENDC(double gpsx,double gpsy)
 {
-// 	tempSend.Format("11%d,%lf,%lf,%lf",theApp.CardNumi,gpsx,gpsy,0);
-// 	SetEvent(hThreadEvent);
-	tempSend.Format("[GPSInfo]\r\nCAR%dlon=%lf\r\nCAR%ddla=%lf\r\nZT%d=%d\r\nErrID%d=%d\r\n",theApp.CardNumi,gpsx,theApp.CardNumi,gpsy,theApp.CardNumi,1,theApp.CardNumi,1);
-	SetEvent(hThreadEvent);
+ 	tempSend.Format("11%d,%lf,%lf,%lf",theApp.CardNumi,gpsx,gpsy,0);
+ 	SetEvent(hThreadEvent);
+//	tempSend.Format("[GPSInfo]\r\nCAR%dlon=%lf\r\nCAR%ddla=%lf\r\nZT%d=%d\r\nErrID%d=%d\r\n",theApp.CardNumi,gpsx,theApp.CardNumi,gpsy,theApp.CardNumi,1,theApp.CardNumi,1);
+//	SetEvent(hThreadEvent);
 }
