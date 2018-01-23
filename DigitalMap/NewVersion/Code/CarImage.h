@@ -21,7 +21,7 @@ public:
 	void SetDrawimg(int drawi);
 	void SetEllipsePenColor(UINT iset);//设置圆形颜色
 	bool isOnLine;//考车在线
-	BOOL IsPtinScreen(CRect src,float fzl);//是否在屏幕区域内
+	BOOL IsPtinScreen(CRect src,float fzl, float fzlY);//是否在屏幕区域内
 	void SetXYRotate(double cx,double cy,double cr);//设置XY及旋转角度
 	void DrawCar(Graphics* graphics);//画车
 	void InitCar(int cnum);//初始化考车

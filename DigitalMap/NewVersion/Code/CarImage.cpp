@@ -91,7 +91,7 @@ void CCarImage::SetXYRotate(double cx,double cy,double cr)
 //	isOnLine =true;
 }
 
-BOOL CCarImage::IsPtinScreen(CRect src, float fzl)
+BOOL CCarImage::IsPtinScreen(CRect src, float fzl, float fzlY)
 {	
 	CPoint temppt;
 	temppt.x =(int)m_mapPT.X;
@@ -100,8 +100,9 @@ BOOL CCarImage::IsPtinScreen(CRect src, float fzl)
 	{//不在屏幕区域内
 		return FALSE;
 	}
-	m_CenterPt.X=(m_mapPT.X-src.left)/fzl;
-	m_CenterPt.Y=(m_mapPT.Y-src.top)/fzl;
+
+	m_CenterPt.X=(m_mapPT.X-src.left) / fzl;
+	m_CenterPt.Y=(m_mapPT.Y-src.top) / fzlY;
 	m_picRCF.X=m_CenterPt.X-20;
 	m_picRCF.Y=m_CenterPt.Y-20;
 	m_picRCF.Width =40;

@@ -192,8 +192,12 @@ BOOL CCDMapDlg::OnInitDialog()
 		CDialog::OnCancel();
 		return FALSE;
 	}
+
+	OnShowall();
+	
 	AfxBeginThread(&InvaliDateMap_thd, this);
-	logz.WriteLog(dwlogID,"数字地图 V2.0 版本!Build 20160518");
+	logz.WriteLog(dwlogID,"数字地图 V2.0 版本!Build 20180122");
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -242,12 +246,11 @@ void CCDMapDlg::OnPaint()
 		grap.SetInterpolationMode(InterpolationModeNearestNeighbor);
 		grap.DrawImage(m_pImageMap,Rect(0,0, ClientRect.Width(),ClientRect.Height()),(int)m_ImageL,(int)m_ImageT,(int)m_ImageW,(int)m_ImageH,UnitPixel);
 	
-
 		m_imgRc.SetRect(m_ImageL,m_ImageT,m_ImageW+m_ImageL,m_ImageH+m_ImageT);
 		MAP_INT_SOCKET::iterator iter;
 		for (iter=m_CarMapN.begin();iter!=m_CarMapN.end();iter++)
 		{		
-			if (carimg[iter->first].IsPtinScreen(m_imgRc,m_ZoomLevel))
+			if (carimg[iter->first].IsPtinScreen(m_imgRc,m_ZoomLevel, m_ZoomLevelY))
 			{
 				carimg[iter->first].DrawCar(&grap);
 			}
@@ -331,12 +334,19 @@ bool CCDMapDlg::InitMap()
 // 	m_DestT=m_ShowAllT;
 // 	m_DestW=m_ShowAllW;
 // 	m_DestH=m_ShowAllH;
+
+
+	m_MinZoomLevel=float((float)m_imageSize.cx / (float)ClientRect.Width());
+	m_MinZoomLevelHeight = float((float)m_imageSize.cy / (float)ClientRect.Height());
+	m_ZoomLevel=m_MinZoomLevel;
+	m_ZoomLevelY=m_MinZoomLevel;
  	m_ImageL=0;
  	m_ImageT=0;
-	m_ZoomLevel=1.0f;
- 	m_ImageW=ClientRect.Width()*m_ZoomLevel;
- 	m_ImageH=ClientRect.Height()*m_ZoomLevel;
-	m_MinZoomLevel=float(m_imageSize.cx /ClientRect.Width());
+	m_ImageW=m_imageSize.cx;
+ 	m_ImageH=m_imageSize.cy;
+	//m_ImageW=ClientRect.Width()*m_ZoomLevel;
+ 	//m_ImageH=ClientRect.Height()*m_ZoomLevel;
+	
 	//////////////////////////////////////////////////////////////////////////
 	CString MapCfg,keyXname,keyYname,temp;
 	MapCfg.Format(".\\MAP.cfg");
@@ -406,7 +416,7 @@ void CCDMapDlg::OnMouseMove(UINT nFlags, CPoint point)
 	if (m_isLBDown)//左键按下
 	{
 		m_ImageL +=(m_LBx-point.x)*m_ZoomLevel;
-		m_ImageT +=(m_LBy-point.y)*m_ZoomLevel;		
+		m_ImageT +=(m_LBy-point.y)*m_ZoomLevelY;		
 		m_LBx=point.x;
 		m_LBy=point.y;
 		AssertImageLT();
@@ -427,6 +437,7 @@ BOOL CCDMapDlg::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 	// TODO: Add your message handler code here and/or call default
 	short iDelta = zDelta; //确定滚动方向
 	m_ZoomLevelOld =m_ZoomLevel;//
+	m_ZoomLevelOldY = m_ZoomLevelY;
 	m_ImgLOld =m_ImageL;
 	m_ImgTOld =m_ImageT;
 	//////////////////////////////////////////////////////////////////////////
@@ -439,7 +450,16 @@ BOOL CCDMapDlg::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 		else
 		{
 			m_ZoomLevel+=0.1f;
-		}		
+		}	
+		
+		if (m_ZoomLevelY >=m_MinZoomLevelHeight)//
+		{
+			m_ZoomLevelY =m_MinZoomLevelHeight;
+		}
+		else
+		{
+			m_ZoomLevelY+=0.1f;
+		}
 	}
 	else //放大
 	{
@@ -451,11 +471,20 @@ BOOL CCDMapDlg::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 		{
 			m_ZoomLevel-=0.1f;
 		}
+
+		if (m_ZoomLevelY <=0.4f)//
+		{
+			m_ZoomLevelY =0.4f;
+		}
+		else
+		{
+			m_ZoomLevelY-=0.1f;
+		}
 	}
 	m_ImageL =m_ImgLOld + pt.x*(m_ZoomLevelOld-m_ZoomLevel);
-	m_ImageT =m_ImgTOld + pt.y*(m_ZoomLevelOld-m_ZoomLevel);
+	m_ImageT =m_ImgTOld + pt.y*(m_ZoomLevelOldY-m_ZoomLevelY);
 	m_ImageW =ClientRect.Width()*m_ZoomLevel;
-	m_ImageH =ClientRect.Height()*m_ZoomLevel;
+	m_ImageH =ClientRect.Height()*m_ZoomLevelY;
 	AssertImageLT();
 	Invalidate(FALSE);
 	return CDialog::OnMouseWheel(nFlags, zDelta, pt);
@@ -530,10 +559,17 @@ void CCDMapDlg::OnShowall()
 	m_DestW=m_ShowAllW;
 	m_DestH=m_ShowAllH;
 
+	m_ZoomLevel = m_MinZoomLevel;
+	m_ZoomLevelY = m_MinZoomLevelHeight;
+
 	m_ImageL=0;
 	m_ImageT=0;
 	m_ImageW=m_imageSize.cx;
  	m_ImageH=m_imageSize.cy;
+	//m_ImageW =ClientRect.Width()*m_ZoomLevel;
+	//m_ImageH =ClientRect.Height()*m_ZoomLevel;
+
+	AssertImageLT();
 	Invalidate(FALSE);
 }
 
@@ -556,6 +592,8 @@ void CCDMapDlg::OnSocketClose(SOCKET CSock)
 
 void CCDMapDlg::OnGnssData(CString recvtemp,SOCKET csocket)
 {
+	//logz.WriteLog(dwlogID,"收到考车数据,%s", recvtemp);
+	
 	UINT uCmd=atoi(recvtemp.Left(2));
 	recvtemp =recvtemp.Mid(2);
 	int CarNum;	
@@ -583,12 +621,15 @@ void CCDMapDlg::OnGnssData(CString recvtemp,SOCKET csocket)
 					logz.WriteLog(dwlogID,"新的考车[%d],Port:%d",CarNum,csocket);
 				}				
 				carimg[CarNum].isOnLine=true;
-// 				int tempx=abs(((gpsx-m_Mapx)*m_bs))+176;
-// 				int tempy=abs(((gpsy-m_Mapy)*m_bs))+144;
+ 				//int tempx=abs(((gpsx-m_Mapx)*m_bs))+176;
+ 				//int tempy=abs(((gpsy-m_Mapy)*m_bs))+144;
+				int tempx=abs(((gpsx-m_Mapx)*m_bs));
+ 				int tempy=abs(((gpsy-m_Mapy)*m_bs));
 
-				int tempx=abs(((gpsy-m_Mapx)*m_bs))+176;
-				int tempy=abs(((gpsx-m_Mapy)*m_bs))+144;
+				//int tempx=abs(((gpsy-m_Mapx)*m_bs))+176;
+				//int tempy=abs(((gpsx-m_Mapy)*m_bs))+144;
 				carimg[CarNum].SetXY(tempx,tempy);
+				logz.WriteLog(dwlogID,"x=%d,y=%d,,,%d,gpsx=%f,gpsy=%f,m_Mapx=%lf",tempx,tempy,CarNum,gpsx,gpsy,m_Mapx);
 //				logz.WriteLog(dwlogID,"x=%d,y=%d,,,%d,gpsx=%f,gpsy=%f,m_Mapx=%lf",tempx,tempy,CarNum,gpsx,gpsy,m_Mapx);
 			}
 			break;

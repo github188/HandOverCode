@@ -81,7 +81,7 @@ private:
 
 	
 	double m_Mapx,m_Mapy,m_bs;	//经纬度 和倍数
-	float m_ZoomLevel,m_ZoomLevelOld,m_MinZoomLevel; //缩放级别
+	float m_ZoomLevel,m_ZoomLevelY,m_ZoomLevelOld,m_ZoomLevelOldY,m_MinZoomLevel,m_MinZoomLevelHeight; //缩放级别
 	float m_ImageL,m_ImageT,m_ImageW,m_ImageH,m_ImgLOld,m_ImgTOld;
 	float m_ShowAllL,m_ShowAllT,m_ShowAllW,m_ShowAllH;
 	float m_DestL,m_DestT,m_DestW,m_DestH;
