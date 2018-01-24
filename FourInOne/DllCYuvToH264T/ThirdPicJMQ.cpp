@@ -286,7 +286,7 @@ BOOL CThirdPicJMQ::ReadPhotoFromDB(CDC *pDC, CString sCard,CRect rc)
 
 		if (m_bEncrypt)
 		{
-			strSQL.Format("SELECT 照片 FROM StudentPhoto WHERE 准考证明编号 = charEncode('%s')",sCard);
+			strSQL.Format("Set ARITHABORT ON;SELECT 照片 FROM StudentPhoto WHERE 准考证明编号 = dbo.charEncode('%s')",sCard);
 		}
 		else
 		{
@@ -396,7 +396,7 @@ BOOL CThirdPicJMQ::ReadMJPhotoFromDB(CDC *pDC, CString sCard,CRect rc)
 
 		if (m_bEncrypt)
 		{
-			strSQL.Format("SELECT 门禁照片 FROM StudentPhoto WHERE 准考证明编号 = charEncode('%s')",sCard);
+			strSQL.Format("Set ARITHABORT ON;SELECT 门禁照片 FROM StudentPhoto WHERE 准考证明编号 = dbo.charEncode('%s')",sCard);
 		}
 		else
 		{
@@ -513,7 +513,7 @@ int CThirdPicJMQ::GetDrcs()
 
 		if (m_bEncrypt)
 		{
-			sqltemp.Format("SELECT 当日次数 FROM Studentinfo WHERE 准考证明编号=charEncode('%s')",m_zkzmbh);
+			sqltemp.Format("Set ARITHABORT ON;SELECT 当日次数 FROM Studentinfo WHERE 准考证明编号=dbo.charEncode('%s')",m_zkzmbh);
 		}
 		else
 		{
@@ -550,7 +550,7 @@ bool CThirdPicJMQ::GetStuMSG()
 
 		if (m_bEncrypt)
 		{
-			sqltemp.Format("%scharEncode('%s') ",sqlExstr,m_zkzmbh);	//调用 charEncode 数据库函数进行加密
+			sqltemp.Format("%sdbo.charEncode('%s') ",sqlExstr,m_zkzmbh);	//调用 dbo.charEncode 数据库函数进行加密
 		}
 		else
 		{
@@ -599,7 +599,7 @@ void CThirdPicJMQ::SetSQLOracle(UINT itype)
 	{	
 		if (m_bEncrypt)
 		{
-			sqlExstr.Format("SELECT 考车号+'-'+SysCfg.备注+'-'+考试车型 as MSG0, charDecode(姓名) as MSG1,性别 as MSG2,(Select CONVERT(varchar(100), GETDATE(), 23)) as MSG3,charDecode(流水号) as MSG4,charDecode(身份证明编号) as MSG5,驾校名称 as MSG6,考试员1+(CASE 考试原因	WHEN 'A' THEN ' A-初考'	WHEN 'B' THEN ' B-增驾' WHEN 'F' THEN ' F-满分学习' WHEN 'D' THEN ' D-补考' ELSE ' 考试原因:未知' END) as MSG7,charDecode(准考证明编号) as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 LEFT JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+			sqlExstr.Format("Set ARITHABORT ON;SELECT 考车号+'-'+SysCfg.备注+'-'+考试车型 as MSG0, dbo.charDecode(姓名) as MSG1,性别 as MSG2,(Select CONVERT(varchar(100), GETDATE(), 23)) as MSG3,dbo.charDecode(流水号) as MSG4,dbo.charDecode(身份证明编号) as MSG5,驾校名称 as MSG6,考试员1+(CASE 考试原因	WHEN 'A' THEN ' A-初考'	WHEN 'B' THEN ' B-增驾' WHEN 'F' THEN ' F-满分学习' WHEN 'D' THEN ' D-补考' ELSE ' 考试原因:未知' END) as MSG7,dbo.charDecode(准考证明编号) as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 LEFT JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
 		}
 		else
 		{
@@ -612,7 +612,7 @@ void CThirdPicJMQ::SetSQLOracle(UINT itype)
 	{
 		if (m_bEncrypt)
 		{
-			sqlExstr.Format("SELECT 考车号||'-'||SysCfg.备注||'-'||考试车型||'-路线'||SysCfg.考车路线 as MSG0,charDecode(姓名) as MSG1,性别 as MSG2,to_char(sysdate,'yyyy-mm-dd')  as MSG3,charDecode(流水号) as MSG4,charDecode(身份证明编号) as MSG5,驾校名称 as MSG6,考试员1 as MSG7,charDecode(准考证明编号)||'_'||当日次数 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+			sqlExstr.Format("Set ARITHABORT ON;SELECT 考车号||'-'||SysCfg.备注||'-'||考试车型||'-路线'||SysCfg.考车路线 as MSG0,dbo.charDecode(姓名) as MSG1,性别 as MSG2,to_char(sysdate,'yyyy-mm-dd')  as MSG3,dbo.charDecode(流水号) as MSG4,dbo.charDecode(身份证明编号) as MSG5,驾校名称 as MSG6,考试员1 as MSG7,dbo.charDecode(准考证明编号)||'_'||当日次数 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
 		}
 		else
 		{

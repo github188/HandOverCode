@@ -414,7 +414,7 @@ BOOL CJMQManager::SetErrorData()
 
 		if (m_bEncrypt)
 		{
-			sqltemp.Format("select intDecode(错误编号) as 错误编号,扣分类型,扣除分数 from ErrorData");
+			sqltemp.Format("Set ARITHABORT ON;select dbo.intDecode(错误编号) as 错误编号,扣分类型,扣除分数 from ErrorData");
 		}
 		else
 		{
@@ -1145,7 +1145,7 @@ void CJMQManager::GetCS(CString str, int &ikscs, int &idrcs)
 
 		if (m_bEncrypt)
 		{
-			sqltemp.Format("SELECT 考试次数,当日次数 FROM StudentInfo WHERE 准考证明编号=charEncode('%s') ",str);
+			sqltemp.Format("Set ARITHABORT ON;SELECT 考试次数,当日次数 FROM StudentInfo WHERE 准考证明编号=dbo.charEncode('%s') ",str);
 		}
 		else
 		{

@@ -327,7 +327,7 @@ BOOL CCVideoCXDlg::UpdateList(CString temp)
 	catch (_com_error &comError)
 	{
 		//TRACE("打开数据库异常：%s!\n",comError.ErrorMessage());
-		tempk.Format("查询数据出错!UpdateList,错误[%s]",comError.Description());
+		tempk.Format("查询数据出错!UpdateList,错误[%s]",(_bstr_t)comError.Description());
 		AfxMessageBox(tempk);
 	}
 	return TRUE;
@@ -450,23 +450,24 @@ void CCVideoCXDlg::OnBtnCx()
 	{
 		if (m_bOracle)
 		{
-			temp.Format("select charDecode(姓名) as 姓名,charDecode(身份证明编号) as 身份证明编号,考试次数,当日次数,考车号,dateDecode(开始时间) as 开始时间,dateDecode(考试时间) as 考试时间 from examrecordindetail where (开始时间 between dateEncode(to_date('%s','yyyy-MM-dd hh24:mi:ss')) and dateEncode(to_date('%s','yyyy-MM-dd hh24:mi:ss')))",strST,strET);
+			temp.Format("Set ARITHABORT ON;select dbo.charDecode(姓名) as 姓名,dbo.charDecode(身份证明编号) as 身份证明编号,考试次数,当日次数,考车号,dbo.dateDecode(开始时间) as 开始时间,dbo.dateDecode(考试时间) as 考试时间 from examrecordindetail where (开始时间 between dbo.dateEncode('%s') and dbo.dateEncode('%s'))",strST,strET);
 		}
 		else if (m_bSql)
 		{
-			temp.Format("select charDecode(姓名) as 姓名,charDecode(身份证明编号) as 身份证明编号,考试次数,当日次数,考车号,dateDecode(开始时间) as 开始时间,dateDecode(考试时间) as 考试时间 from examrecordindetail where (开始时间 between dateEncode(convert(datetime, '%s')) and dateEncode(convert(datetime, '%s')))", strST, strET);
+			temp.Format("Set ARITHABORT ON;select dbo.charDecode(姓名) as 姓名,dbo.charDecode(身份证明编号) as 身份证明编号,考试次数,当日次数,考车号,dbo.dateDecode(开始时间) as 开始时间,dbo.dateDecode(考试时间) as 考试时间 from examrecordindetail where (开始时间 between dbo.dateEncode('%s') and dbo.dateEncode('%s'))", strST, strET);
+			//temp.Format("select * from examrecordindetail where (开始时间 between dateEncode('%s') and dateEncode('%s'))", strST, strET);
 		}
 		
 		switch(iComboxS)
 		{
 		case 1:
-			strSQL.Format("%s and 姓名=charEncode('%s') ",temp,m_tiaoj);
+			strSQL.Format("%s and 姓名=dbo.charEncode('%s') ",temp,m_tiaoj);
 			break;
 		case 2:
-			strSQL.Format("%s and 身份证明编号=charEncode('%s') ",temp,m_tiaoj);
+			strSQL.Format("%s and 身份证明编号=dbo.charEncode('%s') ",temp,m_tiaoj);
 			break;
 		case 3:
-			strSQL.Format("%s and 考车号=charEncode('%s') ",temp,m_tiaoj);
+			strSQL.Format("%s and 考车号='%s' ",temp,m_tiaoj);
 			break;
 		default:
 			strSQL.Format("%s",temp);
@@ -474,6 +475,7 @@ void CCVideoCXDlg::OnBtnCx()
 		}
 	}
 
+	//AfxMessageBox(strSQL);
 	UpdateList(strSQL);
 }
 
