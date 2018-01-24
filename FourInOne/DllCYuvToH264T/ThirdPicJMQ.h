@@ -34,7 +34,10 @@ private:
 	int m_idrcs,m_ikscs;	//考试次数 当日次数 17C51
 	CString textstr[9];	
 	int m_iMtype;
-	int m_izt;		
+	int m_izt;
+	
+	bool m_bEncrypt;	//数据库字段是否有做加密
+
 private:
 	void DrawHbHg(Graphics *graphics,int x,int y);//17C56时调用 画 合格与不合格  	
 	//////////////////////////////////////////////////////////////////////////

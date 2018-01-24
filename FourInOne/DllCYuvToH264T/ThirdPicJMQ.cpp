@@ -13,6 +13,8 @@ CThirdPicJMQ::CThirdPicJMQ()
 {
 	m_iMtype=0;
 	m_SleepTime=1000;
+
+	m_bEncrypt = false;
 }
 
 CThirdPicJMQ::~CThirdPicJMQ()
@@ -187,6 +189,12 @@ void CThirdPicJMQ::ThirdPicInit(int ikch, CString path,int wMSG,HWND hwndz)
 	m_iMtype =m_iMtype | MTYPE1;
 	m_iMtype =m_iMtype | MTYPE3;
 	iRunNum=5;
+
+	UINT uEncrypt = GetPrivateProfileInt("CONFIG","ENCRYPT",0,configfile);
+	if (1 == uEncrypt)
+	{
+		m_bEncrypt = true;
+	}
 }
 
 void CThirdPicJMQ::SetSleepTime(DWORD dwTime)
@@ -275,7 +283,16 @@ BOOL CThirdPicJMQ::ReadPhotoFromDB(CDC *pDC, CString sCard,CRect rc)
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		CString strSQL;	
-		strSQL.Format("SELECT 照片 FROM StudentPhoto WHERE 准考证明编号 = '%s'",sCard);
+
+		if (m_bEncrypt)
+		{
+			strSQL.Format("SELECT 照片 FROM StudentPhoto WHERE 准考证明编号 = charEncode('%s')",sCard);
+		}
+		else
+		{
+			strSQL.Format("SELECT 照片 FROM StudentPhoto WHERE 准考证明编号 = '%s'",sCard);
+		}
+
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)m_pConn, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
 		
@@ -376,7 +393,16 @@ BOOL CThirdPicJMQ::ReadMJPhotoFromDB(CDC *pDC, CString sCard,CRect rc)
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		CString strSQL;	
-		strSQL.Format("SELECT 门禁照片 FROM StudentPhoto WHERE 准考证明编号 = '%s'",sCard);
+
+		if (m_bEncrypt)
+		{
+			strSQL.Format("SELECT 门禁照片 FROM StudentPhoto WHERE 准考证明编号 = charEncode('%s')",sCard);
+		}
+		else
+		{
+			strSQL.Format("SELECT 门禁照片 FROM StudentPhoto WHERE 准考证明编号 = '%s'",sCard);
+		}
+		
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)m_pConn, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
 		
@@ -484,7 +510,16 @@ int CThirdPicJMQ::GetDrcs()
 	try
 	{
 		CString sqltemp;
-		sqltemp.Format("SELECT 当日次数 FROM Studentinfo WHERE 准考证明编号='%s' ",m_zkzmbh);
+
+		if (m_bEncrypt)
+		{
+			sqltemp.Format("SELECT 当日次数 FROM Studentinfo WHERE 准考证明编号=charEncode('%s')",m_zkzmbh);
+		}
+		else
+		{
+			sqltemp.Format("SELECT 当日次数 FROM Studentinfo WHERE 准考证明编号='%s' ",m_zkzmbh);
+		}
+		
 		VARIANT cnt;
 		cnt.vt = VT_INT;
 		_RecordsetPtr pSet =m_pConn->Execute((_bstr_t)sqltemp,&cnt,adCmdUnknown);
@@ -512,7 +547,16 @@ bool CThirdPicJMQ::GetStuMSG()
 		CString sqltemp,MSGstr;
 		VARIANT cnt;
 		cnt.vt = VT_INT;
-		sqltemp.Format("%s'%s' ",sqlExstr,m_zkzmbh);
+
+		if (m_bEncrypt)
+		{
+			sqltemp.Format("%scharEncode('%s') ",sqlExstr,m_zkzmbh);	//调用 charEncode 数据库函数进行加密
+		}
+		else
+		{
+			sqltemp.Format("%s'%s' ",sqlExstr,m_zkzmbh);
+		}
+
 		TRACE(sqltemp+"\n");
 		_RecordsetPtr pSet =m_pConn->Execute((_bstr_t)sqltemp,&cnt,adCmdUnknown);
 		_variant_t vat;
@@ -553,13 +597,29 @@ void CThirdPicJMQ::SetSQLOracle(UINT itype)
 {
 	if(1==itype)
 	{	
-		sqlExstr.Format("SELECT 考车号+'-'+SysCfg.备注+'-'+考试车型 as MSG0,姓名 as MSG1,性别 as MSG2,(Select CONVERT(varchar(100), GETDATE(), 23)) as MSG3,流水号 as MSG4,身份证明编号 as MSG5,驾校名称 as MSG6,考试员1+(CASE 考试原因	WHEN 'A' THEN ' A-初考'	WHEN 'B' THEN ' B-增驾' WHEN 'F' THEN ' F-满分学习' WHEN 'D' THEN ' D-补考' ELSE ' 考试原因:未知' END) as MSG7,准考证明编号 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 LEFT JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+		if (m_bEncrypt)
+		{
+			sqlExstr.Format("SELECT 考车号+'-'+SysCfg.备注+'-'+考试车型 as MSG0, charDecode(姓名) as MSG1,性别 as MSG2,(Select CONVERT(varchar(100), GETDATE(), 23)) as MSG3,charDecode(流水号) as MSG4,charDecode(身份证明编号) as MSG5,驾校名称 as MSG6,考试员1+(CASE 考试原因	WHEN 'A' THEN ' A-初考'	WHEN 'B' THEN ' B-增驾' WHEN 'F' THEN ' F-满分学习' WHEN 'D' THEN ' D-补考' ELSE ' 考试原因:未知' END) as MSG7,charDecode(准考证明编号) as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 LEFT JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+		}
+		else
+		{
+			sqlExstr.Format("SELECT 考车号+'-'+SysCfg.备注+'-'+考试车型 as MSG0,姓名 as MSG1,性别 as MSG2,(Select CONVERT(varchar(100), GETDATE(), 23)) as MSG3,流水号 as MSG4,身份证明编号 as MSG5,驾校名称 as MSG6,考试员1+(CASE 考试原因	WHEN 'A' THEN ' A-初考'	WHEN 'B' THEN ' B-增驾' WHEN 'F' THEN ' F-满分学习' WHEN 'D' THEN ' D-补考' ELSE ' 考试原因:未知' END) as MSG7,准考证明编号 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 LEFT JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+		}
+		
 		WriteLog("SQL版本 %d",itype);
 	}
 	else
 	{
-		//sqlExstr.Format("SELECT 考车号||'-'||SysCfg.备注||'-'||考试车型||'-路线'||SysCfg.考车路线 as MSG0,姓名 as MSG1,性别 as MSG2,to_char(sysdate,'yyyy-mm-dd')  as MSG3,流水号 as MSG4,身份证明编号 as MSG5,驾校名称 as MSG6,考试员1 ||'   助考员:'|| 助考员 as MSG7,准考证明编号||'_'||当日次数 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
-		sqlExstr.Format("SELECT 考车号||'-'||SysCfg.备注||'-'||考试车型||'-路线'||SysCfg.考车路线 as MSG0,姓名 as MSG1,性别 as MSG2,to_char(sysdate,'yyyy-mm-dd')  as MSG3,流水号 as MSG4,身份证明编号 as MSG5,驾校名称 as MSG6,考试员1 as MSG7,准考证明编号||'_'||当日次数 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+		if (m_bEncrypt)
+		{
+			sqlExstr.Format("SELECT 考车号||'-'||SysCfg.备注||'-'||考试车型||'-路线'||SysCfg.考车路线 as MSG0,charDecode(姓名) as MSG1,性别 as MSG2,to_char(sysdate,'yyyy-mm-dd')  as MSG3,charDecode(流水号) as MSG4,charDecode(身份证明编号) as MSG5,驾校名称 as MSG6,考试员1 as MSG7,charDecode(准考证明编号)||'_'||当日次数 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+		}
+		else
+		{
+			//sqlExstr.Format("SELECT 考车号||'-'||SysCfg.备注||'-'||考试车型||'-路线'||SysCfg.考车路线 as MSG0,姓名 as MSG1,性别 as MSG2,to_char(sysdate,'yyyy-mm-dd')  as MSG3,流水号 as MSG4,身份证明编号 as MSG5,驾校名称 as MSG6,考试员1 ||'   助考员:'|| 助考员 as MSG7,准考证明编号||'_'||当日次数 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+			sqlExstr.Format("SELECT 考车号||'-'||SysCfg.备注||'-'||考试车型||'-路线'||SysCfg.考车路线 as MSG0,姓名 as MSG1,性别 as MSG2,to_char(sysdate,'yyyy-mm-dd')  as MSG3,流水号 as MSG4,身份证明编号 as MSG5,驾校名称 as MSG6,考试员1 as MSG7,准考证明编号||'_'||当日次数 as MSG8 FROM StudentInfo LEFT JOIN SchoolInfo ON 代理人=驾校编号 JOIN SysCfg ON 考车号=项目 WHERE 准考证明编号=");
+		}
+		
 		WriteLog("Oracle版本 %d",itype);
 	}
 }
