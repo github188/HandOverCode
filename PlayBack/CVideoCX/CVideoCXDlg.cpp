@@ -396,8 +396,14 @@ void CCVideoCXDlg::OnBtnCx()
 	strET.Format("%s %s",m_StopTime.Format("%Y-%m-%d"),m_StopTimes.Format("%H:%M:%S"));
 
 	TRACE("%s   %s\n",strST,strET);
-//	temp.Format("select  * from examrecordindetail where (考试日期 between to_date('%s','yyyy-mm-dd') and to_date('%s','yyyy-mm-dd') ) ",m_StartTime.Format("%Y-%m-%d"),m_StopTime.Format("%Y-%m-%d"));
-	temp.Format("select  * from examrecordindetail where (开始时间 between to_date('%s','yyyy-MM-dd hh24:mi:ss') and to_date('%s','yyyy-MM-dd hh24:mi:ss') ) ",strST,strET);
+	//temp.Format("select  * from examrecordindetail where (考试日期 between to_date('%s','yyyy-mm-dd') and to_date('%s','yyyy-mm-dd') ) ",m_StartTime.Format("%Y-%m-%d"),m_StopTime.Format("%Y-%m-%d"));
+	
+	//oracle
+	//temp.Format("select  * from examrecordindetail where (开始时间 between to_date('%s','yyyy-MM-dd hh24:mi:ss') and to_date('%s','yyyy-MM-dd hh24:mi:ss') ) ",strST,strET);
+	//sql
+	temp.Format("select * from examrecordindetail where (开始时间 between convert(datetime, '%s') and convert(datetime, '%s'))", strST, strET);
+	
+	
 	TRACE("%s\n",temp);
 	int iComboxS=m_ComBoTJ.GetCurSel();
 	switch(iComboxS)

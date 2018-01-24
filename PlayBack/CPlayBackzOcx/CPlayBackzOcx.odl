@@ -1,0 +1,71 @@
+// CPlayBackzOcx.odl : type library source for ActiveX Control project.
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (CPlayBackzOcx.tlb) that will become a resource in
+// CPlayBackzOcx.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(9C02AC6D-78AC-40EF-8EBE-09CA5F0E1C68), version(1.0),
+  helpfile("CPlayBackzOcx.hlp"),
+  helpstring("CPlayBackzOcx ActiveX Control module"),
+  control ]
+library CPLAYBACKZOCXLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CCPlayBackzOcxCtrl
+
+	[ uuid(C387F89C-2FE8-42BF-8E12-B83BDB95FF15),
+	  helpstring("Dispatch interface for CPlayBackzOcx Control"), hidden ]
+	dispinterface _DCPlayBackzOcx
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CCPlayBackzOcxCtrl)
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CCPlayBackzOcxCtrl)
+			[id(1)] boolean LoginDevice(BSTR strIP, BSTR strUser, BSTR strPwd, short nPort, short nChannel);
+			[id(2)] boolean SetPlayBackByTime(BSTR strSTime, BSTR strETime);
+			//}}AFX_ODL_METHOD
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  Event dispatch interface for CCPlayBackzOcxCtrl
+
+	[ uuid(09E6EF0D-AC99-4D18-8187-C5972719471B),
+	  helpstring("Event interface for CPlayBackzOcx Control") ]
+	dispinterface _DCPlayBackzOcxEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CCPlayBackzOcxCtrl)
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CCPlayBackzOcxCtrl
+
+	[ uuid(A166BB8F-89C7-473F-9B15-1C9E5E2FDE67),
+	  helpstring("CPlayBackzOcx Control"), control ]
+	coclass CPlayBackzOcx
+	{
+		[default] dispinterface _DCPlayBackzOcx;
+		[default, source] dispinterface _DCPlayBackzOcxEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};
