@@ -1,0 +1,223 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""CPlayBackzOcx.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "视频时间回放控件\0"
+            VALUE "CompanyName", "福州北科大舟宇电子有限公司\0"
+            VALUE "FileDescription", "CPlayBackzOcx ActiveX Control Module\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "CPlayBackzOcx\0"
+            VALUE "LegalCopyright", "Copyright (C) 2017 ZSZ\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OLESelfRegister", "\0"
+            VALUE "OriginalFilename", "CPlayBackzOcx.OCX\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "CPlayBackzOcx ActiveX Control Module\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ABOUTDLL            ICON    DISCARDABLE     "CPlayBackzOcx.ico"
+IDI_PIC                 ICON    DISCARDABLE     "res\\camera.ico"
+IDI_FASTFORWARD_ENABLE  ICON    DISCARDABLE     "res\\ico00001.ico"
+IDI_FASTBACKWARD_DISABLE ICON    DISCARDABLE     "res\\ico00002.ico"
+IDI_FASTFORWARD_DISABLE ICON    DISCARDABLE     "res\\ico00003.ico"
+IDI_SOUND_ENABLE        ICON    DISCARDABLE     "res\\ico00008.ico"
+IDI_SOUND_DISABLE       ICON    DISCARDABLE     "res\\ico00009.ico"
+IDI_PAUSE_DISABLE       ICON    DISCARDABLE     "res\\icon1.ico"
+IDI_FASTBACKWARD_ENABLE ICON    DISCARDABLE     "res\\icon8.ico"
+IDI_PAUSE_ENABLE        ICON    DISCARDABLE     "res\\PAUSE_ENABLE.ICO"
+IDI_PLAY_DISABLE        ICON    DISCARDABLE     "res\\PLAY_DISABLE.ICO"
+IDI_PLAY_ENABLE         ICON    DISCARDABLE     "res\\PLAY_ENABLE.ICO"
+IDI_STOP_ENABLE         ICON    DISCARDABLE     "res\\STOP.ICO"
+IDI_STOP_DISABLE        ICON    DISCARDABLE     "res\\STOP_DISABLE.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_CPLAYBACKZOCX       BITMAP  DISCARDABLE     "CPlayBackzOcxCtl.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX_CPLAYBACKZOCX DIALOG DISCARDABLE  34, 22, 260, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About CPlayBackzOcx Control"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDI_ABOUTDLL,IDC_STATIC,10,10,20,20
+    LTEXT           "CPlayBackzOcx Control, Version 1.0",IDC_STATIC,40,10,
+                    170,8
+    LTEXT           "Copyright (C) 2017, Sky123.Org",IDC_STATIC,40,25,170,8
+    DEFPUSHBUTTON   "OK",IDOK,221,7,32,14,WS_GROUP
+END
+
+IDD_PROPPAGE_CPLAYBACKZOCX DIALOG DISCARDABLE  0, 0, 250, 62
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "TODO: order by zhengshizeng",IDC_STATIC,7,25,229,16
+END
+
+IDD_DLGPlayBack DIALOG DISCARDABLE  0, 0, 176, 179
+STYLE WS_CHILD
+FONT 12, "宋体"
+BEGIN
+    LTEXT           "",IDC_STATIC_PWND,16,13,59,33
+    CONTROL         "Slider1",IDC_SLIDER_Play,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,9,71,86,10
+    PUSHBUTTON      "",IDC_BTN_PLAY,8,132,17,16,BS_ICON
+    PUSHBUTTON      "",IDC_BTN_STOP,29,133,17,16,BS_ICON
+    PUSHBUTTON      "",IDC_BTN_FAST,53,133,17,16,BS_ICON
+    PUSHBUTTON      "",IDC_BTN_SLOW,76,135,17,16,BS_ICON
+    PUSHBUTTON      "",IDC_BTN_PIC,99,135,17,16,BS_ICON
+    PUSHBUTTON      "",IDC_BTN_SOUND,126,138,17,16,BS_ICON
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX_CPLAYBACKZOCX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 253
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_PROPPAGE_CPLAYBACKZOCX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CPLAYBACKZOCX       "CPlayBackzOcx Control"
+    IDS_CPLAYBACKZOCX_PPG   "CPlayBackzOcx Property Page"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CPLAYBACKZOCX_PPG_CAPTION "General"
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "CPlayBackzOcx.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
