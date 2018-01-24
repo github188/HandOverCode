@@ -72,6 +72,9 @@ CCVideoCXDlg::CCVideoCXDlg(CWnd* pParent /*=NULL*/)
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+
+	m_bOracle = false;
+	m_bSql = false;
 }
 
 void CCVideoCXDlg::DoDataExchange(CDataExchange* pDX)
@@ -343,6 +346,17 @@ BOOL CCVideoCXDlg::OnInitSQL()
 	HRESULT res=-1;
 	//////////////////////////////////////////////////////////////////////////
 	CString m_strInEdit;
+
+	//数据库类型
+	int nDBType = GetPrivateProfileInt("CONFIG", "DBTYPE", 0, ".\\config.ini");
+	if (0 == nDBType)
+	{
+		m_bOracle = true;
+	}
+	else if (1 == nDBType)
+	{
+		m_bSql = true;
+	}
 	
 	GetPrivateProfileString("SQLLINK","ServerPZ","",m_strInEdit.GetBuffer(MAX_PATH),MAX_PATH,".\\config.ini");
 	m_strInEdit.ReleaseBuffer();
@@ -398,11 +412,14 @@ void CCVideoCXDlg::OnBtnCx()
 	TRACE("%s   %s\n",strST,strET);
 	//temp.Format("select  * from examrecordindetail where (考试日期 between to_date('%s','yyyy-mm-dd') and to_date('%s','yyyy-mm-dd') ) ",m_StartTime.Format("%Y-%m-%d"),m_StopTime.Format("%Y-%m-%d"));
 	
-	//oracle
-	//temp.Format("select  * from examrecordindetail where (开始时间 between to_date('%s','yyyy-MM-dd hh24:mi:ss') and to_date('%s','yyyy-MM-dd hh24:mi:ss') ) ",strST,strET);
-	//sql
-	temp.Format("select * from examrecordindetail where (开始时间 between convert(datetime, '%s') and convert(datetime, '%s'))", strST, strET);
-	
+	if (m_bOracle)
+	{
+		temp.Format("select  * from examrecordindetail where (开始时间 between to_date('%s','yyyy-MM-dd hh24:mi:ss') and to_date('%s','yyyy-MM-dd hh24:mi:ss') ) ",strST,strET);
+	}
+	else if (m_bSql)
+	{
+		temp.Format("select * from examrecordindetail where (开始时间 between convert(datetime, '%s') and convert(datetime, '%s'))", strST, strET);
+	}
 	
 	TRACE("%s\n",temp);
 	int iComboxS=m_ComBoTJ.GetCurSel();

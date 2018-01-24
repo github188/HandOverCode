@@ -58,6 +58,10 @@ protected:
 	afx_msg void OnBtnPz();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
+private:
+	bool m_bOracle;
+	bool m_bSql;
 };
 
 //{{AFX_INSERT_LOCATION}}
