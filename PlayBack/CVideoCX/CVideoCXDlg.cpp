@@ -450,11 +450,11 @@ void CCVideoCXDlg::OnBtnCx()
 	{
 		if (m_bOracle)
 		{
-			temp.Format("select charDecode(姓名),charDecode(身份证明编号),考试次数,当日次数,charDecode(考车号),dateDecode(开始时间),dateDecode(考试时间) from examrecordindetail where (开始时间 between dateEncode(to_date('%s','yyyy-MM-dd hh24:mi:ss')) and dateEncode(to_date('%s','yyyy-MM-dd hh24:mi:ss')))",strST,strET);
+			temp.Format("select charDecode(姓名) as 姓名,charDecode(身份证明编号) as 身份证明编号,考试次数,当日次数,考车号,dateDecode(开始时间) as 开始时间,dateDecode(考试时间) as 考试时间 from examrecordindetail where (开始时间 between dateEncode(to_date('%s','yyyy-MM-dd hh24:mi:ss')) and dateEncode(to_date('%s','yyyy-MM-dd hh24:mi:ss')))",strST,strET);
 		}
 		else if (m_bSql)
 		{
-			temp.Format("select charDecode(姓名),charDecode(身份证明编号),考试次数,当日次数,charDecode(考车号),dateDecode(开始时间),dateDecode(考试时间) from examrecordindetail where (开始时间 between dateEncode(convert(datetime, '%s')) and dateEncode(convert(datetime, '%s')))", strST, strET);
+			temp.Format("select charDecode(姓名) as 姓名,charDecode(身份证明编号) as 身份证明编号,考试次数,当日次数,考车号,dateDecode(开始时间) as 开始时间,dateDecode(考试时间) as 考试时间 from examrecordindetail where (开始时间 between dateEncode(convert(datetime, '%s')) and dateEncode(convert(datetime, '%s')))", strST, strET);
 		}
 		
 		switch(iComboxS)
