@@ -31,11 +31,18 @@ CJMQManager::CJMQManager()
 	
 	uMergeVideo = 0;
 	m_bBigCar = false;
+	m_bEncrypt = false;
 
 	UINT uBigCar = GetPrivateProfileInt("CONFIG","BigCar",0,configfile);	//大车科目二合格分数为90
 	if (1 == uBigCar)
 	{
 		m_bBigCar = true;
+	}
+
+	UINT uEncrypt = GetPrivateProfileInt("CONFIG","ENCRYPT",0,configfile);
+	if (1 == uEncrypt)
+	{
+		m_bEncrypt = true;
 	}
 }
 
@@ -404,7 +411,16 @@ BOOL CJMQManager::SetErrorData()
 	{		
 		VARIANT cnt;
 		cnt.vt = VT_INT;
-		sqltemp.Format("select 错误编号,扣分类型,扣除分数 from ErrorData");//
+
+		if (m_bEncrypt)
+		{
+			sqltemp.Format("select intDecode(错误编号) as 错误编号,扣分类型,扣除分数 from ErrorData");
+		}
+		else
+		{
+			sqltemp.Format("select 错误编号,扣分类型,扣除分数 from ErrorData");
+		}
+
 		_RecordsetPtr pSet =m_pConn->Execute((_bstr_t)sqltemp,&cnt,adCmdUnknown);
 		_variant_t vat;
 		if(pSet != NULL && (!pSet->adoEOF))
@@ -1126,7 +1142,16 @@ void CJMQManager::GetCS(CString str, int &ikscs, int &idrcs)
 		idrcs=0;
 		VARIANT cnt;
 		cnt.vt = VT_INT;
-		sqltemp.Format("SELECT 考试次数,当日次数 FROM StudentInfo WHERE 准考证明编号='%s' ",str);//
+
+		if (m_bEncrypt)
+		{
+			sqltemp.Format("SELECT 考试次数,当日次数 FROM StudentInfo WHERE 准考证明编号=charEncode('%s') ",str);
+		}
+		else
+		{
+			sqltemp.Format("SELECT 考试次数,当日次数 FROM StudentInfo WHERE 准考证明编号='%s' ",str);
+		}
+		
 		_RecordsetPtr pSet =m_pConn->Execute((_bstr_t)sqltemp,&cnt,adCmdUnknown);
 		_variant_t vat;
 		if(pSet != NULL && (!pSet->adoEOF))

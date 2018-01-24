@@ -88,6 +88,7 @@ private:
 	
 	UINT uMergeVideo;
 	bool m_bBigCar;	//大车科目二合格分数为90
+	bool m_bEncrypt;	//数据库是否有加密 
 private:
 	//////////////////////////////////////////////////////////////////////////
 	typedef void (* TFInit)(int /*ikch*/,int /*wMSG*/,HWND /*hwndz*/);
