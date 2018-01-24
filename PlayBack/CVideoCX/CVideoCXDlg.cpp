@@ -75,6 +75,7 @@ CCVideoCXDlg::CCVideoCXDlg(CWnd* pParent /*=NULL*/)
 
 	m_bOracle = false;
 	m_bSql = false;
+	m_bEncrypt = false;
 }
 
 void CCVideoCXDlg::DoDataExchange(CDataExchange* pDX)
@@ -357,6 +358,13 @@ BOOL CCVideoCXDlg::OnInitSQL()
 	{
 		m_bSql = true;
 	}
+
+	//数据库字段是否加密
+	int nEncrypt = GetPrivateProfileInt("CONFIG", "ENCRYPT", 0, ".\\config.ini");
+	if (1 == nEncrypt)
+	{
+		m_bEncrypt = true;
+	}
 	
 	GetPrivateProfileString("SQLLINK","ServerPZ","",m_strInEdit.GetBuffer(MAX_PATH),MAX_PATH,".\\config.ini");
 	m_strInEdit.ReleaseBuffer();
@@ -410,34 +418,62 @@ void CCVideoCXDlg::OnBtnCx()
 	strET.Format("%s %s",m_StopTime.Format("%Y-%m-%d"),m_StopTimes.Format("%H:%M:%S"));
 
 	TRACE("%s   %s\n",strST,strET);
-	//temp.Format("select  * from examrecordindetail where (考试日期 between to_date('%s','yyyy-mm-dd') and to_date('%s','yyyy-mm-dd') ) ",m_StartTime.Format("%Y-%m-%d"),m_StopTime.Format("%Y-%m-%d"));
-	
-	if (m_bOracle)
-	{
-		temp.Format("select  * from examrecordindetail where (开始时间 between to_date('%s','yyyy-MM-dd hh24:mi:ss') and to_date('%s','yyyy-MM-dd hh24:mi:ss') ) ",strST,strET);
-	}
-	else if (m_bSql)
-	{
-		temp.Format("select * from examrecordindetail where (开始时间 between convert(datetime, '%s') and convert(datetime, '%s'))", strST, strET);
-	}
-	
-	TRACE("%s\n",temp);
 	int iComboxS=m_ComBoTJ.GetCurSel();
-	switch(iComboxS)
+	if (!m_bEncrypt)
 	{
-	case 1:
-		strSQL.Format("%s and 姓名='%s' ",temp,m_tiaoj);
-		break;
-	case 2:
-		strSQL.Format("%s and 身份证明编号='%s' ",temp,m_tiaoj);
-		break;
-	case 3:
-		strSQL.Format("%s and 考车号='%s' ",temp,m_tiaoj);
-		break;
-	default:
-		strSQL.Format("%s",temp);
-		break;
+		if (m_bOracle)
+		{
+			temp.Format("select * from examrecordindetail where (开始时间 between to_date('%s','yyyy-MM-dd hh24:mi:ss') and to_date('%s','yyyy-MM-dd hh24:mi:ss') ) ",strST,strET);
+		}
+		else if (m_bSql)
+		{
+			temp.Format("select * from examrecordindetail where (开始时间 between convert(datetime, '%s') and convert(datetime, '%s'))", strST, strET);
+		}
+
+		switch(iComboxS)
+		{
+		case 1:
+			strSQL.Format("%s and 姓名='%s' ",temp,m_tiaoj);
+			break;
+		case 2:
+			strSQL.Format("%s and 身份证明编号='%s' ",temp,m_tiaoj);
+			break;
+		case 3:
+			strSQL.Format("%s and 考车号='%s' ",temp,m_tiaoj);
+			break;
+		default:
+			strSQL.Format("%s",temp);
+			break;
+		}
 	}
+	else
+	{
+		if (m_bOracle)
+		{
+			temp.Format("select charDecode(姓名),charDecode(身份证明编号),考试次数,当日次数,charDecode(考车号),dateDecode(开始时间),dateDecode(考试时间) from examrecordindetail where (开始时间 between dateEncode(to_date('%s','yyyy-MM-dd hh24:mi:ss')) and dateEncode(to_date('%s','yyyy-MM-dd hh24:mi:ss')))",strST,strET);
+		}
+		else if (m_bSql)
+		{
+			temp.Format("select charDecode(姓名),charDecode(身份证明编号),考试次数,当日次数,charDecode(考车号),dateDecode(开始时间),dateDecode(考试时间) from examrecordindetail where (开始时间 between dateEncode(convert(datetime, '%s')) and dateEncode(convert(datetime, '%s')))", strST, strET);
+		}
+		
+		switch(iComboxS)
+		{
+		case 1:
+			strSQL.Format("%s and 姓名=charEncode('%s') ",temp,m_tiaoj);
+			break;
+		case 2:
+			strSQL.Format("%s and 身份证明编号=charEncode('%s') ",temp,m_tiaoj);
+			break;
+		case 3:
+			strSQL.Format("%s and 考车号=charEncode('%s') ",temp,m_tiaoj);
+			break;
+		default:
+			strSQL.Format("%s",temp);
+			break;
+		}
+	}
+
 	UpdateList(strSQL);
 }
 

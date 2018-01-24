@@ -62,6 +62,7 @@ protected:
 private:
 	bool m_bOracle;
 	bool m_bSql;
+	bool m_bEncrypt;	//数据库字段是否有加密 
 };
 
 //{{AFX_INSERT_LOCATION}}
