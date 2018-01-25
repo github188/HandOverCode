@@ -414,7 +414,7 @@ BOOL CJMQManager::SetErrorData()
 
 		if (m_bEncrypt)
 		{
-			sqltemp.Format("Set ARITHABORT ON;select dbo.intDecode(错误编号) as 错误编号,扣分类型,扣除分数 from ErrorData");
+			sqltemp.Format("Set ARITHABORT ON;select 错误编号,dbo.charDecode(扣分类型) as 扣分类型,dbo.intDecode(扣除分数) as 扣除分数 from ErrorData");
 		}
 		else
 		{
