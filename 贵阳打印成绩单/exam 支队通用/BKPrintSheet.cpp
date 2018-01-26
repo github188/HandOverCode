@@ -108,13 +108,13 @@ int CBKPrintSheetApp::Serialnum(CString strYKRQ,CString strExamNo,CString strZT,
 		CString strText,szSQL;
 		if (strZT==_T("1"))
 		{
-			szSQL.Format("select 准考证明编号 from examrecordindetail where 考试日期='%s' \
-				and (考试成绩-right(准考证明编号,2)-45)>=%d and 驾校名称='%s' and 考试车型 ='%s'order by \
+			szSQL.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号 from examrecordindetail where 考试日期=dbo.dateEncode('%s') \
+				and (考试成绩-right(dbo.charDecode(准考证明编号),2)-45)>=%d and 驾校名称='%s' and 考试车型 ='%s'order by \
 				考试时间",strYKRQ,kmms,strDLR,strBkcx);
 		}else if (strZT==_T("2"))
 		{
-			szSQL.Format("select 准考证明编号 from examrecordindetail where 考试日期='%s' and \
-				((考试成绩-right(准考证明编号,2)-45)<%d) and 当日次数='2' and 驾校名称='%s' and 考试车型='%s' \
+			szSQL.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号 from examrecordindetail where 考试日期=dbo.dateEncode('%s') and \
+				((考试成绩-right(dbo.charDecode(准考证明编号),2)-45)<%d) and 当日次数='2' and 驾校名称='%s' and 考试车型='%s' \
 				order by  考试时间 ",strYKRQ,kmms,strDLR,strBkcx);
 		}
 		pRecordset->Open(_variant_t(szSQL), _variant_t((IDispatch*)theApp.m_pConnection, true),
@@ -216,9 +216,9 @@ extern "C" DllExport BOOL PrintSheet(LPTSTR lpExamNo, int ikscs,LPTSTR strSQLIP,
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		//导入资料
-		szSQL.Format("select top 1 sc.驾校编号,ex.姓名,ex.准考证明编号,ex.身份证明编号,ex.考试车型,ex.驾校名称,ex.考试原因, \
-			ex.考试成绩-right(ex.准考证明编号,2)-45 as 成绩,ex.考试日期,ex.考试次数,ex.当日次数,ex.考试员1   \
-			from examrecordindetail ex,SchoolInfo sc where  准考证明编号='%s' and sc.驾校名称=ex.驾校名称 and 考试次数='%d' order by 考试时间 desc",strExamNo,ikscs);
+		szSQL.Format("Set ARITHABORT ON;select top 1 sc.驾校编号,dbo.charDecode(ex.姓名) as 姓名,dbo.charDecode(ex.准考证明编号) as 准考证明编号,dbo.charDecode(ex.身份证明编号) as 身份证明编号,ex.考试车型,ex.驾校名称,ex.考试原因, \
+			ex.考试成绩-right(dbo.charDecode(ex.准考证明编号),2)-45 as 成绩,dbo.dateDecode(ex.考试日期),ex.考试次数,ex.当日次数,ex.考试员1   \
+			from examrecordindetail ex,SchoolInfo sc where  准考证明编号=dbo.charEncode('%s') and sc.驾校名称=ex.驾校名称 and 考试次数='%d' order by 考试时间 desc",strExamNo,ikscs);
 		//AfxMessageBox(szSQL);
 		TRACE(szSQL);
 		pRecordset->Open(_variant_t(szSQL), _variant_t((IDispatch*)theApp.m_pConnection, true),
@@ -311,8 +311,8 @@ extern "C" DllExport BOOL PrintSheet(LPTSTR lpExamNo, int ikscs,LPTSTR strSQLIP,
 			}
 		}
 		pRecordset->Close();
-		szSQL.Format("select 开始时间,考试成绩-RIGHT(准考证明编号,2)-45 as 成绩,当日次数,考试时间 from \
-			ExamRecord where 准考证明编号='%s' and 考试次数='%d' ",strExamNo,ikscs);
+		szSQL.Format("Set ARITHABORT ON;select dbo.dateDecode(开始时间) as 开始时间,考试成绩-RIGHT(dbo.charDecode(准考证明编号),2)-45 as 成绩,当日次数,dbo.dateDecode(考试时间) as 考试时间 from \
+			ExamRecord where 准考证明编号=dbo.charEncode('%s') and 考试次数='%d' ",strExamNo,ikscs);
 		pRecordset->Open(_variant_t(szSQL), _variant_t((IDispatch*)theApp.m_pConnection, true),
 			adOpenDynamic, adLockOptimistic, adCmdText);//打开到数据库连接的记录
 		CString tempdrcs;
@@ -744,8 +744,8 @@ BOOL CBKPrintSheetApp::ReadProject(CStringArray &strProject,CString sExamNo,int 
 	ADO m_AdoProject;
 	m_AdoProject.OnInitADOConn(m_IPAddress,sVersion,"sa",m_PassWord,theApp.SQLorOracle);
 	CString strsql,strtemp;
-	strsql.Format("select 公安网代码 from errorrecordindetail where right(公安网代码,2)='00' and right(错误编号,3)!='990' \
-		and 准考证明编号='%s' and 考试次数='%d' and 当日次数='%d'",sExamNo,iKscs,iDrcs);
+	strsql.Format("Set ARITHABORT ON;select 公安网代码 from errorrecordindetail where right(公安网代码,2)='00' and right(错误编号,3)!='990' \
+		and 准考证明编号=dbo.charEncode('%s') and 考试次数='%d' and 当日次数='%d'",sExamNo,iKscs,iDrcs);
 	//AfxMessageBox(strsql);
 	m_AdoProject.m_pRecordset=m_AdoProject.OpenRecordset(strsql);
 	int len=m_AdoProject.GetRecordCount(m_AdoProject.m_pRecordset);
@@ -804,7 +804,7 @@ BOOL CBKPrintSheetApp::ReadXMPhotoFromSQL(CDC *pDC,CRect *rc,CString sExamNo,int
 	try
 	{
 		CString strSQL;
-		strSQL.Format("SELECT * FROM XMPhoto WHERE (准考证明编号 = '%s') AND (考试次数 = %d) AND (当日次数 =%d)",sExamNo,iKscs,Printcs);
+		strSQL.Format("Set ARITHABORT ON;SELECT * FROM XMPhoto WHERE (准考证明编号 = dbo.charEncode('%s') AND (考试次数 = %d) AND (当日次数 =%d)",sExamNo,iKscs,Printcs);
 		
         m_AdoPhoto.OpenRecordset(strSQL);
         if(m_AdoPhoto.GetRecordCount(m_AdoPhoto.m_pRecordset)==0)
@@ -1066,8 +1066,8 @@ void CBKPrintSheetApp::GetKFX(CStringArray &dest,CString zkzm,int kscs,int drcs)
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		CString strSQL;	/* */
-		strSQL.Format("select CONVERT(varchar(30),er.出错时间, 24) as 出错时间,ed.公安网代码,ed.扣分类型,ed.扣除分数 \
-		from ErrorRecords er,ErrorData ed where 准考证明编号='%s' and er.错误编号=ed.错误编号 and er.考试次数='%d' \
+		strSQL.Format("Set ARITHABORT ON;select CONVERT(varchar(30),dbo.dateDecode(er.出错时间), 24) as 出错时间,ed.公安网代码,dbo.charDecode(ed.扣分类型) as 扣分类型,dbo.intDecode(ed.扣除分数) as 扣除分数 \
+		from ErrorRecords er,ErrorData ed where 准考证明编号=dbo.charEncode('%s') and er.错误编号=ed.错误编号 and er.考试次数='%d' \
 		and 当日次数='%d' order by 出错时间 asc ",zkzm,kscs,drcs);
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)m_pConnection, true),adOpenDynamic, adLockOptimistic, adCmdText);
 		
@@ -1162,7 +1162,7 @@ BOOL CBKPrintSheetApp::ReadGYPhotoFromDB(CDC *pDC, CString sCard, CRect *rc1, CR
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		CString strSQL;	
-		strSQL.Format("SELECT 照片,门禁照片 FROM StudentPhoto WHERE 准考证明编号 = '%s'",sCard);
+		strSQL.Format("Set ARITHABORT ON;SELECT 照片,门禁照片 FROM StudentPhoto WHERE 准考证明编号 = dbo.charEncode('%s')",sCard);
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)theApp.m_pConnection, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
      
@@ -1513,7 +1513,7 @@ BOOL CBKPrintSheetApp::ReadQZPhoto(CDC *pDC, CString sCard, CString sSir, int iD
 	
 
 		pRecordset->Close();
-		strSQL.Format("SELECT 签名照片 FROM StudentPhoto WHERE 准考证明编号 = '%s' and 签名照片 is not null",sCard);
+		strSQL.Format("Set ARITHABORT ON;SELECT 签名照片 FROM StudentPhoto WHERE 准考证明编号 = dbo.charEncode('%s') and 签名照片 is not null",sCard);
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)m_pConnection, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
 		if(pRecordset->RecordCount == 1)

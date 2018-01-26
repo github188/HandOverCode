@@ -328,11 +328,11 @@ UINT PrintThread(LPVOID lpParam)
 			pRecordset.CreateInstance("ADODB.Recordset"); 
 			pRecordset->CursorLocation = adUseClient; 
 			if (iZJ==0)
-				Sqlstr.Format("select top 1 准考证明编号,考试次数,当日次数,打印状态 from studentinfo where 预考日期=%s and 状态='1'  and 打印状态 ='0' order by  考试日期 ",m_strTime);
+				Sqlstr.Format("Set ARITHABORT ON;select top 1 dbo.charDecode(准考证明编号) as 准考证明编号,考试次数,当日次数,打印状态 from studentinfo where 预考日期=dbo.dateEncode('%s') and 状态='1' and 打印状态 ='0' order by 考试日期 ",m_strTime);
 			else if (iZJ==1)
-				Sqlstr.Format("select top 1 准考证明编号,考试次数,当日次数,打印状态 from studentinfo where 预考日期=%s and (状态='2' and 当日次数='2')  and 打印状态 ='0'  order by  考试日期",m_strTime);
+				Sqlstr.Format("Set ARITHABORT ON;select top 1 dbo.charDecode(准考证明编号) as 准考证明编号,考试次数,当日次数,打印状态 from studentinfo where 预考日期=dbo.dateEncode('%s') and (状态='2' and 当日次数='2')  and 打印状态 ='0'  order by  考试日期",m_strTime);
 			else
-				Sqlstr.Format("select top 1 准考证明编号,考试次数,当日次数,打印状态 from studentinfo where 预考日期=%s and (状态='1' or(状态='2' and 当日次数='2'))   and 打印状态 ='0'  order by  考试日期",m_strTime);
+				Sqlstr.Format("Set ARITHABORT ON;select top 1 dbo.charDecode(准考证明编号) as 准考证明编号,考试次数,当日次数,打印状态 from studentinfo where 预考日期=dbo.dateEncode('%s') and (状态='1' or(状态='2' and 当日次数='2'))   and 打印状态 ='0'  order by  考试日期",m_strTime);
 			pRecordset->Open(_variant_t(Sqlstr),_variant_t((IDispatch*)m_pConn, true),adOpenDynamic,adLockOptimistic, adCmdText);
 			if (pRecordset->RecordCount == 0)
 			{
@@ -394,7 +394,7 @@ UINT PrintThread(LPVOID lpParam)
 					{
 						VARIANT cnt;
 						cnt.vt = VT_INT;
-						strSQL.Format("update studentinfo set 打印状态 ='2' where 准考证明编号='%s'",strZKZM);
+						strSQL.Format("Set ARITHABORT ON;update studentinfo set 打印状态 ='2' where 准考证明编号=dbo.charEncode('%s')",strZKZM);
 						m_pConn->Execute((_bstr_t)strSQL,&cnt,adCmdUnknown);
 						::PostMessage(AfxGetMainWnd()->m_hWnd,WM_PRINTTHR_MSG,3,thri);
 					}
@@ -1125,11 +1125,11 @@ void CAutoPrintManagerDlg::PrintSchoolReport()
 		pRecordset->CursorLocation = adUseClient;   
 		if (zkzorsfzi ==0)
 		{
-			Sqlstr.Format("select 准考证明编号,考试次数,当日次数 from studentinfo where 身份证明编号='%s' ",m_Ezkzm5);
+			Sqlstr.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号,考试次数,当日次数 from studentinfo where 身份证明编号=dbo.charEncode('%s') ",m_Ezkzm5);
 		}
 		else
 		{
-			Sqlstr.Format("select 准考证明编号,考试次数,当日次数 from studentinfo where 准考证明编号='%s' ",m_Ezkzm5);
+			Sqlstr.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号,考试次数,当日次数 from studentinfo where 准考证明编号=dbo.charEncode('%s') ",m_Ezkzm5);
 		}		
 		TRACE(Sqlstr);
 		pRecordset->Open(_variant_t(Sqlstr),_variant_t((IDispatch*)m_pConn, true),adOpenDynamic,adLockOptimistic, adCmdText);
@@ -1319,18 +1319,14 @@ void CAutoPrintManagerDlg::UpDateExamStut()
 		/////////////////////////////////////
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
-		strSQL.Format("SELECT * FROM StudentInfo WHERE 预考日期 = '%s' ",stime);
+		strSQL.Format("Set ARITHABORT ON;SELECT 状态,考试员1,登录状态 FROM StudentInfo WHERE 预考日期 = dbo.dateEncode('%s') ",stime);
 		
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)m_Connection, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
 		
 		iExamAll = pRecordset->RecordCount; //所有人数
-		
 		while(!pRecordset->adoEOF)
 		{
-
-			
-
 			vZT = pRecordset->GetCollect("状态");
 			tempv=(LPCSTR)_bstr_t(vZT);
 			if(strcmp(tempv,"1")==0)
@@ -1475,11 +1471,11 @@ void CAutoPrintManagerDlg::OnBtnyl()
 		pRecordset->CursorLocation = adUseClient;   
 		if (zkzorsfzi ==0)
 		{
-			Sqlstr.Format("select 准考证明编号,考试次数,当日次数 from studentinfo where 身份证明编号='%s' ",m_Ezkzm5);
+			Sqlstr.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号,考试次数,当日次数 from studentinfo where 身份证明编号=dbo.charEncode('%s') ",m_Ezkzm5);
 		}
 		else
 		{
-			Sqlstr.Format("select 准考证明编号,考试次数,当日次数 from studentinfo where 准考证明编号='%s' ",m_Ezkzm5);
+			Sqlstr.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号,考试次数,当日次数 from studentinfo where 准考证明编号=dbo.charEncode('%s') ",m_Ezkzm5);
 		}		
 		TRACE(Sqlstr);
 		pRecordset->Open(_variant_t(Sqlstr),_variant_t((IDispatch*)m_pConn, true),adOpenDynamic,adLockOptimistic, adCmdText);
@@ -1743,8 +1739,8 @@ void CAutoPrintManagerDlg::OnMakeBtnStudent()
 	CTime time;
 	m_sDate.GetTime(time);
     stime=time.Format("%Y-%m-%d"); 
-	strSQL.Format("select 身份证明编号,准考证明编号,姓名,考试科目,考试成绩,考试次数 \
-		from examrecordindetail where 考试日期='%s' and ((考试成绩-right(准考证明编号,2)-45)>=%d or ((考试成绩-right(准考证明编号,2)-45)<%d and 当日次数=2))  order by 考试时间 ",stime,theApp.iCJ);
+	strSQL.Format("Set ARITHABORT ON;select dbo.charDecode(身份证明编号) as 身份证明编号,dbo.charDecode(准考证明编号) as 准考证明编号,dbo.charDecode(姓名) as 姓名,考试科目,考试成绩,考试次数 \
+		from examrecordindetail where 考试日期=dbo.dateEncode('%s') and ((考试成绩-right(dbo.charDecode(准考证明编号),2)-45)>=%d or ((考试成绩-right(dbo.charDecode(准考证明编号),2)-45)<%d and 当日次数=2))  order by 考试时间 ",stime,theApp.iCJ);
 	AllStudent(strSQL);
 	Btnname.Format("全部考生 共%d人",STRS);
 	GetDlgItem(IDC_STATIC_JS)->SetWindowText(Btnname);
@@ -1886,7 +1882,7 @@ void CAutoPrintManagerDlg::UpdateSQL(CString sZKZM)
 		CString strSQL;
 		VARIANT cnt;
 		cnt.vt = VT_INT;
-		strSQL.Format("update studentinfo set 打印状态='0' where 准考证明编号='%s'",sZKZM);		
+		strSQL.Format("Set ARITHABORT ON;update studentinfo set 打印状态='0' where 准考证明编号=dbo.charEncode('%s')",sZKZM);		
 		m_pConn->Execute((_bstr_t)strSQL,&cnt,adCmdUnknown);		
 	}
 	catch (_com_error e) 
@@ -2007,8 +2003,8 @@ void CAutoPrintManagerDlg::OnMenuitem32782() //合格未打印
 	CTime time;
 	m_sDate.GetTime(time);
     stime=time.Format("%Y-%m-%d"); 
-	strSQL.Format("select 身份证明编号,准考证明编号,姓名,考试科目,考试成绩,打印状态,考试次数 \
-		from studentinfo where 预考日期='%s' and 状态='1' and 打印状态='0'order by 考试日期 ",stime);
+	strSQL.Format("Set ARITHABORT ON;select dbo.charDecode(身份证明编号) as 身份证明编号,dbo.charDecode(准考证明编号) as 准考证明编号,dbo.charDecode(姓名) as 姓名,考试科目,考试成绩,打印状态,考试次数 \
+		from studentinfo where 预考日期=dbo.dateEncode('%s') and 状态='1' and 打印状态='0'order by 考试日期 ",stime);
 	AllStudent(strSQL);
 	Btnname.Format("合格未打印 共%d人",STRS);
 	GetDlgItem(IDC_STATIC_JS)->SetWindowText(Btnname);
@@ -2021,8 +2017,8 @@ void CAutoPrintManagerDlg::OnMenuitem32783() //合格已打印
 	CTime time;
 	m_sDate.GetTime(time);
     stime=time.Format("%Y-%m-%d"); 
-	strSQL.Format("select 身份证明编号,准考证明编号,姓名,考试科目,考试成绩,打印状态,考试次数 \
-		from studentinfo where 预考日期='%s' and 状态='1' and 打印状态='2' order by 考试日期 ",stime);	
+	strSQL.Format("Set ARITHABORT ON;select dbo.charDecode(身份证明编号) as 身份证明编号,dbo.charDecode(准考证明编号) as 准考证明编号,dbo.charDecode(姓名) as 姓名,考试科目,考试成绩,打印状态,考试次数 \
+		from studentinfo where 预考日期=dbo.dateEncode('%s') and 状态='1' and 打印状态='2' order by 考试日期 ",stime);	
 	AllStudent(strSQL);
 	Btnname.Format("合格已打印 共%d人",STRS);
 	GetDlgItem(IDC_STATIC_JS)->SetWindowText(Btnname);
@@ -2035,8 +2031,8 @@ void CAutoPrintManagerDlg::OnMenuitem32784() //不合格名单
 	CTime time;
 	m_sDate.GetTime(time);
     stime=time.Format("%Y-%m-%d"); 
-	strSQL.Format("select 身份证明编号,准考证明编号,姓名,考试科目,考试成绩,考试次数 \
-		from examrecordindetail where 考试日期='%s' and (考试成绩-right(准考证明编号,2)-45)<%d and 当日次数=2 order by 考试时间",stime,theApp.iCJ);
+	strSQL.Format("Set ARITHABORT ON;select dbo.charDecode(身份证明编号) as 身份证明编号,dbo.charDecode(准考证明编号) as 准考证明编号,dbo.charDecode(姓名) as 姓名,考试科目,考试成绩,考试次数 \
+		from examrecordindetail where 考试日期=dbo.dateEncode('%s') and (考试成绩-right(dbo.charDecode(准考证明编号),2)-45)<%d and 当日次数=2 order by 考试时间",stime,theApp.iCJ);
 	AllStudent(strSQL);
 	Btnname.Format("不合格名单 共%d人",STRS);
 	GetDlgItem(IDC_STATIC_JS)->SetWindowText(Btnname);
@@ -2050,8 +2046,8 @@ void CAutoPrintManagerDlg::OnMenuitem32785() //全部考生
 	CTime time;
 	m_sDate.GetTime(time);
     stime=time.Format("%Y-%m-%d"); 
-	strSQL.Format("select 身份证明编号,准考证明编号,姓名,考试科目,考试成绩,考试次数 \
-		from examrecordindetail where 考试日期='%s' and 当日次数=1 order by 考试日期 ",stime);
+	strSQL.Format("Set ARITHABORT ON;select dbo.charDecode(身份证明编号) as 身份证明编号,dbo.charDecode(准考证明编号) as 准考证明编号,dbo.charDecode(姓名) as 姓名,考试科目,考试成绩,考试次数 \
+		from examrecordindetail where 考试日期=dbo.dateEncode('%s') and 当日次数=1 order by 考试日期 ",stime);
 	AllStudent(strSQL);
 	Btnname.Format("全部考生 共%d人",STRS);
 	GetDlgItem(IDC_STATIC_JS)->SetWindowText(Btnname);
@@ -2065,8 +2061,8 @@ void CAutoPrintManagerDlg::OnMenuitem32774() //合格名单
 	CTime time;
 	m_sDate.GetTime(time);
     stime=time.Format("%Y-%m-%d"); 
-	strSQL.Format("select 身份证明编号,准考证明编号,姓名,考试科目,考试成绩,考试次数 \
-		from examrecordindetail where 考试日期='%s' and (考试成绩-right(准考证明编号,2)-45)>=%d order by 考试时间 ",stime,theApp.iCJ);
+	strSQL.Format("Set ARITHABORT ON;select dbo.charDecode(身份证明编号) as 身份证明编号,dbo.charDecode(准考证明编号) as 准考证明编号,dbo.charDecode(姓名) as 姓名,考试科目,考试成绩,考试次数 \
+		from examrecordindetail where 考试日期=dbo.dateEncode('%s') and (考试成绩-right(dbo.charDecode(准考证明编号),2)-45)>=%d order by 考试时间 ",stime,theApp.iCJ);
 	AllStudent(strSQL);
 	Btnname.Format("合格名单 共%d人",STRS);
 	GetDlgItem(IDC_STATIC_JS)->SetWindowText(Btnname);
@@ -2193,8 +2189,8 @@ void CAutoPrintManagerDlg::OnMenuitem32793() //补打列表
 	CTime time;
 	m_sDate.GetTime(time);
     stime=time.Format("%Y-%m-%d"); 
-	strSQL.Format("select 身份证明编号,准考证明编号,姓名,考试科目,考试成绩,考试次数 from \
-		examrecordindetail where 考试日期='%s' order by 考试日期 ",stime);	
+	strSQL.Format("Set ARITHABORT ON;select dbo.charDecode(身份证明编号) as 身份证明编号,dbo.charDecode(准考证明编号) as 准考证明编号,dbo.charDecode(姓名) as 姓名,考试科目,考试成绩,考试次数 from \
+		examrecordindetail where 考试日期=dbo.dateEncode('%s') order by 考试日期 ",stime);	
 	AllStudent(strSQL);
 	Btnname.Format("合格已打印 共%d人",STRS);
 	GetDlgItem(IDC_STATIC_JS)->SetWindowText(Btnname);
@@ -2340,7 +2336,7 @@ void CAutoPrintManagerDlg::OnBTNAutoPrint1J()
 					CTime time;
 					m_sDate.GetTime(time);
 					sdate=time.Format("'%Y-%m-%d'"); 
-					strSQL.Format("update studentinfo set 打印状态='0' where 预考日期=%s",sdate);
+					strSQL.Format("Set ARITHABORT ON;update studentinfo set 打印状态='0' where 预考日期=dbo.dateEncode('%s')",sdate);
 					UpdateStudent(strSQL);
 					AfxBeginThread(PrintThread,&m_info[i]);
 					Sleep(100);

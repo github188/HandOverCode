@@ -16,11 +16,11 @@ Class4=CPass
 Class5=CYLDlg
 
 ResourceCount=6
-Resource1=IDR_MENU1
-Resource2=IDD_DIALOG_Pass
-Resource3=IDD_AUTOPRINTMANAGER_DIALOG
-Resource4=IDD_ABOUTBOX
-Resource5=IDD_DLGYL
+Resource1=IDD_DIALOG_Pass
+Resource2=IDD_DLGYL
+Resource3=IDD_ABOUTBOX
+Resource4=IDR_MENU1
+Resource5=IDD_AUTOPRINTMANAGER_DIALOG
 Resource6=IDR_MENU2
 
 [CLS:CAutoPrintManagerApp]
