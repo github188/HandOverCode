@@ -241,8 +241,8 @@ extern "C" DllExport BOOL PrintSheetEx(LPTSTR lpExamNo, int ikscs,LPTSTR strSQLI
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		//导入资料
-		szSQL.Format("select st.姓名,st.准考证明编号,st.身份证明编号,st.考试车型,sc.驾校名称,st.考试原因,st.考试日期,st.考试次数,st.当日次数, \
-			st.考试员1 from studentinfo st,SchoolInfo sc where 准考证明编号='%s' and st.代理人=sc.驾校编号", strExamNo);
+		szSQL.Format("Set ARITHABORT ON;select dbo.charDecode(st.姓名) as 姓名,dbo.charDecode(st.准考证明编号) as 准考证明编号,dbo.charDecode(st.身份证明编号) as 身份证明编号,st.考试车型,sc.驾校名称,st.考试原因,dbo.dateDecode(st.考试日期) as 考试日期,st.考试次数,st.当日次数, \
+			st.考试员1 from studentinfo st,SchoolInfo sc where 准考证明编号=dbo.charEncode('%s') and st.代理人=sc.驾校编号", strExamNo);
 		TRACE(szSQL);
 		pRecordset->Open(_variant_t(szSQL), _variant_t((IDispatch*)theApp.m_pConnection, true),
 			adOpenDynamic, adLockOptimistic, adCmdText);//打开到数据库连接的记录
@@ -314,13 +314,13 @@ extern "C" DllExport BOOL PrintSheetEx(LPTSTR lpExamNo, int ikscs,LPTSTR strSQLI
 		pRecordset->Close();
 		if (theApp.SQLorOracle==1)
 		{
-			szSQL.Format("select 考试时间,开始时间,考试成绩-RIGHT(准考证明编号,2)-45 as 成绩,当日次数 from \
-			ExamRecord where 准考证明编号='%s' and 考试次数='%d' ",strExamNo,ikscs);
+			szSQL.Format("Set ARITHABORT ON;select dbo.dateDecode(考试时间) as 考试时间,dbo.dateDecode(开始时间) as 开始时间,考试成绩-RIGHT(dbo.charDecode(准考证明编号),2)-45 as 成绩,当日次数 from \
+			ExamRecord where 准考证明编号=dbo.charEncode('%s') and 考试次数='%d' ",strExamNo,ikscs);
 		} 
 		else
 		{
-			szSQL.Format("select 考试时间,开始时间,考试成绩-substr(准考证明编号,-2,2)-45 as 成绩,当日次数 from \
-			ExamRecord where 准考证明编号='%s' and 考试次数='%d' ",strExamNo,ikscs);
+			szSQL.Format("Set ARITHABORT ON;select dbo.dateDecode(考试时间) as 考试时间,dbo.dateDecode(开始时间) as 开始时间,考试成绩-substr(dbo.charDecode(准考证明编号),-2,2)-45 as 成绩,当日次数 from \
+			ExamRecord where 准考证明编号=dbo.charEncode('%s') and 考试次数='%d' ",strExamNo,ikscs);
 		}
 		pRecordset->Open(_variant_t(szSQL), _variant_t((IDispatch*)theApp.m_pConnection, true),
 			adOpenDynamic, adLockOptimistic, adCmdText);//打开到数据库连接的记录
@@ -508,8 +508,8 @@ extern "C" DllExport BOOL PrintSheetEx(LPTSTR lpExamNo, int ikscs,LPTSTR strSQLI
 	CRect XMPhoto1,XMPhoto2;
 	XMPhoto1.SetRect(DCRect.left,DCRect.top+theApp.LineHeight*10,DCRect.right,DCRect.top+theApp.LineHeight*14);
 	XMPhoto2.SetRect(DCRect.left,DCRect.top+theApp.LineHeight*20,DCRect.right,DCRect.top+theApp.LineHeight*24);
-	// 	theApp.m_DC.Rectangle(XMPhoto1);
-	// 	theApp.m_DC.Rectangle(XMPhoto2);
+// 	theApp.m_DC.Rectangle(XMPhoto1);
+// 	theApp.m_DC.Rectangle(XMPhoto2);
 	theApp.ReadXMPhotoFromDB(&ImageDC,strExamNo,1,ikscs,&XMPhoto1);
 	if (2==idrcs)
 	{
@@ -874,14 +874,14 @@ void CBKPrintSheetApp::GetKFX(CStringArray &dest,CString zkzm,int kscs,int drcs)
 		CString strSQL;	/* */
 		if (theApp.SQLorOracle==1)
 		{
-			strSQL.Format("select CONVERT(varchar(30),er.出错时间, 24) as 出错时间,ed.公安网代码,ed.扣分类型,ed.扣除分数 \
-			  from ErrorRecords er,ErrorData ed where 准考证明编号='%s' and er.错误编号=ed.错误编号 and er.考试次数='%d' \
+			strSQL.Format("Set ARITHABORT ON;select CONVERT(varchar(30),dbo.dateDecode(er.出错时间), 24) as 出错时间,ed.公安网代码,dbo.charDecode(ed.扣分类型) as 扣分类型,dbo.intDecode(ed.扣除分数) as 扣除分数 \
+			  from ErrorRecords er,ErrorData ed where 准考证明编号=dbo.charEncode('%s') and er.错误编号=ed.错误编号 and er.考试次数='%d' \
 			and 当日次数='%d' order by 出错时间 asc ",zkzm,kscs,drcs);
 		} 
 		else
 		{
-			strSQL.Format("select to_char(er.出错时间,'HH12:MI:SS') as 出错时间,ed.公安网代码,ed.扣分类型,ed.扣除分数 \
-			 from ErrorRecords er,ErrorData ed where 准考证明编号='%s' and er.错误编号=ed.错误编号 and er.考试次数='%d' \
+			strSQL.Format("Set ARITHABORT ON;select to_char(dbo.dateDecode(er.出错时间),'HH12:MI:SS') as 出错时间,ed.公安网代码,dbo.charDecode(ed.扣分类型) as 扣分类型,dbo.intDecode(ed.扣除分数) as 扣除分数 \
+			 from ErrorRecords er,ErrorData ed where 准考证明编号=dbo.charEncode('%s') and er.错误编号=ed.错误编号 and er.考试次数='%d' \
 			and 当日次数='%d' order by 出错时间 asc ",zkzm,kscs,drcs);
 		}
 		
@@ -978,7 +978,7 @@ BOOL CBKPrintSheetApp::ReadGYPhotoFromDB(CDC *pDC, CString sCard, CRect *rc1, CR
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		CString strSQL;	
-		strSQL.Format("SELECT 照片,门禁照片 FROM StudentPhoto WHERE 准考证明编号 = '%s'",sCard);
+		strSQL.Format("Set ARITHABORT ON;SELECT 照片,门禁照片 FROM StudentPhoto WHERE 准考证明编号 = dbo.charEncode('%s')",sCard);
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)theApp.m_pConnection, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
 		if(pRecordset->RecordCount != 1)
@@ -1127,24 +1127,26 @@ BOOL CBKPrintSheetApp::ReadGYPhotoFromDB(CDC *pDC, CString sCard, CRect *rc1, CR
 BOOL CBKPrintSheetApp::ReadXMPhotoFromDB(CDC *pDC, CString sExamNo, int Printcs, int iKscs, CRect *rc)
 {
    	CStringArray sItem11;/*={"QB","SCZB","ZX","BGCD","LKZZ","LKYZ","LKZX","JJD","KBTC","DT","HC","CC","RXHD","TGXX","TGGGCZ","JSQY","ENDBUTTON"}*/
-	sItem11.Add("QB");
-	sItem11.Add("SCZB");
-	sItem11.Add("ZX");
-	sItem11.Add("BGCD");
-	sItem11.Add("LKZZ");
-	sItem11.Add("LKYZ");
-	sItem11.Add("LKZX");
-	sItem11.Add("JJD");//桩考  1	
-	sItem11.Add("KBTC");//连续障碍  1	
-	sItem11.Add("DT");//单边桥  1
-	sItem11.Add("HC");//限宽门  1
-	sItem11.Add("CC");//起伏路 1
-	sItem11.Add("RXHD");//雨雾天  1
-	sItem11.Add("TGXX");//湿滑路  1
-	sItem11.Add("TGGGCZ");// 山区急转 1
-	sItem11.Add("JSQY");//窄路掉头   1
-	sItem11.Add("ENDBUTTON");//隧道  1
-	/*
+	
+// 	sItem11.Add("QB");
+// 	sItem11.Add("SCZB");
+// 	sItem11.Add("ZX");
+// 	sItem11.Add("BGCD");
+// 	sItem11.Add("LKZZ");
+// 	sItem11.Add("LKYZ");
+// 	sItem11.Add("LKZX");
+// 	sItem11.Add("JJD");//桩考  1	
+// 	sItem11.Add("KBTC");//连续障碍  1	
+// 	sItem11.Add("DT");//单边桥  1
+// 	sItem11.Add("HC");//限宽门  1
+// 	sItem11.Add("CC");//起伏路 1
+// 	sItem11.Add("RXHD");//雨雾天  1
+// 	sItem11.Add("TGXX");//湿滑路  1
+// 	sItem11.Add("TGGGCZ");// 山区急转 1
+// 	sItem11.Add("JSQY");//窄路掉头   1
+// 	sItem11.Add("ENDBUTTON");//隧道  1
+	
+	
 	sItem11.Add("p10001");
 	sItem11.Add("p20500");
 	sItem11.Add("p20300");
@@ -1165,13 +1167,15 @@ BOOL CBKPrintSheetApp::ReadXMPhotoFromDB(CDC *pDC, CString sExamNo, int Printcs,
 	sItem11.Add("p21200");//高速公路 1
 	sItem11.Add("p21700");//紧急处置 1
 	sItem11.Add("p10086");
-*/
+	
+
 	_variant_t varBLOB;	
 	int iShowPhoto=0;
 	CString ItemPicture[20];
 	int iHavePhoto=0;
 	ADO m_AdoPhoto;
-	m_AdoPhoto.OnInitADOConn(theApp.SQLorOracle);
+	//m_AdoPhoto.OnInitADOConn(theApp.SQLorOracle);
+	m_AdoPhoto.OnInitADOConn(m_pConn);
 	LPVOID m_pBMPBuffer;
 	CString temp;
 	try
@@ -1179,7 +1183,7 @@ BOOL CBKPrintSheetApp::ReadXMPhotoFromDB(CDC *pDC, CString sExamNo, int Printcs,
 		
 		CString strSQL;
 		long lDataSize;
-		strSQL.Format("SELECT * FROM XMPhoto WHERE (准考证明编号 = '%s') AND (考试次数 = %d) AND (当日次数 =%d)",sExamNo,iKscs,Printcs);
+		strSQL.Format("Set ARITHABORT ON;SELECT * FROM XMPhoto WHERE (准考证明编号 = dbo.charEncode('%s') AND (考试次数 = %d) AND (当日次数 =%d))",sExamNo,iKscs,Printcs);
         m_AdoPhoto.OpenRecordset(strSQL);
         if(m_AdoPhoto.GetRecordCount(m_AdoPhoto.m_pRecordset)==0)
 		{
@@ -1296,7 +1300,7 @@ BOOL CBKPrintSheetApp::ReadXMPhotoFromDB(CDC *pDC, CString sExamNo, int Printcs,
 
 		
 		m_AdoPhoto.CloseRecordset();
-		m_AdoPhoto.CloseConn();
+		//m_AdoPhoto.CloseConn();
 		
 		
 	}
@@ -1509,7 +1513,7 @@ BOOL CBKPrintSheetApp::ReadQZPhoto(CDC *pDC, CString sCard, CString sSir, int iD
 			}
 		}
 		pRecordset->Close();
-		strSQL.Format("SELECT 签名照片 FROM StudentPhoto WHERE 准考证明编号 = '%s' and 签名照片 is not null",sCard);
+		strSQL.Format("Set ARITHABORT ON;SELECT 签名照片 FROM StudentPhoto WHERE 准考证明编号 = dbo.charEncode('%s') and 签名照片 is not null",sCard);
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)m_pConnection, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
 		if(pRecordset->RecordCount == 1)

@@ -217,7 +217,7 @@ extern "C" DllExport BOOL PrintSheet(LPTSTR lpExamNo, int ikscs,LPTSTR strSQLIP,
 		pRecordset->CursorLocation = adUseClient;
 		//导入资料
 		szSQL.Format("Set ARITHABORT ON;select top 1 sc.驾校编号,dbo.charDecode(ex.姓名) as 姓名,dbo.charDecode(ex.准考证明编号) as 准考证明编号,dbo.charDecode(ex.身份证明编号) as 身份证明编号,ex.考试车型,ex.驾校名称,ex.考试原因, \
-			ex.考试成绩-right(dbo.charDecode(ex.准考证明编号),2)-45 as 成绩,dbo.dateDecode(ex.考试日期),ex.考试次数,ex.当日次数,ex.考试员1   \
+			ex.考试成绩-right(dbo.charDecode(ex.准考证明编号),2)-45 as 成绩,dbo.dateDecode(ex.考试日期) as 考试日期,ex.考试次数,ex.当日次数,ex.考试员1   \
 			from examrecordindetail ex,SchoolInfo sc where  准考证明编号=dbo.charEncode('%s') and sc.驾校名称=ex.驾校名称 and 考试次数='%d' order by 考试时间 desc",strExamNo,ikscs);
 		//AfxMessageBox(szSQL);
 		TRACE(szSQL);
@@ -804,7 +804,7 @@ BOOL CBKPrintSheetApp::ReadXMPhotoFromSQL(CDC *pDC,CRect *rc,CString sExamNo,int
 	try
 	{
 		CString strSQL;
-		strSQL.Format("Set ARITHABORT ON;SELECT * FROM XMPhoto WHERE (准考证明编号 = dbo.charEncode('%s') AND (考试次数 = %d) AND (当日次数 =%d)",sExamNo,iKscs,Printcs);
+		strSQL.Format("Set ARITHABORT ON;SELECT * FROM XMPhoto WHERE (准考证明编号 = dbo.charEncode('%s') AND (考试次数 = %d) AND (当日次数 =%d))",sExamNo,iKscs,Printcs);
 		
         m_AdoPhoto.OpenRecordset(strSQL);
         if(m_AdoPhoto.GetRecordCount(m_AdoPhoto.m_pRecordset)==0)

@@ -21,67 +21,73 @@ extern
 
 ADO::ADO()
 {
-
+	::CoInitialize(NULL);
 }
 
 ADO::~ADO()
 {
-
+	::CoUninitialize();
 }
 
-void ADO::OnInitADOConn(int SQLorOracle)
+void ADO::OnInitADOConn(_ConnectionPtr conn)
 {
-
-	::CoInitialize(NULL);
-	 CString m_strInEdit;
-	try
-	{
-       m_pConnection.CreateInstance("ADODB.Connection");  //创建连接对象实例
-	   ////////////////////////////////照片数据库//////////////////////////////////////////
-	  
-	   GetPrivateProfileString("SQLLINK","ServerPZ","",m_strInEdit.GetBuffer(MAX_PATH),MAX_PATH,".\\ConfigPhoto.ini");
-	   m_strInEdit.ReleaseBuffer();
-	   if (!m_strInEdit.IsEmpty())
-	   {
-		   int iLen =m_strInEdit.GetLength();
-		   
-		   for(int i=0;i<iLen;i++)
-		   {
-			   m_strInEdit.SetAt(i,m_strInEdit[i]-1);
-		   }
-		   m_strInEdit.MakeReverse();
-	   }
-		//////////////////////////////////////////////////////////////////////////
-	   /*
-	   CString strConnect;
-		if (SQLorOracle==1)
-		{
-			strConnect.Format("driver={SQL Server};Server=%s;DATABASE=%s;UID=%s;PWD=%s",m_IP,m_DataBase,m_Name,m_Pwd);
-		}else
-		{
-			strConnect.Format("Provider=OraOLEDB.Oracle.1;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=%s)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=bkzy)));User ID=sapho;Password=%s",m_IP,m_Pwd);
-		}
-		*/
-	   m_pConnection->Open((_bstr_t)m_strInEdit,"","",adModeUnknown); //打开数据库
-	}
-	catch(_com_error e)
-	{
-		CString errormessage;
-		errormessage.Format("数据库提示,连接2ndPhoto照片数据库失败!,错误信息:%s,请先配置照片数据库连接",e.ErrorMessage());
-		AfxMessageBox(errormessage);
-		//AfxMessageBox(m_strInEdit);
-		if (SQLorOracle==1)
-		{
-			ShellExecute(NULL,"open",".\\sqlLink.exe",".\\ConfigPhoto.ini",NULL,SW_SHOW);//调用SQL工具
-		}
-		else
-		{
-			ShellExecute(NULL,"open",".\\oracle.exe",".\\ConfigPhoto.ini",NULL,SW_SHOW);//调用Oracle工具
-		}
-	}
-
-
+	//m_pConnection.CreateInstance("ADODB.Connection");  //创建连接对象实例
+	m_pConnection = conn;
 }
+
+// void ADO::OnInitADOConn(int SQLorOracle)
+// {
+// 	
+// 	::CoInitialize(NULL);
+// 	CString m_strInEdit;
+// 	try
+// 	{
+// 		m_pConnection.CreateInstance("ADODB.Connection");  //创建连接对象实例
+// 		////////////////////////////////照片数据库//////////////////////////////////////////
+// 		
+// 	   GetPrivateProfileString("SQLLINK","ServerPZ","",m_strInEdit.GetBuffer(MAX_PATH),MAX_PATH,".\\ConfigPhoto.ini");
+// 	   m_strInEdit.ReleaseBuffer();
+// 	   if (!m_strInEdit.IsEmpty())
+// 	   {
+// 		   int iLen =m_strInEdit.GetLength();
+// 		   
+// 		   for(int i=0;i<iLen;i++)
+// 		   {
+// 			   m_strInEdit.SetAt(i,m_strInEdit[i]-1);
+// 		   }
+// 		   m_strInEdit.MakeReverse();
+// 	   }
+// 		
+// 
+// 		//////////////////////////////////////////////////////////////////////////
+// 	   
+// 	   /*CString strConnect;
+// 		if (SQLorOracle==1)
+// 		{
+// 			strConnect.Format("driver={SQL Server};Server=%s;DATABASE=%s;UID=%s;PWD=%s",m_IP,m_DataBase,m_Name,m_Pwd);
+// 		}else
+// 		{
+// 			strConnect.Format("Provider=OraOLEDB.Oracle.1;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=%s)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=bkzy)));User ID=sapho;Password=%s",m_IP,m_Pwd);
+// 		}*/
+// 		
+// 	   m_pConnection->Open((_bstr_t)m_strInEdit,"","",adModeUnknown); //打开数据库
+// 	}
+// 	catch(_com_error e)
+// 	{
+// 		CString errormessage;
+// 		errormessage.Format("数据库提示,连接2ndPhoto照片数据库失败!,错误信息:%s,请先配置照片数据库连接",e.ErrorMessage());
+// 		AfxMessageBox(errormessage);
+// 		//AfxMessageBox(m_strInEdit);
+// 		if (SQLorOracle==1)
+// 		{
+// 			ShellExecute(NULL,"open",".\\sqlLink.exe",".\\ConfigPhoto.ini",NULL,SW_SHOW);//调用SQL工具
+// 		}
+// 		else
+// 		{
+// 			ShellExecute(NULL,"open",".\\oracle.exe",".\\ConfigPhoto.ini",NULL,SW_SHOW);//调用Oracle工具
+// 		}
+// 	}
+// }
 
 _RecordsetPtr&  ADO::OpenRecordset(CString sql)
 {

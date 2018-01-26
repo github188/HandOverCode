@@ -22,7 +22,8 @@ public:
 	CString GetStrFromRecordset(char * str );
 	ADO();
 	virtual ~ADO();
-	void OnInitADOConn(int SQLorOracle);							//连接数据库
+	void OnInitADOConn(_ConnectionPtr conn);
+	//void OnInitADOConn(int SQLorOracle);							//连接数据库
 	_RecordsetPtr&  OpenRecordset(CString sql);		//打开记录集
 	void CloseRecordset();							//关闭记录集
 	void CloseConn();								//关闭数据库连接
