@@ -1,0 +1,315 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\AutoPrintManager.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\AutoPrintManager.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 AutoPrintManager"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "AutoPrintManager 1.0 版",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2014",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_AUTOPRINTMANAGER_DIALOG DIALOGEX 0, 0, 713, 352
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "打印管理器"
+FONT 10, "宋体"
+BEGIN
+    GROUPBOX        "考场列表",IDC_STATIC,13,13,371,248
+    CONTROL         "List1",IDC_LIST_ALLKC,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,23,109,352,123
+    PUSHBUTTON      "开始自动打印",IDC_BTN_AutoPrint,118,234,58,20,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "成绩打印",IDC_BTNPrint,306,309,69,20
+    GROUPBOX        "成绩单打印",IDC_STATIC,14,295,371,44
+    RTEXT           "考场名称:",IDC_STATIC,29,31,38,11
+    RTEXT           "数据库IP:",IDC_STATIC,29,51,38,11
+    RTEXT           "用户名:",IDC_STATIC,29,71,38,11
+    RTEXT           "密  码:",IDC_STATIC,29,91,38,11
+    EDITTEXT        IDC_EDIT1,72,28,92,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,72,47,92,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,72,66,93,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,72,85,94,16,ES_PASSWORD | ES_AUTOHSCROLL
+    PUSHBUTTON      "删除考场",IDC_BTN_DEL,313,82,60,19
+    PUSHBUTTON      "添加考场",IDC_BTN_ADD,233,82,60,19
+    EDITTEXT        IDC_EDIT5,104,313,125,16,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO3,27,313,71,65,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "",IDC_EXAM_STAT,13,269,313,16
+    PUSHBUTTON      "查看合格率",IDC_BUTTON1,334,269,50,17
+    PUSHBUTTON      "预览",IDC_BTNYL,250,309,48,20
+    LTEXT           "打印日期:",IDC_STATIC,232,32,37,11
+    CONTROL         "DateTimePicker1",IDC_DATETIMEPICKER1,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,276,29,91,15
+    CONTROL         "List1",IDC_LIST_ALLKC2,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,412,17,288,288
+    GROUPBOX        "补打考生列表",IDC_STATIC_JS,402,4,307,336,BS_CENTER
+    PUSHBUTTON      "补打列表",IDC_BTN_AutoPrint2,324,235,52,20
+    CONTROL         "全选/全不选",IDC_CHECK_ALL2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,413,310,56,14
+    PUSHBUTTON      "勾选名单确认",IDC_BUTTON4,641,306,54,27
+    CONTROL         "考试员签名",IDC_CHECK1_KSY1,"Button",BS_AUTOCHECKBOX | 
+                    BS_FLAT | WS_TABSTOP,311,64,62,13
+    CONTROL         "全选/全不选",IDC_CHECK_ALL3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,23,235,56,14
+    LTEXT           "自动打印:",IDC_STATIC,231,53,37,11
+    COMBOBOX        IDC_COMBO1,276,51,53,53,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "一键自动打印",IDC_BTN_AutoPrint3,260,235,58,20
+END
+
+IDD_DLGYL DIALOG DISCARDABLE  0, 0, 286, 301
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "预览"
+FONT 10, "System"
+BEGIN
+END
+
+IDD_DIALOG_Pass DIALOG DISCARDABLE  0, 0, 146, 44
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "输入密码"
+FONT 10, "@黑体"
+BEGIN
+    EDITTEXT        IDC_EDIT1,18,14,109,13,ES_PASSWORD | ES_AUTOHSCROLL
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "福州北科大舟宇电子有限公司\0"
+            VALUE "FileDescription", "支队成绩单打印管理器\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "AutoPrintManager\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2014 ZSZ\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "AutoPrintManager.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "AutoPrintManager 应用程序\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_AUTOPRINTMANAGER_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 709
+        BOTTOMMARGIN, 343
+    END
+
+    IDD_DLGYL, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 276
+    END
+
+    IDD_DIALOG_Pass, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 139
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 42
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU DISCARDABLE 
+BEGIN
+    POPUP "菜单", CHECKED
+    BEGIN
+        POPUP "刷新名单"
+        BEGIN
+            MENUITEM "合格考生名单",                ID_MENUITEM32774
+            MENUITEM "合格未打印",                  ID_MENUITEM32782
+            MENUITEM "合格已打印",                  ID_MENUITEM32783
+            MENUITEM "不合格名单",                  ID_MENUITEM32784
+            MENUITEM "全部考生名单",                ID_MENUITEM32785
+        END
+        MENUITEM "打印考生",                    ID_MENUITEM32773
+        MENUITEM "补打列表",                    ID_MENUITEM32793
+    END
+END
+
+IDR_MENU2 MENU DISCARDABLE 
+BEGIN
+    POPUP "驾校"
+    BEGIN
+        POPUP "机单打印"
+        BEGIN
+            MENUITEM "合格名单",                    ID_MENUITEM32786
+            MENUITEM "不合格名单",                  ID_MENUITEM32787
+            MENUITEM "全部考生名单",                ID_MENUITEM32788
+        END
+        POPUP "驾校表单"
+        BEGIN
+            MENUITEM "合格率名单",                  ID_MENUITEM32789
+            MENUITEM "考试台帐名单",                ID_MENUITEM32800
+        END
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 AutoPrintManager(&A)..."
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\AutoPrintManager.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
