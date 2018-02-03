@@ -108,12 +108,12 @@ int CBKPrintSheetApp::Serialnum(CString strYKRQ,CString strExamNo,CString strZT,
 		CString strText,szSQL;
 		if (strZT==_T("1"))
 		{
-			szSQL.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号 from examrecordindetail where 考试日期=dbo.dateEncode('%s') \
+			szSQL.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号 from examrecordindetail where 考试日期=dbo.dateEncode(%s) \
 				and (考试成绩-right(dbo.charDecode(准考证明编号),2)-45)>=%d and 驾校名称='%s' and 考试车型 ='%s'order by \
 				考试时间",strYKRQ,kmms,strDLR,strBkcx);
 		}else if (strZT==_T("2"))
 		{
-			szSQL.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号 from examrecordindetail where 考试日期=dbo.dateEncode('%s') and \
+			szSQL.Format("Set ARITHABORT ON;select dbo.charDecode(准考证明编号) as 准考证明编号 from examrecordindetail where 考试日期=dbo.dateEncode(%s) and \
 				((考试成绩-right(dbo.charDecode(准考证明编号),2)-45)<%d) and 当日次数='2' and 驾校名称='%s' and 考试车型='%s' \
 				order by  考试时间 ",strYKRQ,kmms,strDLR,strBkcx);
 		}
@@ -379,7 +379,7 @@ extern "C" DllExport BOOL PrintSheet(LPTSTR lpExamNo, int ikscs,LPTSTR strSQLIP,
 	catch (_com_error e)
 	{
 		CString sErrInfo;
-		sErrInfo.Format("加载打印数据失败!\n%s %s考试数据不完整!",strName,strExamNo);
+		sErrInfo.Format("加载打印数据失败!\n%s %s考试数据不完整!%s",strName,strExamNo,szSQL);
 		WriteLogPPTXT("打印照片编号","日志",sErrInfo);
 		/*终止打印作业*/
 		theApp.m_DC.EndPage(); 

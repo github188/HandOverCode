@@ -319,7 +319,7 @@ extern "C" DllExport BOOL PrintSheetEx(LPTSTR lpExamNo, int ikscs,LPTSTR strSQLI
 		} 
 		else
 		{
-			szSQL.Format("Set ARITHABORT ON;select dbo.dateDecode(考试时间) as 考试时间,dbo.dateDecode(开始时间) as 开始时间,考试成绩-substr(dbo.charDecode(准考证明编号),-2,2)-45 as 成绩,当日次数 from \
+			szSQL.Format("Set ARITHABORT ON;select dbo.dateDecode(考试时间) as 考试时间,dbo.dateDecode(开始时间) as 开始时间,考试成绩-substr(dbo.charDecode(准考证明编号)-2,2)-45 as 成绩,当日次数 from \
 			ExamRecord where 准考证明编号=dbo.charEncode('%s') and 考试次数='%d' ",strExamNo,ikscs);
 		}
 		pRecordset->Open(_variant_t(szSQL), _variant_t((IDispatch*)theApp.m_pConnection, true),
