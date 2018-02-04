@@ -1,0 +1,207 @@
+;-------------------------------------------------------
+; INF file for DS40/41/42/43xx Series Driver 
+; Copyright (C) Hikvision Digital Technology Co.,Ltd.
+
+
+[Version]
+CatalogFile=HikDrv.cat
+Signature="$WINDOWS NT$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%DS400XX%
+DriverVer=05/07/2012,2.5.0.0
+
+; ================= Device Install section =====================
+[SourceDisksNames]
+1 = %DISK_NAME%,,,""
+
+[SourceDisksFiles]
+DS40xxV.sys=1
+DS41xxV.sys=1
+DS42xxV.sys=1
+DS41XXHDDrv.sys = 1
+DS43xxDrv.sys=1
+
+[Manufacturer]
+%Manufacturer%=DS400x,NTAMD64
+
+; For Win2K
+[DS400x]
+%DS40XXHC.DRVDESC% = DS40XXHC, PCI\VEN_104c&DEV_9065
+%DS41XXHC.DRVDESC% = DS41XXHC, PCI\VEN_104c&DEV_B003
+%DS42XXHC.DRVDESC% = DS42XXHC, PCI\VEN_3086&DEV_0101
+%DS41XXHD.DRVDESC% = DS41XXHD, PCI\VEN_104c&DEV_B002
+%DS43XXHC.DRVDESC% = DS43XXHC, PCI\VEN_104c&DEV_b801
+
+; For XP and later
+[DS400x.NTAMD64]
+%DS40XXHC.DRVDESC% = DS40XXHC, PCI\VEN_104c&DEV_9065
+%DS41XXHC.DRVDESC% = DS41XXHC, PCI\VEN_104c&DEV_B003
+%DS42XXHC.DRVDESC% = DS42XXHC, PCI\VEN_3086&DEV_0101
+%DS41XXHD.DRVDESC% = DS41XXHD, PCI\VEN_104c&DEV_B002
+%DS43XXHC.DRVDESC% = DS43XXHC, PCI\VEN_104c&DEV_b801
+
+[DestinationDirs]
+DS40XXHC.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+DS41XXHC.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+DS42XXHC.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+DS41XXHD.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+DS43XXHC.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         ds40xxhc md		            ;;;;;;;;;;;;;;;;;;;
+[DS40XXHC.NT]
+CopyFiles=DS40XXHC.CopyList
+
+[DS40XXHC.CopyList]
+DS40xxV.sys
+
+[DS40XXHC.NT.Services]
+AddService = DS40XXHC,0x00000002,DS40XXHC_Service
+
+[DS40XXHC_Service]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\DS40xxV.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         ds41xxhc 		               ;;;;;;;;;;;;;;;;;;;
+[DS41XXHC.NT]
+CopyFiles=DS41XXHC.CopyList
+
+[DS41XXHC.CopyList]
+DS41xxV.sys
+
+[DS41XXHC.NT.Services]
+AddService = DS41XXHC,0x00000002,DS41XXHC_Service
+
+[DS41XXHC_Service]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\DS41xxV.sys
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         ds42xxhc 		               ;;;;;;;;;;;;;;;;;;;
+[DS42XXHC.NT]
+CopyFiles=DS42XXHC.CopyList
+
+[DS42XXHC.CopyList]
+DS42xxV.sys
+
+[DS42XXHC.NT.Services]
+AddService = DS42XXHC,0x00000002,DS42XXHC_Service
+
+[DS42XXHC_Service]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\DS42xxV.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         ds41xxhd 		   ;;;;;;;;;;;;;;;;;;;
+[DS41XXHD.NT]
+CopyFiles=DS41XXHD.CopyList
+
+[DS41XXHD.CopyList]
+DS41xxHDDrv.sys
+
+[DS41XXHD.NT.Services]
+AddService = DS41XXHD,0x00000002,DS41XXHD_Service
+
+[DS41XXHD_Service]
+ServiceType   = 1	; KERNEL MODE DRIVER
+StartType     = 3	; MANUAL
+ErrorControl  = 1	; NORMAL
+ServiceBinary = %12%\DS41xxHDDrv.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         DS43XXHC 	 ;;;;;;;;;;;;;;;;;;;
+[DS43XXHC.NT]
+CopyFiles=DS43XXHC.CopyList
+
+[DS43XXHC.CopyList]
+DS43xxDrv.sys
+
+[DS43XXHC.NT.Services]
+AddService = DS43XXHC,0x00000002,DS43XXHC_Service
+
+[DS43XXHC_Service]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\DS43xxDrv.sys
+
+
+;-------------- Coinstaller installation
+[DestinationDirs]
+CoInstaller_CopyFiles = 11
+
+[DS40XXHC.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[DS41XXHC.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[DS42XXHC.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[DS41XXHD.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[DS43XXHC.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[CoInstaller_CopyFiles]
+wdfcoinstaller01005.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01005.dll=1 ; make sure the number matches with SourceDisksNames
+
+[CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01005.dll,WdfCoInstaller"
+
+[DS40XXHC.NT.Wdf]
+KmdfService = DS40XXHC, DS40XXHC_wdfsect
+[DS40XXHC_wdfsect]
+KmdfLibraryVersion = 1.5
+
+[DS41XXHC.NT.Wdf]
+KmdfService = DS41XXHC, DS41XXHC_wdfsect
+[DS41XXHC_wdfsect]
+KmdfLibraryVersion = 1.5
+
+[DS42XXHC.NT.Wdf]
+KmdfService = DS42XXHC, DS42XXHC_wdfsect
+[DS42XXHC_wdfsect]
+KmdfLibraryVersion = 1.5
+
+[DS41XXHD.NT.Wdf]
+KmdfService = DS41XXHD, DS41XXHD_wdfsect
+[DS41XXHD_wdfsect]
+KmdfLibraryVersion = 1.5
+
+[DS43XXHC.NT.Wdf]
+KmdfService = DS43XXHC, DS43XXHC_wdfsect
+[DS43XXHC_wdfsect]
+KmdfLibraryVersion = 1.5
+
+[Strings]
+DS400XX=     "Hangzhou Hikvision Digital Technology Co.,Ltd."
+Manufacturer="Hangzhou Hikvision Digital Technology Co.,Ltd."
+DS40XXHC.DRVDESC="Hikvision DS40xxHC/HCS/HC+/HF/HS/MD Series"
+DS41XXHC.DRVDESC="Hikvision DS41xx Series"
+DS42XXHC.DRVDESC="Hikvision DS42xx Series"
+DS41XXHD.DRVDESC="Hikvision DS41xx HD Series"
+DS43XXHC.DRVDESC="Hikvision DS43XX Series"
+DISK_NAME="DS40/41/42/43xx serial card Installation Disk"
+
+
+
