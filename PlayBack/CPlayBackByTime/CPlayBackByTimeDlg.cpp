@@ -67,6 +67,14 @@ CCPlayBackByTimeDlg::CCPlayBackByTimeDlg(CWnd* pParent /*=NULL*/)
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+
+	m_sIP = "";
+	m_sUsername = "";
+	m_sPassword = "";
+	m_sBeginTime = "";
+	m_sEndTime = "";
+	m_lChannel = 0;
+	m_dwPort = 0;
 }
 
 void CCPlayBackByTimeDlg::DoDataExchange(CDataExchange* pDX)
@@ -117,10 +125,51 @@ BOOL CCPlayBackByTimeDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
 	// TODO: Add extra initialization here
-	SetTimer(1,100,NULL);
-	CString temp;
-	temp.Format("[%s] 正在回放...",__targv[1]);
-	SetWindowText(temp);
+	try
+	{
+		//参数定义
+		//考车编号*设备IP*用户名*密码*端口号*通道号*开始时间*结束时间
+		//考车1*192.168.0.92*admin*hk12345678*8000*33*2018-02-03 14:10:35*2018-02-03 14:10:35
+		CString csCmdLine1 = __targv[1];
+		CString csCmdLine2 = __targv[2];
+		CString csCmdLine3 = __targv[3];
+		CString csCmdLine = csCmdLine1 + " " + csCmdLine2 + " " + csCmdLine3;
+
+		vector<string> vecParams;
+		SplitString(csCmdLine.GetBuffer(csCmdLine.GetLength()), "*", vecParams);
+		if (8 != vecParams.size())
+		{
+			AfxMessageBox("参数异常");
+			return false;
+		}
+
+		CString sCarNo = vecParams[0].c_str();
+		m_sIP = vecParams[1].c_str();
+		m_sUsername = vecParams[2].c_str();
+		m_sPassword = vecParams[3].c_str();
+		m_dwPort = _ttoi(vecParams[4].c_str());
+		m_lChannel = atol(vecParams[5].c_str());
+		m_sBeginTime = vecParams[6].c_str();
+		m_sEndTime = vecParams[7].c_str();
+
+		if (sCarNo.IsEmpty() || m_sIP.IsEmpty() || m_sUsername.IsEmpty() || m_sPassword.IsEmpty() || m_sBeginTime.IsEmpty() || m_sEndTime.IsEmpty()
+			|| m_dwPort <= 0 || m_lChannel <= 0)
+		{
+			AfxMessageBox("参数异常");
+			return FALSE;
+		}
+
+		SetTimer(1,100,NULL);
+		CString temp;
+		temp.Format("[%s] 正在回放...", sCarNo);
+		SetWindowText(temp);
+	}
+	catch (...)
+	{
+		AfxMessageBox("参数异常");
+		return FALSE;
+	}
+	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -173,39 +222,65 @@ HCURSOR CCPlayBackByTimeDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
+void CCPlayBackByTimeDlg::SplitString(const std::string &srcString, const std::string &separator, std::vector<std::string> &strList)
+{
+	size_t pos = 0;
+	for (;;)
+	{
+		size_t  tpos = 0;
+		std::string substr;
+		tpos = srcString.find(separator.c_str(), pos);
+		if (tpos == std::string::npos)
+		{
+			substr = srcString.substr(pos);
+			if (substr.size())
+			{
+				strList.push_back(substr);
+			}
+			break;
+		}
+		//if (tpos != pos)		//分隔符隔出来的空字符串也取出来
+		{
+			substr = srcString.substr(pos, tpos - pos);
+			strList.push_back(substr);
+		}
+		pos = tpos + separator.length();
+		
+	}
+}
 
 void CCPlayBackByTimeDlg::OnStartPlay()
 {   
-	CString temp,temp1,temp2;
-	CString DSIP,DSUser,Dspwd,strStime,strEtime;
-	WORD DSport;
-	LONG Channel;
-	//temp2.Format("CONFIG");
-	temp2.Format("%s",__targv[1]);
-	
-	GetPrivateProfileString(temp2,"xmsbip","192.168.0.68",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
-	DSIP.Format("%s",temp);
-	GetPrivateProfileString(temp2,"xmsbuser","admin",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
-	DSUser.Format("%s",temp);
-	GetPrivateProfileString(temp2,"xmsbpwd","12345",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
-	Dspwd.Format("%s",temp);
-	GetPrivateProfileString(temp2,"xmsbport","8000",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
-	temp1.Format("%s",temp);
-	DSport =_ttoi(temp1);
-	GetPrivateProfileString(temp2,"xmsbtd","1",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
-	temp1.Format("%s",temp);
-	Channel =atol(temp1);
-	
-	GetPrivateProfileString(temp2,"xmstime","1",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
-	strStime.Format("%s",temp);
+// 	CString temp,temp1,temp2;
+// 	CString DSIP,DSUser,Dspwd,strStime,strEtime;
+// 	WORD DSport;
+// 	LONG Channel;
+// 	//temp2.Format("CONFIG");
+// 	temp2.Format("%s",__targv[1]);
+// 	
+// 	GetPrivateProfileString(temp2,"xmsbip","192.168.0.68",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+// 	DSIP.Format("%s",temp);
+// 	GetPrivateProfileString(temp2,"xmsbuser","admin",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+// 	DSUser.Format("%s",temp);
+// 	GetPrivateProfileString(temp2,"xmsbpwd","12345",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+// 	Dspwd.Format("%s",temp);
+// 	GetPrivateProfileString(temp2,"xmsbport","8000",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+// 	temp1.Format("%s",temp);
+// 	DSport =_ttoi(temp1);
+// 	GetPrivateProfileString(temp2,"xmsbtd","1",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+// 	temp1.Format("%s",temp);
+// 	Channel =atol(temp1);
+// 	
+// 	GetPrivateProfileString(temp2,"xmstime","1",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+// 	strStime.Format("%s",temp);
+// 
+// 	
+// 	GetPrivateProfileString(temp2,"xmetime","1",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+// 	strEtime.Format("%s",temp);
 
-	
-	GetPrivateProfileString(temp2,"xmetime","1",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
-	strEtime.Format("%s",temp);
 
-
-	m_PlayBackC.LoginDevice(DSIP,DSUser,Dspwd,DSport,(short)Channel);
-	m_PlayBackC.SetPlayBackByTime(strStime,strEtime);
+	m_PlayBackC.LoginDevice(m_sIP,m_sUsername,m_sPassword,m_dwPort,(short)m_lChannel);
+	m_PlayBackC.SetPlayBackByTime(m_sBeginTime,m_sEndTime);
 
 }
 

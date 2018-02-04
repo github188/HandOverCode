@@ -46,6 +46,18 @@ protected:
 	afx_msg void OnTimer(UINT nIDEvent);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
+private:
+	void SplitString(const std::string &srcString, const std::string &separator, std::vector<std::string> &strList);
+
+private:
+	CString m_sIP;
+	CString m_sUsername;
+	CString m_sPassword;
+	CString m_sBeginTime;
+	CString m_sEndTime;
+	WORD m_dwPort;
+	LONG m_lChannel;
 };
 
 //{{AFX_INSERT_LOCATION}}
