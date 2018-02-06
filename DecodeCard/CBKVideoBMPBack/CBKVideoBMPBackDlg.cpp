@@ -680,7 +680,7 @@ BOOL CCBKVideoBMPBackDlg::ReadPhotoFromDB(CDC *pDC, CString sCard, CRect *rc)
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		CString strSQL;	
-		strSQL.Format("SELECT 照片 FROM StudentPhoto WHERE 准考证明编号 = '%s'",sCard);
+		strSQL.Format("Set ARITHABORT ON;SELECT 照片 FROM StudentPhoto WHERE 准考证明编号 = dbo.charEncode('%s')",sCard);
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)m_pConn, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
 		
@@ -780,7 +780,7 @@ BOOL CCBKVideoBMPBackDlg::ReadMJPhotoFromDB(CDC *pDC, CString sCard, CRect *rc)
 		pRecordset.CreateInstance("ADODB.Recordset");
 		pRecordset->CursorLocation = adUseClient;
 		CString strSQL;	
-		strSQL.Format("SELECT 门禁照片 FROM StudentPhoto WHERE 准考证明编号 = '%s'",sCard);
+		strSQL.Format("Set ARITHABORT ON;SELECT 门禁照片 FROM StudentPhoto WHERE 准考证明编号 = dbo.charEncode('%s')",sCard);
 		pRecordset->Open((_variant_t)_bstr_t(strSQL), _variant_t((IDispatch*)m_pConn, true), 
 			adOpenDynamic, adLockOptimistic, adCmdText);
 		
@@ -1996,7 +1996,7 @@ BOOL CCBKVideoBMPBackDlg::SelectKFLX(int ErrorID,int listi)
 		CString sqltemp,tempkflx;
 		VARIANT cnt;
 		cnt.vt = VT_INT;
-		sqltemp.Format("select 扣分类型 from ErrorData where 错误编号='%d'",ErrorID);//
+		sqltemp.Format("Set ARITHABORT ON;select dbo.charDecode(扣分类型) as 扣分类型 from ErrorData where 错误编号='%d'",ErrorID);//
 		_RecordsetPtr m_pRecordset =m_pConn->Execute((_bstr_t)sqltemp,&cnt,adCmdUnknown);
 		_variant_t vat;
 		if(m_pRecordset != NULL && (!m_pRecordset->adoEOF))
