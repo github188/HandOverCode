@@ -229,12 +229,34 @@ void CCVideoCXDlg::OnButton2()
 		AfxMessageBox("错误提示,请先查询数据然后,选择列表中的信息,再播放!");
 		return ;
 	}
-	CString temp;
-	temp.Format("%s",strKCH);
-	::WritePrivateProfileString(temp,"xmstime",strBfStime,".\\VIDEOPLAYBACK.dat");
-	::WritePrivateProfileString(temp,"xmetime",strBfEtime,".\\VIDEOPLAYBACK.dat");
 
-	ShellExecute(NULL,"open","CPlayBackByTime.exe",temp,NULL,SW_SHOW); 
+	CString temp,temp1,temp2;
+	CString DSIP,DSUser,Dspwd,strStime,strEtime;
+	WORD DSport;
+	LONG Channel;
+
+	temp2.Format("%s",strKCH);
+
+	::WritePrivateProfileString(temp2,"xmstime",strBfStime,".\\VIDEOPLAYBACK.dat");
+	::WritePrivateProfileString(temp2,"xmetime",strBfEtime,".\\VIDEOPLAYBACK.dat");
+
+	GetPrivateProfileString(temp2,"xmsbip","192.168.0.68",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+	DSIP.Format("%s",temp);
+	GetPrivateProfileString(temp2,"xmsbuser","admin",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+	DSUser.Format("%s",temp);
+	GetPrivateProfileString(temp2,"xmsbpwd","12345",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+	Dspwd.Format("%s",temp);
+	GetPrivateProfileString(temp2,"xmsbport","8000",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+	temp1.Format("%s",temp);
+	DSport =_ttoi(temp1);
+	GetPrivateProfileString(temp2,"xmsbtd","1",temp.GetBuffer(MAX_PATH),MAX_PATH,".\\VIDEOPLAYBACK.dat");
+	temp1.Format("%s",temp);
+	Channel =atol(temp1);
+
+	CString csCmd;
+	csCmd.Format("%s*%s*%s*%s*%d*%d*%s*%s", temp2, DSIP, DSUser, Dspwd, DSport, Channel, strBfStime, strBfEtime);
+
+	ShellExecute(NULL,"open","CPlayBackByTime.exe",csCmd,NULL,SW_SHOW); 
 	strBfStime=_T("");
 	strBfEtime=_T("");
 	UpdateData(FALSE);

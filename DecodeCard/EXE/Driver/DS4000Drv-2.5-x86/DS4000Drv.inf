@@ -1,0 +1,144 @@
+;---------------------------------------------------------------
+; INF file for DS40/41/42/43xx Series Driver
+; For Windows 2000/XP/2003/Vista/7(32-bit)
+
+[Version]
+CatalogFile=HikDrv.cat
+Signature="$WINDOWS NT$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%DS400XX%
+DriverVer=05/07/2012,2.5.0.0
+
+
+; ================= Device Install section =====================
+[SourceDisksNames]
+1 = %DISKID%,,,
+
+[SourceDisksFiles]
+DS40xxDrv.sys = 1
+DS41xxDrv.sys = 1
+DS42xxDrv.sys = 1
+DS41XXHDDrv.sys = 1
+DS43xxDrv.sys = 1
+
+[Manufacturer]
+%Manufacturer%=DS400x
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[DS400x]
+%DS40XXHC.DeviceDesc% = DS40XXHC, PCI\VEN_104c&DEV_9065
+%DS41XXHC.DeviceDesc% = DS41XXHC, PCI\VEN_104c&DEV_B003
+%DS42XXHC.DeviceDesc% = DS42XXHC, PCI\VEN_3086&DEV_0101
+%DS41XXHD.DeviceDesc% = DS41XXHD, PCI\VEN_104c&DEV_B002
+%DS43XX.DeviceDesc% = DS43XX, PCI\VEN_104c&DEV_b801
+
+[DestinationDirs]
+DS40XXHC.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+DS41XXHC.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+DS42XXHC.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+DS41XXHD.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+DS43XX.CopyList  =  10,system32\drivers      ; WinXX\system32\drivers
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         ds40xxhc md		    ;;;;;;;;;;;;;;;;;;;
+
+[DS40XXHC]
+CopyFiles=DS40XXHC.CopyList
+
+[DS40XXHC.Services]
+AddService = DS40XXHC,0x00000002,DS40XXHC.AddReg
+
+[DS40XXHC.AddReg]
+ServiceType   = 1	; KERNEL MODE DRIVER
+StartType     = 3	; MANUAL
+ErrorControl  = 1	; NORMAL
+ServiceBinary = %12%\DS40xxDrv.sys
+
+[DS40XXHC.CopyList]
+DS40xxDrv.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         ds41xxhc 		           ;;;;;;;;;;;;;;;;;;;
+
+[DS41XXHC]
+CopyFiles=DS41XXHC.CopyList
+
+[DS41XXHC.Services]
+AddService = DS41XXHC,0x00000002,DS41XXHC.AddReg
+
+[DS41XXHC.AddReg]
+ServiceType   = 1	; KERNEL MODE DRIVER
+StartType     = 3	; MANUAL
+ErrorControl  = 1	; NORMAL
+ServiceBinary = %12%\DS41xxDrv.sys
+
+[DS41XXHC.CopyList]
+DS41xxDrv.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         ds42xxhc 		   ;;;;;;;;;;;;;;;;;;;
+
+[DS42XXHC]
+CopyFiles=DS42XXHC.CopyList
+
+[DS42XXHC.Services]
+AddService = DS42XXHC,0x00000002,DS42XXHC.AddReg
+
+[DS42XXHC.AddReg]
+ServiceType   = 1	; KERNEL MODE DRIVER
+StartType     = 3	; MANUAL
+ErrorControl  = 1	; NORMAL
+ServiceBinary = %12%\DS42xxDrv.sys
+
+[DS42XXHC.CopyList]
+DS42xxDrv.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         ds41xxhd 		   ;;;;;;;;;;;;;;;;;;;
+
+[DS41XXHD]
+CopyFiles=DS41XXHD.CopyList
+
+[DS41XXHD.Services]
+AddService = DS41XXHD,0x00000002,DS41XXHD.AddReg
+
+[DS41XXHD.AddReg]
+ServiceType   = 1	; KERNEL MODE DRIVER
+StartType     = 3	; MANUAL
+ErrorControl  = 1	; NORMAL
+ServiceBinary = %12%\DS41xxHDDrv.sys
+
+[DS41XXHD.CopyList]
+DS41xxHDDrv.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;         DS43XX		    ;;;;;;;;;;;;;;;;;;;
+
+[DS43XX]
+CopyFiles=DS43XX.CopyList
+
+[DS43XX.Services]
+AddService = DS43XX,0x00000002,DS43XX.AddReg
+
+[DS43XX.AddReg]
+ServiceType   = 1	; KERNEL MODE DRIVER
+StartType     = 3	; MANUAL
+ErrorControl  = 1	; NORMAL
+ServiceBinary = %12%\DS43xxDrv.sys
+
+[DS43XX.CopyList]
+DS43xxDrv.sys
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[Strings]
+DS400XX=     "Hangzhou Hikvision Digital Technology Co.,Ltd."
+Manufacturer="Hangzhou Hikvision Digital Technology Co.,Ltd."
+DS40XXHC.DeviceDesc="Hikvision DS40xxHC/HCS/HC+/HF/HS/MD Series"
+DS41XXHC.DeviceDesc="Hikvision DS41xx Series"
+DS42XXHC.DeviceDesc="Hikvision DS42xx Series"
+DS41XXHD.DeviceDesc="Hikvision DS41xx HD Series"
+DS43XX.DeviceDesc="Hikvision DS43XX Series"
+DISKID="DS40/41/42/43xx serial card Installation Disk"
+
