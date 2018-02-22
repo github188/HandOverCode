@@ -24,9 +24,9 @@
 #ifndef ULONG_PTR
 #define ULONG_PTR unsigned long*
 #endif
-#include "C:\\gdiplus\\Include\\gdiplus.h" 
-using namespace Gdiplus; 
-#pragma comment(lib, "C:\\gdiplus\\lib\\gdiplus.lib") 
+#include "../../../3rdparty/gdiplus/Include/gdiplus.h"
+using namespace Gdiplus;  
+#pragma comment(lib, "../../../3rdparty/gdiplus/lib/gdiplus.lib")
 //////////////////////////////////////////////////////////////////////////
 //»’÷æ¿‡
 #include "WriteLog.h"
