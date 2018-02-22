@@ -64,9 +64,9 @@ CSendrecvDlg::CSendrecvDlg(CWnd* pParent /*=NULL*/)
 {
 	//{{AFX_DATA_INIT(CSendrecvDlg)
 	m_Ed1 = _T("");
-	m_Ed2 = _T("650100197452");
-	m_Ed3 = _T("201");
-	m_Ed4 = _T("1");
+	m_Ed2 = _T("197407250011");
+	m_Ed3 = _T("201510");
+	m_Ed4 = _T("100");
 	m_Ejd = 0.0;
 	m_Ewd = 0.0;
 	//}}AFX_DATA_INIT
