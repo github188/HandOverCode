@@ -39,9 +39,9 @@
 #define ULONG_PTR unsigned long*
 #endif
 //gdi
-#include "C:\\gdiplus\\Include\\gdiplus.h"
+#include "../../3rdparty/gdiplus/Include/gdiplus.h"
 using namespace Gdiplus;  
-#pragma comment(lib, "C:\\gdiplus\\lib\\gdiplus.lib")
+#pragma comment(lib, "../../3rdparty/gdiplus/lib/gdiplus.lib")
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

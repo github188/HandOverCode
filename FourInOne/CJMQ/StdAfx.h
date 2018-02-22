@@ -23,8 +23,8 @@
 
 //////////////////////////////////////////////////////////////////////////
 //海康SDK
-#include "../../hikLibDll/HLIB/HCNetSDK.h"
-#pragma comment(lib,"../../hikLibDll/HLIB/HCNetSDK.lib")
+#include "../../3rdparty/hikLibDll/HLIB/HCNetSDK.h"
+#pragma comment(lib,"../../3rdparty/hikLibDll/HLIB/HCNetSDK.lib")
 //日志类
 #include "WriteLog.h"
 #pragma comment(lib,"CLogFilez.lib")
@@ -35,7 +35,7 @@
 #pragma warning(disable: 4146)
 #pragma warning(disable: 4244)
 //ADO
-#import "C:\Program Files\Common Files\System\ADO\msado15.dll" no_namespace rename("EOF", "adoEOF")
+#import "../../3rdparty/ADO/msado15.dll" no_namespace rename("EOF", "adoEOF")
 //////////////////////////////////////////////////////////////////////////
 //GDI+
 #define UNICODE
@@ -43,9 +43,9 @@
 #define ULONG_PTR unsigned long*
 #endif
 //gdi
-#include "C:\\gdiplus\\Include\\gdiplus.h"
+#include "../../3rdparty/gdiplus/Include/gdiplus.h"
 using namespace Gdiplus;  
-#pragma comment(lib, "C:\\gdiplus\\lib\\gdiplus.lib")
+#pragma comment(lib, "../../3rdparty/gdiplus/lib/gdiplus.lib")
 //////////////////////////////////////////////////////////////////////////
 #include "CSTRUCT.H"
 #define WM_MY_MSG WM_USER+93
