@@ -38,22 +38,22 @@
 #include "AVIThreadz.h"
 #pragma comment(lib,"CTranCodeBase.lib")
 //海康SDK
-#include "../../hikLibDll/HLIB/HCNetSDK.h"
-#pragma comment(lib,"../../hikLibDll/HLIB/HCNetSDK.lib")
+#include "../../3rdparty/hikLibDll/HLIB/HCNetSDK.h"
+#pragma comment(lib,"../../3rdparty/hikLibDll/HLIB/HCNetSDK.lib")
 
 #ifndef ULONG_PTR
 #define ULONG_PTR unsigned long*
 #endif
 //gdi
-#include "C:\\gdiplus\\Include\\gdiplus.h"
+#include "../../3rdparty/gdiplus/Include/gdiplus.h"
 using namespace Gdiplus;  
-#pragma comment(lib, "C:\\gdiplus\\lib\\gdiplus.lib")
+#pragma comment(lib, "../../3rdparty/gdiplus/lib/gdiplus.lib")
 //忽略ADO的警告
 #pragma warning(disable: 4146)
 #pragma warning(disable: 4244)
 #pragma warning(disable: 4786)//忽略4786警告
 //ADO需要导入的库
-#import "C:\Program Files\Common Files\SYSTEM\ADO\msado15.dll" no_namespace \
+#import "../../3rdparty/ADO/msado15.dll" no_namespace \
 	rename("EOF","adoEOF") \
 	rename("DataTypeEnum","adoDataTypeEnum") \
 	rename("FieldAttributeEnum","adoFielAttributeEnum") \
