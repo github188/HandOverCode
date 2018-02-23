@@ -1,0 +1,7 @@
+; CBkUDP.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CBkUDP"
+DESCRIPTION  'CBkUDP Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
