@@ -1150,7 +1150,7 @@ void CCBKVideoBMPBackDlg::ReadDVRPZ()
 	{
 		VARIANT cnt;
 		cnt.vt = VT_INT;
-		sqltemp.Format("select DISTINCT(设备IP),用户名,密码,端口号 from TBKVideo order by 设备IP asc");//查询今天在考的考车
+		sqltemp.Format("select DISTINCT(设备IP),用户名,密码,端口号 from TBKVideo where Nid='1' order by 设备IP asc");//查询今天在考的考车
 		_RecordsetPtr pSet =m_pConn->Execute((_bstr_t)sqltemp,&cnt,adCmdUnknown);
 		_variant_t vat;
 		if(pSet != NULL && (!pSet->adoEOF))
@@ -1210,7 +1210,7 @@ void CCBKVideoBMPBackDlg::DvrIPandChannel(CString bh, CString &dIP, CString &lCh
 	{
 		VARIANT cnt;
 		cnt.vt = VT_INT;
-		sqltemp.Format("select 设备IP,通道号 from TBKVideo where 编号='%s' ",bh);//
+		sqltemp.Format("select 设备IP,通道号 from TBKVideo where 编号='%s' and Nid='1' ",bh);//
 		_RecordsetPtr pSet =m_pConn->Execute((_bstr_t)sqltemp,&cnt,adCmdUnknown);
 		_variant_t vat;
 		if(pSet != NULL && (!pSet->adoEOF))
@@ -1246,7 +1246,7 @@ void CCBKVideoBMPBackDlg::DvrWriteIPChannel()
 	{
 		VARIANT cnt;
 		cnt.vt = VT_INT;
-		sqltemp.Format("select 编号,设备IP,通道号 from TBKVideo");//
+		sqltemp.Format("select 编号,设备IP,通道号 from TBKVideo where Nid='1'");//
 		_RecordsetPtr pSet =m_pConn->Execute((_bstr_t)sqltemp,&cnt,adCmdUnknown);
 		_variant_t vat;
 		if(pSet != NULL && (!pSet->adoEOF))

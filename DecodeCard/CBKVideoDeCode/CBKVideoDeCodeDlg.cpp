@@ -335,9 +335,10 @@ void CCBKVideoDeCodeDlg::OnReadSock()
 				strTemp =strTemp.Mid(pos+1);
 				disChannel=atoi(strTemp);
 				jiemak.DvrSetDisPOSD(disChannel,temp,1);
-// 				CString ltemp;
-// 				ltemp.Format("%d,%s,%d",disChannel,temp,1);
-// 				WriteLog(ltemp);
+
+ 				//CString ltemp;
+ 				//ltemp.Format("speed %d,%s,%d",disChannel,temp,1);
+ 				//WriteLog(ltemp);
 			}
 			break;
 		}
@@ -351,6 +352,10 @@ void CCBKVideoDeCodeDlg::OnReadSock()
 				strTemp =strTemp.Mid(pos+1);
 				disChannel=atoi(strTemp);
 				jiemak.DvrSetDisPOSD(disChannel,temp,0);
+
+				//CString ltemp;
+				//ltemp.Format("time %d,%s,%d",disChannel,temp,0);
+ 				//WriteLog(ltemp);
 			}
 			break;
 		}
