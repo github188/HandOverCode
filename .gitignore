@@ -9,7 +9,6 @@
 *.plg
 *.tlh
 *.tli
-*.dsp
 ipch
 Debug
 Release
