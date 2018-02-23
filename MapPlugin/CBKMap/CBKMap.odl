@@ -1,0 +1,73 @@
+// CBKMap.odl : type library source for ActiveX Control project.
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (CBKMap.tlb) that will become a resource in
+// CBKMap.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(4E378E44-2E33-4329-B52E-6D5EF2AB0BB8), version(1.0),
+  helpfile("CBKMap.hlp"),
+  helpstring("CBKMap ActiveX Control module"),
+  control ]
+library CBKMAPLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CCBKMapCtrl
+
+	[ uuid(930256FD-76F6-4AFB-8D35-84CE38EA22F9),
+	  helpstring("Dispatch interface for CBKMap Control"), hidden ]
+	dispinterface _DCBKMap
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CCBKMapCtrl)
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CCBKMapCtrl)
+			[id(1)] void LoadMapFile(BSTR strkcdm, BSTR strUDate);
+			[id(2)] void PlayBackMap(BSTR strzkzm, short ikscs, short idrcs);
+			[id(3)] void SetTongJi(short izxkc, short iykrs, short iwkrs, float fhgr);
+			//}}AFX_ODL_METHOD
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  Event dispatch interface for CCBKMapCtrl
+
+	[ uuid(61211648-B7B2-4804-8EFB-2C90D75F82D6),
+	  helpstring("Event interface for CBKMap Control") ]
+	dispinterface _DCBKMapEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CCBKMapCtrl)
+			[id(1)] void GetTongJi(BSTR strKcdm);
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CCBKMapCtrl
+
+	[ uuid(D8809DC2-92BB-4F79-9EA3-58D9A8EF09E2),
+	  helpstring("CBKMap Control"), control ]
+	coclass CBKMap
+	{
+		[default] dispinterface _DCBKMap;
+		[default, source] dispinterface _DCBKMapEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

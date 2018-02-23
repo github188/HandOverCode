@@ -1,0 +1,78 @@
+// CBKPlayzWndX.odl : type library source for ActiveX Control project.
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (CBKPlayzWndX.tlb) that will become a resource in
+// CBKPlayzWndX.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(B4917D2C-6063-47FD-914B-842549270051), version(1.0),
+  helpfile("CBKPlayzWndX.hlp"),
+  helpstring("CBKPlayzWndX ActiveX Control module"),
+  control ]
+library CBKPLAYZWNDXLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CCBKPlayzWndXCtrl
+
+	[ uuid(3027A138-DF57-420C-83AE-5BFD944EF422),
+	  helpstring("Dispatch interface for CBKPlayzWndX Control"), hidden ]
+	dispinterface _DCBKPlayzWndX
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CCBKPlayzWndXCtrl)
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CCBKPlayzWndXCtrl)
+			[id(1)] boolean StopPlay();
+			[id(2)] void SetMultiWnd(short nSplit);
+			[id(3)] boolean SetRealStreamID(BSTR strKchp, BSTR csCameraID);
+			[id(4)] void ShowRgppDlg(BSTR strKchp, BSTR strStuName, BSTR strStuZkzm, BSTR strReturn);
+			[id(5)] void SetDeviceInfo(BSTR strIP, BSTR strUser, BSTR strPwd, short nPort, short nChannel, short nType);
+			[id(6)] boolean SetPlayBackByTime(BSTR strSTime, BSTR strETime);
+			//}}AFX_ODL_METHOD
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  Event dispatch interface for CCBKPlayzWndXCtrl
+
+	[ uuid(B53F2586-611F-4444-B7C3-11005D0C57A8),
+	  helpstring("Event interface for CBKPlayzWndX Control") ]
+	dispinterface _DCBKPlayzWndXEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CCBKPlayzWndXCtrl)
+			[id(1)] void RenGongPingPan(BSTR CarName, long XMCode);
+			[id(2)] void ClickRgppMenu(BSTR strKchp, long lWndId);
+			[id(3)] void RClickMenu(BSTR strKchp, short uWndID, short uParam);
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CCBKPlayzWndXCtrl
+
+	[ uuid(D3B921A4-E5D7-48F4-8083-CFEA6E2B6474),
+	  helpstring("CBKPlayzWndX Control"), control ]
+	coclass CBKPlayzWndX
+	{
+		[default] dispinterface _DCBKPlayzWndX;
+		[default, source] dispinterface _DCBKPlayzWndXEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

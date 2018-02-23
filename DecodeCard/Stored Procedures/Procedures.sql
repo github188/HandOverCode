@@ -104,7 +104,7 @@ goto ERR_HANDLER
 END /*17C53*/ --2e
 else
 BEGIN --3b
-if (@ErrorCode = 201990 OR @ErrorCode=204990 OR @ErrorCode=203990 OR @ErrorCode=206990 OR @ErrorCode=207990 OR @ErrorCode=215990 OR @ErrorCode=216990 )
+if (@ErrorCode = 201990 OR @ErrorCode=204990 OR @ErrorCode=203990 OR @ErrorCode=206990 OR @ErrorCode=207990 OR @ErrorCode=214990 OR @ErrorCode=215990 OR @ErrorCode=216990 OR @ErrorCode=10086 )
 begin --4b
 Select ErrorRecords.º«¬º±‡∫≈,ErrorRecords.¥ÌŒÛ±‡∫≈,[dbo].charDecode(ErrorData.ø€∑÷¿‡–Õ) as ø€∑÷¿‡–Õ
 from ErrorRecords JOIN ErrorData ON ErrorRecords.¥ÌŒÛ±‡∫≈=ErrorData.¥ÌŒÛ±‡∫≈ 
