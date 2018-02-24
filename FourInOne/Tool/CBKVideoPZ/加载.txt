@@ -1,0 +1,13 @@
+	typedef BOOL (* DLGPZVideo)();
+	DLGPZVideo pzvideodlg;
+	HINSTANCE dllHandlet;
+	
+	dllHandlet = LoadLibrary(TEXT("CBKVideoPZ.dll")); 
+	if (dllHandlet == NULL) 
+	{ 
+		AfxMessageBox("º”‘ÿCBKVideoPZ.dll ß∞‹!");
+		return ; 
+	}  
+	pzvideodlg = (DLGPZVideo) GetProcAddress(dllHandlet,TEXT("DLGPZVideo"));	
+	pzvideodlg();
+	FreeLibrary(dllHandlet);
