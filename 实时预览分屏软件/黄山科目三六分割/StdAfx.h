@@ -32,7 +32,7 @@ void WriteLog(LPCTSTR pstrFormat, ...);
 /*ºöÂÔADOµÄ¾¯¸æ*/ 
 #pragma warning(disable: 4146)
 #pragma warning(disable: 4244)
-#import "C:\Program Files\Common Files\System\ADO\msado15.dll" no_namespace rename("EOF", "adoEOF")
+#import "../../3rdparty/ADO/msado15.dll" no_namespace rename("EOF", "adoEOF")
 
 CString VariantToStr(_variant_t var);
 BOOL ChangeToVariant(CString str, _variant_t *var, DataTypeEnum type);

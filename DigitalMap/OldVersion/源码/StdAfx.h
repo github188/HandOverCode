@@ -36,7 +36,7 @@
 #pragma warning(disable: 4146)
 #pragma warning(disable: 4244)
 #pragma warning(disable: 4786)
-#import "C:\Program Files\Common Files\System\ADO\msado15.dll" no_namespace rename("EOF", "adoEOF")
+#import "../../../3rdparty/ADO/msado15.dll" no_namespace rename("EOF", "adoEOF")
 #include <icrsint.h> 
 
 #pragma comment (lib,"vfw32.lib")
