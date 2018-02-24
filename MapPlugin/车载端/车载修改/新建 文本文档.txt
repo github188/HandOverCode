@@ -1,0 +1,27 @@
+UDP 接口
+void UDPSendToJGSer(LPTSTR strs)
+
+//.h 定义
+	HINSTANCE dllHzjjg;
+	typedef void (* DLLUDPSendToJGSer)(LPTSTR);
+	DLLUDPSendToJGSer dllzjjgSendData;
+
+//.cpp 加载
+//////////////////////////////////////////////////////////////////////////
+	dllHzjjg =LoadLibrary(TEXT("CBKJGUdpClient.dll")); 
+	if (dllHzjjg == NULL)
+	{
+		AfxMessageBox("CBKJGUdpClient.dll 失败!"); 
+		TerminateProcess(GetCurrentProcess(),0); 
+		return FALSE; 
+	}
+	 dllzjjgSendData =(DLLUDPSendToJGSer) GetProcAddress(dllHzjjg,TEXT("UDPSendToJGSer"));
+	if (dllzjjgSendData ==NULL)
+	{
+		AfxMessageBox("加载CBKJGUdpClient UDPSendToJGSer 失败!");
+		return FALSE;
+	}
+	//////////////////////////////////////////////////////////////////////////
+
+//调用20170522 1428 改
+dllzjjgSendData("BEGIN,3,52012,闽A0001,0,2011111,5555555,90,10:10:10,0,268435457,速度,里程,250,2,2,4,经度,纬度,60,0,0,0,航向角,0,0,00001111111111111123,40100,0,0,0,,END");
