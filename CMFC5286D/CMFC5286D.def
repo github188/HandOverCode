@@ -1,0 +1,7 @@
+; CMFC5286D.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CMFC5286D"
+DESCRIPTION  'CMFC5286D Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
