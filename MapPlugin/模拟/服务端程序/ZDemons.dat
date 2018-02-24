@@ -1,0 +1,10 @@
+;Demons=1退出 不再守护
+;Restart=0 重启
+;ExeNum=1 守护一个程序
+[CONFIG]
+Demons=1
+Restart=1
+ExeNum=1
+
+[ExeFile]
+1=CUDPServer.exe

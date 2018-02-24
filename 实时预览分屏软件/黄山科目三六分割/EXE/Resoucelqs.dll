@@ -1,0 +1,75 @@
+--创建 pr_ErrorRecords2 不存在的时候
+if not exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[pr_ErrorRecords2]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+begin
+exec('CREATE PROCEDURE pr_ErrorRecords2
+(
+	@ZKZM_Number varchar(50),--准考证明编号
+	@Ejlbh bigint, --错误记录编号
+	@intErrorCode int OUTPUT
+) 
+WITH   ENCRYPTION 
+AS
+BEGIN
+SET NOCOUNT ON --不返回计数
+set @intErrorCode=-1
+return @intErrorCode
+END
+')
+end
+GO
+--修改 pr_ErrorRecords2 2017-01-06
+ALTER PROCEDURE pr_ErrorRecords2
+(
+	@ZKZM_Number varchar(50),--准考证明编号
+	@Ejlbh bigint, --错误记录编号
+	@intErrorCode int OUTPUT
+) 
+WITH   ENCRYPTION 
+AS
+BEGIN
+SET NOCOUNT ON --不返回计数
+declare @KscsN tinyint --考试次数
+declare @DrcsN tinyint --当日次数
+declare @ErrorCode int --错误编号
+declare @ErrorCodejl int --记录编号
+declare @EKCFS	 int --扣除分数
+SELECT @KscsN=考试次数,@DrcsN=当日次数 FROM Studentinfo WHERE 准考证明编号=@ZKZM_Number
+
+set @intErrorCode = 0
+if exists(Select TOP 1 错误编号 from ErrorRecords where 准考证明编号=@ZKZM_Number and 记录编号>@Ejlbh and 当日次数=@DrcsN and 考试次数=@KscsN)
+BEGIN --1
+SELECT TOP 1 @ErrorCode=错误编号,@ErrorCodejl=记录编号 from ErrorRecords where 准考证明编号=@ZKZM_Number and 记录编号>@Ejlbh and 当日次数=@DrcsN and 考试次数=@KscsN
+SELECT @EKCFS=扣除分数 FROM ERRORDATA WHERE 错误编号=@ErrorCode
+IF @EKCFS<> 0
+BEGIN --2
+declare @counterrline int --统计错误行
+SELECT @counterrline=Count(*) FROM ErrorRecords JOIN ErrorData ON  ErrorRecords.错误编号=ErrorData.错误编号 
+WHERE ErrorRecords.准考证明编号=@ZKZM_Number and 考试次数=@KscsN and 当日次数=@DrcsN and ErrorData.扣除分数<>0 and ErrorRecords.记录编号<=@Ejlbh
+
+Select ErrorRecords.记录编号,ErrorData.扣分类型,CONVERT(varchar(10),ErrorRecords.出错时间,8) as 出错时间,ErrorData.扣除分数,ELINE=@counterrline
+from ErrorRecords JOIN ErrorData ON ErrorRecords.错误编号=ErrorData.错误编号 
+where ErrorRecords.记录编号=@ErrorCodejl
+set @intErrorCode = 3
+goto ERR_HANDLER
+END --2
+ELSE
+BEGIN --3
+if (@ErrorCode>=201 and @ErrorCode<=250 )
+begin 
+set @intErrorCode = 2
+end
+else
+begin
+set @intErrorCode = 5
+end
+Select ErrorRecords.记录编号,ErrorRecords.错误编号,ErrorData.扣分类型
+from ErrorRecords LEFT JOIN ErrorData ON ErrorRecords.错误编号=ErrorData.错误编号 
+where ErrorRecords.记录编号=@ErrorCodejl
+
+END --3
+END --1
+
+ERR_HANDLER:
+	return @intErrorCode
+END
+GO

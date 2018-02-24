@@ -1,0 +1,39 @@
+--不存在表TBKVideo则创建
+if not exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[TBKVideo]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+begin
+CREATE TABLE [dbo].[TBKVideo] (
+	[编号] [varchar] (20) COLLATE Chinese_PRC_CI_AS NOT NULL ,
+	[设备IP] [varchar] (20) COLLATE Chinese_PRC_CI_AS NOT NULL ,
+	[用户名] [varchar] (20) COLLATE Chinese_PRC_CI_AS NOT NULL ,
+	[密码] [varchar] (20) COLLATE Chinese_PRC_CI_AS NOT NULL ,
+	[通道号] [varchar] (10) COLLATE Chinese_PRC_CI_AS NOT NULL ,
+	[端口号] [varchar] (10) COLLATE Chinese_PRC_CI_AS NOT NULL ,
+	[备注] [varchar] (50) COLLATE Chinese_PRC_CI_AS NULL ,
+	[Nid] [varchar] (4) COLLATE Chinese_PRC_CI_AS NULL ,
+	[TransMode] [varchar] (4) COLLATE Chinese_PRC_CI_AS NULL ,
+	[MediaIP] [varchar] (20) COLLATE Chinese_PRC_CI_AS NULL 
+) ON [PRIMARY]
+end
+GO
+--Add TBKVideo Nid 
+if not exists(select * from syscolumns where id=object_id('TBKVideo') and name='Nid')
+begin
+alter table TBKVideo add Nid varchar(4)
+end
+else
+begin
+alter table tbkvideo alter column Nid [varchar] (4)
+end
+GO
+--Add TBKVideo MediaIP
+if not exists(select * from syscolumns where id=object_id('TBKVideo') and name='MediaIP')
+begin
+alter table TBKVideo add MediaIP varchar(20)
+end
+GO
+--Add TBKVideo TransMode
+if not exists(select * from syscolumns where id=object_id('TBKVideo') and name='TransMode')
+begin
+alter table TBKVideo add TransMode varchar(4)
+end
+GO

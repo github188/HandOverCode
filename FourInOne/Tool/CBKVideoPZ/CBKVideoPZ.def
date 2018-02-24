@@ -1,0 +1,7 @@
+; CBKVideoPZ.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CBKVideoPZ"
+DESCRIPTION  'CBKVideoPZ Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

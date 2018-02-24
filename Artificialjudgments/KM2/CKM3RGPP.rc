@@ -1,0 +1,204 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\CKM3RGPP.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,2
+ PRODUCTVERSION 1,0,0,2
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "科目三人工评判\0"
+            VALUE "CompanyName", "福州北科大舟宇电子有限公司\0"
+            VALUE "FileDescription", "Build 20170406 1319 CKM3RGPP DLL\0"
+            VALUE "FileVersion", "1, 0, 0, 2\0"
+            VALUE "InternalName", "CKM3RGPP\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2017 ZSZ\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "CKM3RGPP.DLL\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "CKM3RGPP Dynamic Link Library\0"
+            VALUE "ProductVersion", "1, 0, 0, 2\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// ZSZ
+//
+
+IDR_ERRORDATA           ZSZ     DISCARDABLE     "res\\ErrorData.dat"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLGRGPP DIALOG DISCARDABLE  0, 0, 216, 161
+STYLE WS_POPUP
+FONT 18, "宋体"
+BEGIN
+    LTEXT           "Static",IDC_STATIC_T1,12,11,95,11
+    LTEXT           "Static",IDC_STATIC_T2,11,26,95,17
+    LTEXT           "Static",IDC_STATIC_T3,111,22,95,17
+    LTEXT           "",IDC_STATIC_WND,0,103,216,58
+    PUSHBUTTON      "X",IDC_BTN_RETURN,134,50,25,14
+END
+
+IDD_DLG_ELIST DIALOG DISCARDABLE  0, 0, 170, 118
+STYLE WS_CHILD
+FONT 16, "宋体"
+BEGIN
+    PUSHBUTTON      "<==重新选择",IDC_BTN_RETURN,112,1,55,13
+    LTEXT           "",IDC_STATIC_XMNAME,8,5,84,14
+    CONTROL         "List1",IDC_ErrorList,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,6,35,123,46
+    LTEXT           "",IDC_STATIC_KFM,6,90,117,25
+    PUSHBUTTON      "扣分",IDC_BTN_CF,139,99,23,13
+END
+
+IDD_DLG_XM DIALOG DISCARDABLE  0, 0, 242, 177
+STYLE WS_CHILD
+FONT 12, "宋体"
+BEGIN
+    PUSHBUTTON      "倒车入库",IDC_BTN_1,17,6,41,18
+    PUSHBUTTON      "桩考",IDC_BTN_2,67,7,41,18,WS_DISABLED
+    PUSHBUTTON      "定点坡起",IDC_BTN_3,118,8,41,18
+    PUSHBUTTON      "侧方停车",IDC_BTN_4,170,9,41,18
+    PUSHBUTTON      "单 边 桥",IDC_BTN_5,14,35,41,18,WS_DISABLED
+    PUSHBUTTON      "曲线行驶",IDC_BTN_6,70,32,41,18
+    PUSHBUTTON      "直角转弯",IDC_BTN_7,119,32,41,18
+    PUSHBUTTON      "限 宽 门",IDC_BTN_8,174,32,41,18,WS_DISABLED
+    PUSHBUTTON      "连续障碍",IDC_BTN_9,17,66,41,18,WS_DISABLED
+    PUSHBUTTON      "起 伏 路",IDC_BTN_10,75,64,41,18,WS_DISABLED
+    PUSHBUTTON      "窄路掉头",IDC_BTN_11,128,66,41,18,WS_DISABLED
+    PUSHBUTTON      "模拟高速",IDC_BTN_12,182,61,41,18,WS_DISABLED
+    PUSHBUTTON      "连续急弯",IDC_BTN_13,18,96,41,18,WS_DISABLED
+    PUSHBUTTON      "隧道行驶",IDC_BTN_14,76,92,41,18,WS_DISABLED
+    PUSHBUTTON      "雨(雾)天",IDC_BTN_15,126,94,41,18,WS_DISABLED
+    PUSHBUTTON      "湿 滑 路",IDC_BTN_16,183,92,41,18,WS_DISABLED
+    PUSHBUTTON      "紧急情况障碍物",IDC_BTN_17,21,125,41,18,WS_DISABLED
+    PUSHBUTTON      "紧急情况高速故障",IDC_BTN_18,77,124,41,18,WS_DISABLED
+    PUSHBUTTON      "综合评判",IDC_BTN_19,132,125,41,18
+    PUSHBUTTON      "综合评判",IDC_BTN_20,185,126,41,18,NOT WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BMP_BK              BITMAP  DISCARDABLE     "res\\BK.bmp"
+IDB_BMP_CLOSE           BITMAP  DISCARDABLE     "res\\sys_dlg_close.bmp"
+IDB_BMP_KF              BITMAP  DISCARDABLE     "res\\KFBTN.bmp"
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\CKM3RGPP.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

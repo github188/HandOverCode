@@ -1,0 +1,285 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\test2.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\test2.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 test2"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "test2 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2016",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_TEST2_DIALOG DIALOGEX 0, 0, 592, 304
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "配置工具"
+FONT 9, "宋体"
+BEGIN
+    EDITTEXT        IDC_EDIT_play1,502,133,42,12,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE | WS_DISABLED
+    EDITTEXT        IDC_EDIT_play2,502,151,42,12,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE | WS_DISABLED
+    EDITTEXT        IDC_EDIT_play3,502,169,42,12,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE | WS_DISABLED
+    EDITTEXT        IDC_EDIT_play4,502,187,42,12,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE | WS_DISABLED
+    COMBOBOX        IDC_COMBO_THREE,439,168,42,51,CBS_DROPDOWN | CBS_SORT | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_TWO,349,126,95,43,CBS_DROPDOWN | CBS_SORT | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_ONE,490,160,95,33,CBS_DROPDOWNLIST | CBS_SORT | 
+                    CBS_NOINTEGRALHEIGHT | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "保存配置",IDC_SaveplayBUTTON,467,163,93,21,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "通道对应配置",IDC_BTNPZ,492,185,93,21,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    EDITTEXT        IDC_EDIT5,71,17,106,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "IPAddress1",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,
+                    71,40,106,14
+    EDITTEXT        IDC_EDIT2,71,63,106,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,71,86,106,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,71,109,106,14,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "修改/增加",IDC_BUTTON1,189,51,56,21
+    PUSHBUTTON      "删除",IDC_Delete,189,76,56,21
+    PUSHBUTTON      "测试连接",IDC_ConnectBUTTON,189,101,56,21
+    EDITTEXT        IDC_EDIT_Carnum,427,150,106,14,ES_AUTOHSCROLL | 
+                    ES_NUMBER | NOT WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "考车增加/修改",IDC_BUTTON2,441,175,56,21,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    PUSHBUTTON      "考车删除",IDC_CarDeleteBUTTON,508,174,56,21,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | WS_BORDER | 
+                    WS_TABSTOP,7,135,337,142
+    RTEXT           "设备IP: ",IDC_STATIC,12,40,52,14
+    RTEXT           "用户名:",IDC_STATIC,12,63,52,14
+    RTEXT           "密  码:",IDC_STATIC,12,86,52,14
+    RTEXT           "端  口:",IDC_STATIC,12,109,52,14
+    RTEXT           "编号:",IDC_STATIC,12,17,52,14
+    PUSHBUTTON      "查询",IDC_Research,493,138,73,27,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    CONTROL         "List2",IDC_LIST_Second,"SysListView32",LVS_REPORT | NOT 
+                    WS_VISIBLE | WS_DISABLED | WS_BORDER | WS_TABSTOP,356,
+                    224,229,12
+    RTEXT           "考车号:",IDC_STATIC,376,152,43,11,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    CTEXT           "",IDC_STATIC_NUMtotal,189,30,56,13,0,WS_EX_STATICEDGE
+    GROUPBOX        "考车",IDC_STATIC,350,133,235,113,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    EDITTEXT        IDC_SecEDIT,552,151,33,16,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE | WS_DISABLED
+    GROUPBOX        "基本配置",IDC_STATIC,429,126,37,22,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    RTEXT           "隔BNC解码:",IDC_STATIC,424,158,52,14,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    RTEXT           "考试科目:",IDC_STATIC,469,136,52,14,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    RTEXT           "音频窗口:",IDC_STATIC,438,164,43,11,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    RTEXT           "画面一位置:",IDC_STATIC,444,133,52,14,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    RTEXT           "画面二位置:",IDC_STATIC,444,152,52,14,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    RTEXT           "画面三位置:",IDC_STATIC,444,171,52,14,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    RTEXT           "画面四位置:",IDC_STATIC,444,190,52,14,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    LTEXT           "提示：双击,测试连接登入成功的考车号列表，也可进行考车增加和修改，但是删除必须通过考车删除按钮",
+                    IDC_STATIC,361,201,207,17,NOT WS_VISIBLE | WS_DISABLED
+    GROUPBOX        "配置",IDC_STATIC,7,7,338,271
+    PUSHBUTTON      "清空OSD",IDC_BUTTON3,287,17,51,22
+    EDITTEXT        IDC_EDIT6,297,78,42,20,ES_AUTOHSCROLL
+    RTEXT           "通道:",IDC_STATIC,254,81,40,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,1
+ PRODUCTVERSION 2,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "福州北科大舟宇电子有限公司\0"
+            VALUE "FileDescription", "Build 20171025 1355\0"
+            VALUE "FileVersion", "2, 0, 0, 1\0"
+            VALUE "InternalName", "JMQPZ\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2016 ZSZ\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "JMQPZ.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "JMQPZ 应用程序\0"
+            VALUE "ProductVersion", "2, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_TEST2_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 585
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 290
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 test2(&A)..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "提示"
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\test2.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,7 @@
+; CatchPhotoHK.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CatchPhotoHK"
+DESCRIPTION  'CatchPhotoHK Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

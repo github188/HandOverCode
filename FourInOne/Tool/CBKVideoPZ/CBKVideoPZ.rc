@@ -1,0 +1,220 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\CBKVideoPZ.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,2
+ PRODUCTVERSION 2,0,0,2
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "配置\0"
+            VALUE "CompanyName", "福州北科大舟宇电子有限公司\0"
+            VALUE "FileDescription", "Build 20171023\0"
+            VALUE "FileVersion", "2, 0, 0, 2\0"
+            VALUE "InternalName", "CBKVideoPZ\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2016 zsz\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "CBKVideoPZ.DLL\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "CBKVideoPZ Dynamic Link Library\0"
+            VALUE "ProductVersion", "2, 0, 0, 2\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLGPZ DIALOG DISCARDABLE  0, 0, 477, 298
+STYLE WS_POPUP
+FONT 9, "宋体"
+BEGIN
+    EDITTEXT        IDC_EPATH,123,7,196,16,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    PUSHBUTTON      "选择",IDC_BTNCHANGE,315,7,43,16,NOT WS_VISIBLE
+    LTEXT           "",IDC_STATIC_SYKJ,27,8,101,16,NOT WS_VISIBLE
+    CONTROL         "List1",IDC_LISTBKVideo,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,9,179,458,108
+    DEFPUSHBUTTON   "X",IDC_BTN_EXIT,425,0,28,17
+    RTEXT           "编  号:",IDC_STATIC,16,56,32,12
+    COMBOBOX        IDC_COMBO_BH,51,56,77,80,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "编号明细:",IDC_STATIC,173,140,49,11
+    RTEXT           "通道号:",IDC_STATIC,16,140,32,12
+    RTEXT           "设备IP:",IDC_STATIC,16,77,32,12
+    RTEXT           "用户名:",IDC_STATIC,16,98,32,12
+    RTEXT           "密  码:",IDC_STATIC,16,119,32,12
+    EDITTEXT        IDC_EDIT_USER,51,96,102,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PWD,51,117,102,14,ES_PASSWORD | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_BZ,231,138,142,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TDH,51,138,102,14,ES_AUTOHSCROLL
+    RTEXT           "端口号:",IDC_STATIC,173,56,49,11
+    EDITTEXT        IDC_EDIT_PROT,231,54,102,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "保存",IDC_BTNSAVE,402,109,49,19
+    PUSHBUTTON      "删除",IDC_BTN_DELETE,402,135,49,19
+    CONTROL         "IPAddress1",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,
+                    51,75,102,14
+    RTEXT           "视频保存路径:",IDC_STATIC,131,4,63,16,NOT WS_VISIBLE
+    LTEXT           "",IDC_STATIC_SKIN,387,137,82,8,NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO2,234,5,81,61,CBS_DROPDOWN | CBS_SORT | NOT 
+                    WS_VISIBLE | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "设置",IDC_BTNSKINSET,340,4,57,19,NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_SXNUM,231,76,102,94,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "摄像头编号:",IDC_STATIC,173,78,49,11
+    RTEXT           "码流类型:",IDC_STATIC,173,99,49,11
+    RTEXT           "流媒体IP:",IDC_STATIC,173,120,49,11
+    COMBOBOX        IDC_COMBO_ML,231,96,102,65,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "IPAddress1",IDC_IPADDRESS2,"SysIPAddress32",WS_TABSTOP,
+                    231,116,102,14
+    PUSHBUTTON      "清空流媒体",IDC_BTN_LMTIP,405,50,50,19
+    PUSHBUTTON      "统一用户和密码",IDC_BTN_TYIPPWD,396,76,66,23
+END
+
+IDD_DLG_MESSAGE DIALOG DISCARDABLE  0, 0, 187, 94
+STYLE WS_POPUP
+FONT 9, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,31,64,38,17
+    PUSHBUTTON      "Cancel",IDCANCEL,113,64,38,17
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DLGPZ, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 296
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP_BACK         BITMAP  DISCARDABLE     "res\\CBKVideoPZBK.bmp"
+IDB_BMPCLOSE            BITMAP  DISCARDABLE     "res\\pz_close.bmp"
+IDB_BMPBTNO             BITMAP  DISCARDABLE     "res\\messagebtno.bmp"
+IDB_BMP_MESSAGEBK       BITMAP  DISCARDABLE     "res\\message.bmp"
+IDB_BMPBTNC             BITMAP  DISCARDABLE     "res\\messagebtnc.bmp"
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\CBKVideoPZ.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
